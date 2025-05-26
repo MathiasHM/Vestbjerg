@@ -4,7 +4,7 @@ import Containers.Customer;
 
 public class CustomerController {
     public Customer findCustomerByCustomerId(String customerId) {
-        // Simulate a database lookup
+        Customer customer = new Customer();
         return customer;
     }
 }

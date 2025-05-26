@@ -4,7 +4,7 @@ import Containers.Product;
 
 public class ProductController {
     public Product addProductByProductID(int productID) {
-        // Logic to add a product by its ID
+        Product product = new Product();
         return product;
     }
     public void addProduct(Product product) {

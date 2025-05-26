@@ -1,8 +1,10 @@
 package Controllers;
 
+import Containers.Order;
+
 public class OrderController {
     public void createOrder() {
-        // Logic to create an order
+        Order order = new Order();
     }
     public void addProductByProductID(int productId) {
         // Logic to add a product by its ID
