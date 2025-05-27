@@ -1,12 +1,24 @@
 package Containers;
 
 public class Product {
-    private int ProductID;
+    private int productID;
     private String name;
     private double price;
     private int stockTotal;
-    private String Category;
+    private String category;
     private int minMaxThreshold;
+    
+    public Product(int productID, String name, double price,
+    		int stockTotal, String category, 
+    		int minMaxThreshhold) {
+    	this.productID = productID;
+    	this.name = name;
+    	this.price = price;
+    	this.stockTotal = stockTotal;
+    	this.category = category;
+    	this.minMaxThreshhold;
+    }
+    
     public int getProductID() {
         return ProductID;
     }

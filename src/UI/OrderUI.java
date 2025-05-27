@@ -6,10 +6,12 @@ import java.util.Scanner;
 public class OrderUI {
     Scanner scanner = new Scanner(System.in);
     OrderController orderController = new OrderController();
-    public void createOrder() {
+    
+    private void createOrder() {
         orderController.createOrder();
         System.out.println("Order created successfully.");
     }
+    
     public void openOrderMenu() {
         System.out.println("Order UI started.");
         StringBuilder menu = new StringBuilder();
