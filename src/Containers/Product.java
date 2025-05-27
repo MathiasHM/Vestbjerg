@@ -6,7 +6,7 @@ public class Product {
     private double price;
     private int stockTotal;
     private String category;
-    private int minMaxThreshold;
+    private int minMaxThreshhold;
     
     public Product(int productID, String name, double price,
     		int stockTotal, String category, 
@@ -16,7 +16,7 @@ public class Product {
     	this.price = price;
     	this.stockTotal = stockTotal;
     	this.category = category;
-    	this.minMaxThreshhold;
+    	this.minMaxThreshhold = minMaxThreshhold;
     }
     
     public int getProductID() {

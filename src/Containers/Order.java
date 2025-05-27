@@ -19,8 +19,8 @@ public class Order {
     	this.type = type;
     	this.date = date;
     	this.status = status;
-    	this.totalAmount = totalAmount
-    	this.products = products
+    	this.totalAmount = totalAmount;
+    	this.products = products;
     	this.customer = customer;    	
     	
     }
