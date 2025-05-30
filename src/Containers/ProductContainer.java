@@ -7,7 +7,7 @@ public class ProductContainer {
     private ArrayList<Product> products;
 
     private ProductContainer() {
-        products = new ArrayList<>();
+        products = new ArrayList<Product>(); 
     }
 
     public static ProductContainer getInstance() {

@@ -6,20 +6,20 @@ public class Product {
     private double price;
     private int stockTotal;
     private String category;
-    private int minMaxThreshhold;
+    private int maxThreshhold;
     
     public Product(int productID, String name, double price,
     		int stockTotal, String category, 
-    		int minMaxThreshhold) {
+    		int maxThreshhold) {
     	this.productID = productID;
     	this.name = name;
     	this.price = price;
     	this.stockTotal = stockTotal;
     	this.category = category;
-    	this.minMaxThreshhold = minMaxThreshhold;
+    	this.maxThreshhold = maxThreshhold;
     }
     
-    public int getProductID() {
-        return ProductID;
+    public int getID() {
+        return productID;
     }
 }
