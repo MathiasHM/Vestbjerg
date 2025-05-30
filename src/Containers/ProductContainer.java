@@ -18,9 +18,9 @@ public class ProductContainer {
     }
 
     public Product findProductByID(int productID) {
-        for (Product i : products)
-        	if (i.getID() == productID) {
-        		return i;
+        for (Product p : products)
+        	if (p.getID() == productID) {
+        		return p;
         	}
         return null;
     }

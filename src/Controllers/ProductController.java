@@ -12,10 +12,4 @@ public class ProductController {
         Product p = ProductContainer.getInstance().findProductByID(productID);
         return p;
     }
-    
-    /*
-    public void addProduct(Product product) {
-        // Logic to add a product
-    }
-*/
 }
