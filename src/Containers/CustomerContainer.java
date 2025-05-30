@@ -17,7 +17,11 @@ public class CustomerContainer {
         return instance;
     }
 
-    public ArrayList<Customer> getCustomers() {
-        return customers;
+    public Customer findCustomerByEmail(String customerEmail) {
+    	for (Customer customer : customers)
+    		if (customer.getEmail().equals(customerEmail)) {
+    			return customer;
+    		}
+    	return null;
     }
 }

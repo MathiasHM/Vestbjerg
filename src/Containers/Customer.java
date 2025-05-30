@@ -2,23 +2,23 @@ package Containers;
 
 public class Customer {
 	
-    private String customerID;
-    private String name;
+    //private String name;		**TO BE REMOVED
     private String email;
-    private String phone;
-    private String category;
-	
-	public Customer(String customerID, String name, 
-		String email, String phone, String category) {
-		this.customerID = customerID;
-		this.name = name;
-		this.email = email;
-		this.phone = phone;
-		this.category = category;
-	}
-	
+    //private String phone;    	**TO BE REMOVED
+    //private String category; 	**TO BE REMOVED
+	private int CVR;
     
-    public String getCustomerID() {
-        return customerID;
+	public Customer(String email, int CVR) {
+		
+		this.email = email;
+		this.CVR = CVR;
+	}
+    
+    public String getEmail() {
+        return email;
+    }
+    
+    public int getCVR() {
+    	return CVR;
     }
 }
