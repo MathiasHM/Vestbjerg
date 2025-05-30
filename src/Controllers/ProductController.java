@@ -1,13 +1,21 @@
 package Controllers;
 
 import Containers.Product;
+import Containers.ProductContainer;
 
 public class ProductController {
-    public Product addProductByProductID(int productID) {
-        Product product = new Product();
-        return product;
+	
+	public ProductController() {	
+	}
+	
+    public Product findProductByID(int productID) {
+        Product p = ProductContainer.getInstance().findProductByID(productID);
+        return p;
     }
+    
+    /*
     public void addProduct(Product product) {
         // Logic to add a product
     }
+*/
 }

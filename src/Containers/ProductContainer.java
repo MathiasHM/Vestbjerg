@@ -17,7 +17,11 @@ public class ProductContainer {
         return instance;
     }
 
-    public ArrayList<Product> getProducts() {
-        return products;
+    public Product findProductByID(int productID) {
+        for (Product i : products)
+        	if (i.getID() == productID) {
+        		return i;
+        	}
+        return null;
     }
 }
