@@ -1,25 +1,29 @@
 package Controllers;
 
 import Containers.Order;
+import Enums.Status;
+import Containers.Product;
 
 public class OrderController {
-    public void createOrder() {
-        Order order = new Order();
+	
+	private Order order;
+	
+	public OrderController() {
+	}
+	
+    
+	public void createOrder() {
+		this.order = new Order();
+	}
+	
+    public int addProductByID(int productID, int quantity) {
+    	ProductController pC = new ProductController();
+    	Product product = pC.findProductByID(productID);
+    	
+    	int result = this.order.addProduct(product, quantity);
+    	return result;
+    	//TODO fejlmeddelelser.
     }
-    public void addProductByProductID(int productId) {
-        // Logic to add a product by its ID
-    }
-    public void removeProductByProductID(int productId) {
-        // Logic to remove a product by its ID
-    }
-    public void findCustomerByCustomerId(String customerId) {
-        // Logic to find a customer by their ID
-    }
-    public void setPrice() {
-        // Logic to set the price of an order.
-        // Remember to add discount
-    }
-    public void confirmOrder() {
-        // Logic to confirm an order
-    }
+    
+    
 }

@@ -2,38 +2,54 @@ package Containers;
 import Enums.Status;
 import Enums.Type;
 import java.util.ArrayList;
+import Containers.Line;
 
 public class Order {
-    private int orderID;
-    private Type type;
     private String date;
     private Status status;
-    private double totalAmount;
-    private ArrayList<Product> products;
+    private double totalPrice;
+    private ArrayList<Line> lines;
     private Customer customer;
+    private Shipment shipment;
     
-    public Order(int orderID, Type type, String date, 
-    		Status status, double totalAmount,
-    		ArrayList<Product> products, Customer customer) {
-    	this.orderID = orderID;
-    	this.type = type;
-    	this.date = date;
-    	this.status = status;
-    	this.totalAmount = totalAmount;
-    	this.products = products;
-    	this.customer = customer;    	
+    public Order() {
+    }
+    
+    public double getTotalPrice() {								//TODO Implementér
     	
     }
 
-    public double getTotalAmount() {
-        return totalAmount;
+    public boolean setStatus(Status status) {
+    	this.status = status;
+    	return true;
     }
-
-    public ArrayList<Product> getProducts() {
-        return products;
+    
+    
+    public String displayLines() {								//TODO Implementér
+    	
     }
-
-    public Customer getCustomer() {
-        return customer;
+    
+    public int addProduct(Product product, int quantity) {
+    	for (Line l : lines) {
+    		if (l.getProduct().equals(product)) {
+    			int result = l.changeQuantityBy(quantity);					//TODO Tjek resultat
+    			if (result == 1) {
+    				return 2;
+    			}
+    			else if (result == 0) {
+    				return 3;
+    			}
+    		}
+    	}
+    	
+    	Line line = new Line(product, quantity);
+    	return 1;
+    	
     }
+    
+    public int removeProduct(Product product, int quantity) {	//TODO Implementér
+    	
+    }
+    
 }
+    
