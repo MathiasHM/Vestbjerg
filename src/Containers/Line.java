@@ -27,10 +27,10 @@ public class Line {
 	
 	public Result setQuantity(int quantity) { 		
 		if (quantity > product.getMaxThreshold()) {
-			return MAXTHRESHOLDEXCEEDED;
+			return Result.MAXTHRESHOLDEXCEEDED;
 		}
 		else if (quantity < 1) { //TODO implementér logik til at fjerne instans.
-			return QUANTITYLESSTHANONE;
+			return Result.QUANTITYLESSTHANONE;
 		}
 		this.quantity = quantity;
 		return 1;
