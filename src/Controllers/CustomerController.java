@@ -8,8 +8,8 @@ public class CustomerController {
 	public CustomerController() {
 	}
 	
-    public Customer findCustomerByID(String customerID) {
-        Customer customer = CustomerContainer.getInstance().findCustomerByEmail(customerID);
+    public Customer findCustomerByEmail(String email) {
+        Customer customer = CustomerContainer.getInstance().findCustomerByEmail(email);
         return customer;
     }
 }

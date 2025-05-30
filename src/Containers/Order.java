@@ -3,6 +3,7 @@ import Enums.Status;
 import Enums.Type;
 import java.util.ArrayList;
 import Containers.Line;
+import Enums.Result;
 
 public class Order {
     private String date;
@@ -29,22 +30,21 @@ public class Order {
     	
     }
     
-    public int addProduct(Product product, int quantity) {
+    public boolean addCustomer(Customer customer) {
+    	this.customer = customer;
+    	return true;
+    }
+    
+    public Result addProduct(Product product, int quantity) {
     	for (Line l : lines) {
     		if (l.getProduct().equals(product)) {
-    			int result = l.changeQuantityBy(quantity);					//TODO Tjek resultat
-    			if (result == 1) {
-    				return 2;
-    			}
-    			else if (result == 0) {
-    				return 3;
-    			}
+    			Result result = l.changeQuantityBy(quantity);					//TODO Tjek resultat
+    			return result;
     		}
     	}
     	
     	Line line = new Line(product, quantity);
-    	return 1;
-    	
+    	return Result.NEWLINECREATED;
     }
     
     public int removeProduct(Product product, int quantity) {	//TODO Implementér

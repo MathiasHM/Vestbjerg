@@ -33,18 +33,18 @@ public class Line {
 			return Result.QUANTITYLESSTHANONE;
 		}
 		this.quantity = quantity;
-		return 1;
+		return Result.QUANTITYSET;
 	}
 	
-	public int changeQuantityBy(int quantityMod) {
+	public Result changeQuantityBy(int quantityMod) {
 		int q = quantity + quantityMod;
 		if (q > product.getMaxThreshold()) {
-			return 0;
+			return Result.MAXTHRESHOLDEXCEEDED;
 		}
 		else if (q < 1) {		//TODO Kig op :)
-			return -1;
+			return Result.QUANTITYLESSTHANONE;
 		}
 		quantity = q;
-		return 1;
+		return Result.QUANTITYCHANGED;
 	}
 }

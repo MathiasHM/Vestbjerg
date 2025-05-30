@@ -17,7 +17,8 @@ public class OrderContainer {
         return instance;
     }
 
-    public void addOrder(Order order) {
+    public boolean addOrder(Order order) {
     	orders.add(order);
+    	return true;
     }
 }
