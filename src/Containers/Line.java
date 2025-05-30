@@ -30,7 +30,7 @@ public class Line {
 			return MAXTHRESHOLDEXCEEDED;
 		}
 		else if (quantity < 1) { //TODO implementér logik til at fjerne instans.
-			return -1;
+			return QUANTITYLESSTHANONE;
 		}
 		this.quantity = quantity;
 		return 1;
