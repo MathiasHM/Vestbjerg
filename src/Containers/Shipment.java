@@ -11,8 +11,8 @@ public class Shipment {
 		setShipmentInformation(deliveryName, deliveryAdress, deliveryEmail);
 	}
 	
-	public String getShipmentInformation() {
-		String shipmentInformation = name + address + email; //TODO make actual stringbuilder.
+	public String[] getShipmentInformation() {
+		String[] shipmentInformation = { name, adress, email };
 		return shipmentInformation;
 	}
 	
