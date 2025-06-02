@@ -72,7 +72,7 @@ public class Order {
     public Result addProduct(Product product, int quantity) {
     	for (Line l : lines) {
     		if (l.getProduct().equals(product)) {
-    			Result result = l.changeQuantityBy(quantity);					//TODO Tjek resultat
+    			Result result = l.changeQuantityBy(quantity);
     			return result;
     		}
     	}
@@ -81,13 +81,14 @@ public class Order {
     	return Result.NEWLINECREATED;
     }
     
-    public Result removeProduct(Product product, int quantity) {	//TODO Implementér
+    public Result removeProduct(Product product, int quantity) {
 		for (Line l : lines) {
 			if (l.getProduct().equals(product)) {
 				Result result = l.changeQuantityBy(- quantity);
 				return result;
 			}
 		}
+		return Result.PRODUCTNOTFOUND;
     }
     
 }
