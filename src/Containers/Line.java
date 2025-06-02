@@ -2,35 +2,34 @@ package Containers;
 import Enums.Result;
 
 public class Line {
-	
+
 	private Product product;
 	private int quantity;
 	private double subTotal;
-	
+
 	public Line(Product product, int quantity) {
 		this.product = product;
 		this.quantity = quantity;
 		calculateSubTotal();
 	}
-
 	private void calculateSubTotal() {
 		this.subTotal = product.getPrice() * quantity;
 	}
 	public Product getProduct() {
 		return product;
 	}
-	
+
 	public int getQuantity() {
 		return quantity;
 	}
-	
+
 	public double getSubTotal() {
 		return this.subTotal;
 	}
-	
 
-	
-	public Result setQuantity(int quantity) { 		
+
+
+	public Result setQuantity(int quantity) {
 		if (quantity > product.getMaxThreshold()) {
 			return Result.MAXTHRESHOLDEXCEEDED;
 		}
@@ -44,7 +43,7 @@ public class Line {
 		calculateSubTotal();
 		return Result.QUANTITYSET;
 	}
-	
+
 	public Result changeQuantityBy(int quantityMod) {
 		int q = this.quantity + quantityMod;
 		if (q > product.getMaxThreshold()) {
@@ -59,5 +58,10 @@ public class Line {
 		this.quantity = q;
 		calculateSubTotal();
 		return Result.QUANTITYCHANGED;
+	}
+
+	public String displayInformation() {
+		return this.product.getName() + "/" + this.product.getID() + "/"
+				+ this.product.getPrice() + "/" + this.quantity + this.subTotal;
 	}
 }

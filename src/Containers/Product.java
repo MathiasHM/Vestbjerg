@@ -22,6 +22,10 @@ public class Product {
     public int getID() {
         return productID;
     }
+
+    public String getName() {
+        return name;
+    }
     
     public double getPrice() {
     	return price;

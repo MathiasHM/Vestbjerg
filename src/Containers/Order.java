@@ -33,9 +33,9 @@ public class Order {
     		sumOfPrices += l.getSubTotal();
     	}
     	
-    	if (customer.getCVR() != null) {
+    	if (customer.getCVR() != 0) {
     		discount += 7.5;
-    	} // PRIVAT KUNDE CVR ATTRIBUT SKAL SÆTTES TIL NULL.
+    	}
     	
     	if (shipment == null) {
     		discount += 5;
@@ -45,7 +45,7 @@ public class Order {
     		discount = 20;
     	} 
     	
-    	sumOfPrices *= (100-discount)/100;
+    	sumOfPrices *= (100 - discount) / 100;
     	totalPrice = sumOfPrices;
     	return totalPrice;
     }
@@ -56,15 +56,12 @@ public class Order {
     }
     
     
-    public ArrayList<String> displayLines() {	
-    	StringBuilder sb = new StringBuilder();
-    	for (Line l : lines) {
-    		String lineUI = (String) l.getSubTotal();
-    		sb.append("Line subtotal: ".append(lineUI)
-    		.append(", productID: ").append(l.getProduct().getID())
-    		.append(", product name: ").append(l.getProduct().getName()));
-    	}
-    	
+    public ArrayList<String> displayLines() {
+		ArrayList<String> dLines = new ArrayList<>();
+		for (Line l : lines) {
+			dLines.add(l.displayInformation());
+		}
+		return dLines;
     }
     
     public boolean addCustomer(Customer customer) {
@@ -79,13 +76,13 @@ public class Order {
     			return result;
     		}
     	}
-    	
+
     	Line line = new Line(product, quantity);
     	return Result.NEWLINECREATED;
     }
     
-    public int removeProduct(Product product, int quantity) {	//TODO Implementér
-    	
+    public Result removeProduct(Product product, int quantity) {	//TODO Implementér
+
     }
     
 }
