@@ -40,7 +40,7 @@ public class Order {
     	} 
     	
     	sumOfPrices *= (100-discount)/100;
-    	totalPrice = sumOfPrices; // TODO fjern totalPrice i designklasse og som attribut.
+    	totalPrice = sumOfPrices;
     	return totalPrice;
     }
 

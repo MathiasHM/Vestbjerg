@@ -5,6 +5,7 @@ public class Line {
 	
 	private Product product;
 	private int quantity;
+	private double subTotal;
 	
 	public Line(Product product, int quantity) {
 		this.product = product;
@@ -22,7 +23,12 @@ public class Line {
 	
 	public double getSubTotal() {
 		double subTotal = product.getPrice()*quantity;
+		this.subTotal = subTotal;
 		return subTotal;
+	}
+	
+	private double calculateSubTotal() {
+		
 	}
 	
 	public Result setQuantity(int quantity) { 		
