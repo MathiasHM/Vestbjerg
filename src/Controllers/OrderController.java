@@ -19,8 +19,6 @@ public class OrderController {
     
 	public void createOrder() {
 		this.order = new Order();
-		LocalDateTime nu = LocalDateTime.now();
-		order.setDate(nu.toString());
 	}
 	
     public Result addProductByID(int productID, int quantity) {
