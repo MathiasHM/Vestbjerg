@@ -30,13 +30,17 @@ public class OrderController {
     	//TODO error handling
     }
     
-    public Result RemoveProductByID(int productID, int quantity) {
+    public Result removeProductByID(int productID, int quantity) {
+    	ProductController pC = new ProductController();
+    	Product product = pC.findProductByID(productID);
     	
+    	Result result = order.removeProductByID(product, quantity);
+    	return result;
     }
     
-    public boolean setShippingInformation(String deliveryName, 
+    public void setShippingInformation(String deliveryName, 
     		String deliveryAddress, String deliveryEmail) {
-    	
+    	order.setShippingInformation(deliveryName, deliveryAddress, deliveryEmail);
     }
     
     public boolean addCustomerByEmail(String email) {
