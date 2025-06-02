@@ -1,8 +1,8 @@
 package Enums;
 
 public enum Status {
-    PENDING,
     PROCESSING,
+    PENDING,
     SHIPPED,
     DELIVERED,
     CANCELLED,

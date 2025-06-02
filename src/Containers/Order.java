@@ -14,10 +14,13 @@ public class Order {
     private Shipment shipment;
     
     public Order() {
+        this.date = "1970-01-01";
+        this.status = Status.PROCESSING;
+        this.lines = new ArrayList<>();
+        this.totalPrice = 0.0;
     }
     
     public double getTotalPrice() {								//TODO Implementér
-    	
     }
 
     public boolean setStatus(Status status) {

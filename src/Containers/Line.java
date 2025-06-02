@@ -29,7 +29,9 @@ public class Line {
 		if (quantity > product.getMaxThreshold()) {
 			return Result.MAXTHRESHOLDEXCEEDED;
 		}
-		else if (quantity < 1) { //TODO implementér logik til at fjerne instans.
+		else if (quantity < 1) {
+			this.product = null;
+			this.quantity = 0;
 			return Result.QUANTITYLESSTHANONE;
 		}
 		this.quantity = quantity;
@@ -41,7 +43,9 @@ public class Line {
 		if (q > product.getMaxThreshold()) {
 			return Result.MAXTHRESHOLDEXCEEDED;
 		}
-		else if (q < 1) {		//TODO Kig op :)
+		else if (q < 1) {
+			this.product = null;
+			this.quantity = 0;
 			return Result.QUANTITYLESSTHANONE;
 		}
 		quantity = q;
