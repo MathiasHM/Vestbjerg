@@ -55,7 +55,7 @@ public class OrderController {
     
     public boolean setOrderPending() {
     	order.setStatus(Status.PENDING);
-    	order.
+    	order.setDate(LocalDateTime.now().toString());
     	return OrderContainer.getInstance().addOrder(order);
     }
 }
