@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import Containers.Line;
 import Enums.Result;
 
+import java.lang.StringBuilder;
+
 public class Order {
     private String date;
     private Status status;
@@ -35,7 +37,7 @@ public class Order {
     		discount += 7.5;
     	} // PRIVAT KUNDE CVR ATTRIBUT SKAL SÆTTES TIL NULL.
     	
-    	if (shipment != null) {
+    	if (shipment == null) {
     		discount += 5;
     	}
     	
@@ -54,7 +56,14 @@ public class Order {
     }
     
     
-    public String displayLines() {								//TODO Implementér
+    public ArrayList<String> displayLines() {	
+    	StringBuilder sb = new StringBuilder();
+    	for (Line l : lines) {
+    		String lineUI = (String) l.getSubTotal();
+    		sb.append("Line subtotal: ".append(lineUI)
+    		.append(", productID: ").append(l.getProduct().getID())
+    		.append(", product name: ").append(l.getProduct().getName()));
+    	}
     	
     }
     
