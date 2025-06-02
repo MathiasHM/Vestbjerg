@@ -7,6 +7,8 @@ import Containers.Product;
 import Enums.Result;
 import Containers.Customer;
 
+import java.time.LocalDateTime;
+
 public class OrderController {
 	
 	private Order order;
@@ -17,6 +19,8 @@ public class OrderController {
     
 	public void createOrder() {
 		this.order = new Order();
+		LocalDateTime nu = LocalDateTime.now();
+		order.setDate(nu.toString());
 	}
 	
     public Result addProductByID(int productID, int quantity) {
@@ -51,7 +55,7 @@ public class OrderController {
     
     public boolean setOrderPending() {
     	order.setStatus(Status.PENDING);
-    	
+    	order.
     	return OrderContainer.getInstance().addOrder(order);
     }
 }

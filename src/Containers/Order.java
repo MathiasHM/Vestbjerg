@@ -20,6 +20,10 @@ public class Order {
         this.totalPrice = 0.0;
     }
     
+    public void setDate(String date) {
+    	this.date = date;
+    }
+    
     public double getTotalPrice() {	
     	double sumOfPrices = 0; 
     	double discount = 0;
