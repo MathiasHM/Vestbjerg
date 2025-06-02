@@ -6,15 +6,21 @@ public class Shipment {
 	private String address;
 	private String email;
 	
-	public Shipment(String deliveryName, String deliveryAddress, 
+	public Shipment(String deliveryName, String deliveryAddress,
 			String deliveryEmail) {
-		name = deliveryName;
-		address = deliveryAddress;
-		email = deliveryEmail;
+		setShipmentInformation(deliveryName, deliveryAdress, deliveryEmail);
 	}
 	
 	public String getShipmentInformation() {
 		String shipmentInformation = name + address + email; //TODO make actual stringbuilder.
 		return shipmentInformation;
 	}
+	
+	public void setShipmentInformation (String deliveryName, String deliveryAdress,
+		String deliveryEmail) {
+		this.deliveryName = deliveryName;
+		this.deliveryAdress = deliveryAdress;
+		this.deliveryEmail = deliveryEmail;
+	}
+	
 }
