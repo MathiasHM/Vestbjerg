@@ -31,7 +31,7 @@ public class Order {
     		discount += 7.5;
     	} // PRIVAT KUNDE CVR ATTRIBUT SKAL SÆTTES TIL NULL.
     	
-    	if (shipment.getAddress() != null) {
+    	if (shipment != null) {
     		discount += 5;
     	}
     	
