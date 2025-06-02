@@ -17,4 +17,8 @@ public class Shipment {
 		String shipmentInformation = name + address + email; //TODO make actual stringbuilder.
 		return shipmentInformation;
 	}
+	
+	public String getAddress() {
+		return address;
+	}
 }

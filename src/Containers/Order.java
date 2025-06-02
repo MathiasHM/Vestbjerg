@@ -20,7 +20,28 @@ public class Order {
         this.totalPrice = 0.0;
     }
     
-    public double getTotalPrice() {								//TODO Implementér
+    public double getTotalPrice() {	
+    	double sumOfPrices = 0; 
+    	double discount = 0;
+    	for (Line l : lines) {
+    		sumOfPrices += l.getSubTotal();
+    	}
+    	
+    	if (customer.getCVR() != null) {
+    		discount += 7.5;
+    	} // PRIVAT KUNDE CVR ATTRIBUT SKAL SÆTTES TIL NULL.
+    	
+    	if (shipment.getAddress() != null) {
+    		discount += 5;
+    	}
+    	
+    	if (discount > 20) {
+    		discount = 20;
+    	} 
+    	
+    	sumOfPrices *= (100-discount)/100;
+    	totalPrice = sumOfPrices; // TODO fjern totalPrice i designklasse og som attribut.
+    	return totalPrice;
     }
 
     public boolean setStatus(Status status) {
