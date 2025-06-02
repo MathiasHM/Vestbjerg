@@ -82,7 +82,12 @@ public class Order {
     }
     
     public Result removeProduct(Product product, int quantity) {	//TODO Implementér
-
+		for (Line l : lines) {
+			if (l.getProduct().equals(product)) {
+				Result result = l.changeQuantityBy(- quantity);
+				return result;
+			}
+		}
     }
     
 }
