@@ -12,8 +12,7 @@ public class Shipment {
 	}
 	
 	public String[] getShipmentInformation() {
-		String[] shipmentInformation = { name, address, email };
-		return shipmentInformation;
+		return new String[] { name, address, email };
 	}
 	
 	public void setInformation (String deliveryName, String deliveryAddress,
