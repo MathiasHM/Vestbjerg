@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import Containers.Line;
 import Enums.Result;
 
-import java.lang.StringBuilder;
-
 public class Order {
     private String date;
     private Status status;
