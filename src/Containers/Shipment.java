@@ -8,7 +8,7 @@ public class Shipment {
 	
 	public Shipment(String deliveryName, String deliveryAddress,
 			String deliveryEmail) {
-		setShipmentInformation(deliveryName, deliveryAddress, deliveryEmail);
+		setInformation(deliveryName, deliveryAddress, deliveryEmail);
 	}
 	
 	public String[] getShipmentInformation() {
@@ -16,7 +16,7 @@ public class Shipment {
 		return shipmentInformation;
 	}
 	
-	public void setShipmentInformation (String deliveryName, String deliveryAdress,
+	public void setInformation (String deliveryName, String deliveryAdress,
 		String deliveryEmail) {
 		this.name = deliveryName;
 		this.address = deliveryAdress;

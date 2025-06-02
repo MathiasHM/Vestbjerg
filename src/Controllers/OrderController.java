@@ -34,7 +34,7 @@ public class OrderController {
     	ProductController pC = new ProductController();
     	Product product = pC.findProductByID(productID);
     	
-    	Result result = order.removeProductByID(product, quantity);
+    	Result result = order.removeProduct(product, quantity);
     	return result;
     }
     

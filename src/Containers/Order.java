@@ -89,5 +89,14 @@ public class Order {
 		return Result.PRODUCTNOTFOUND;
     }
     
+    public void setShippingInformation(String deliveryName, String deliveryAddress, String deliveryEmail) {
+    	if (shipment == null) {
+    		this.shipment = new Shipment(deliveryName, deliveryAddress, deliveryEmail);
+    	}
+    	else {
+    		this.shipment.setInformation(deliveryName, deliveryAddress, deliveryEmail);
+    	}
+    }
+    
 }
     
