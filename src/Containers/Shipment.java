@@ -16,10 +16,10 @@ public class Shipment {
 		return shipmentInformation;
 	}
 	
-	public void setInformation (String deliveryName, String deliveryAdress,
+	public void setInformation (String deliveryName, String deliveryAddress,
 		String deliveryEmail) {
 		this.name = deliveryName;
-		this.address = deliveryAdress;
+		this.address = deliveryAddress;
 		this.email = deliveryEmail;
 	}
 	
