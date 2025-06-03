@@ -24,21 +24,16 @@ public class OrderController {
     public Result addProductByID(int productID, int quantity) {
     	ProductController pC = new ProductController();
     	Product product = pC.findProductByID(productID);
-    	
-    	Result result = this.order.addProduct(product, quantity);
-    	return result;
+		return this.order.addProduct(product, quantity);
 	}
     
     public Result removeProductByID(int productID, int quantity) {
     	ProductController pC = new ProductController();
     	Product product = pC.findProductByID(productID);
-    	
-    	Result result = order.removeProduct(product, quantity);
-    	return result;
+    	return order.removeProduct(product, quantity);
     }
     
-    public void setShippingInformation(String deliveryName, 
-    		String deliveryAddress, String deliveryEmail) {
+    public void setShippingInformation(String deliveryName, String deliveryAddress, String deliveryEmail) {
     	order.setShippingInformation(deliveryName, deliveryAddress, deliveryEmail);
     }
     
