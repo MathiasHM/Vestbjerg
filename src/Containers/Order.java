@@ -66,7 +66,7 @@ public class Order {
     
     public Result addCustomer(Customer customer) {
 		if (this.customer != null) {
-			return Result.CUSTOMERALREADYASSOCIATED
+			return Result.CUSTOMERALREADYASSOCIATED;
 		}
 		if (customer == null) {
 			return Result.CUSTOMERNOTFOUND;
