@@ -14,6 +14,11 @@ public class TestData {
 
         // Generate test products
         ProductContainer productContainer = ProductContainer.getInstance();
-        productContainer.getProducts().add(new Product(1, "Product A", 100.0, 10));
+        productContainer.getProducts().add(new Product(1, "Sonisk Skruetrækker", 100.00, 13));
+        productContainer.getProducts().add(new Product(2, "Bagvendt Boremaskine", 200.00, 5));
+        productContainer.getProducts().add(new Product(3, "Elektromagnetisk Hammer", 150.00, 20));
+        productContainer.getProducts().add(new Product(4, "Laser Målestok", 499.99, 10));
+        productContainer.getProducts().add(new Product(5, "1000 bier", 20, 10000));
+        productContainer.getProducts().add(new Product(6, "Monopol Magnet", 1000000.00, 1));
     }
 }
