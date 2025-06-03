@@ -24,7 +24,8 @@ public class Order {
     	this.date = date;
     }
     
-    public double getTotalPrice() {	
+    public double[] getTotalPrice() {
+		double[] totalPrice = new double[3];
     	double sumOfPrices = 0; 
     	double discount = 0;
     	for (Line l : lines) {
@@ -43,10 +44,13 @@ public class Order {
     	
     	if (discount > 20) {
     		discount = 20;
-    	} 
-    	
+    	}
+		totalPrice[0] = sumOfPrices; // Total price before discount
+		totalPrice[1] = discount; // Discount percentage
+
     	sumOfPrices *= (100 - discount) / 100;
-    	totalPrice = sumOfPrices;
+
+		totalPrice[2] = sumOfPrices; // Total price after discount
     	return totalPrice;
     }
 

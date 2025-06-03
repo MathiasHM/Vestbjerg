@@ -7,14 +7,16 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         while (true) {
+            System.out.print('\u000C'); // Clear the console
             System.out.println("Velkommen til Vestbjergs ordrerstyringssystem!");
             System.out.println("Vælg en mulighed for at fortsætte.");
             System.out.print("""
                     1. Ordrer
                     2. Generer testdata
-                    3. Afslut
+                    0. Afslut
                     """);
             Scanner scanner = new Scanner(System.in);
+            System.out.print("Vælg en mulighed: ");
             int choice = scanner.nextInt();
             scanner.nextLine();
             switch (choice) {
@@ -23,15 +25,18 @@ public class Main {
                     orderUI.openOrderMenu();
                     break;
                 case 2:
-                    System.out.println("Genererer testdata...");
                     TestData testData = new TestData();
                     testData.generateTestData();
+                    System.out.println("Testdata genereret.");
+                    System.out.println("Du kan nu oprette ordrer med testdata.");
+                    scanner.nextLine();
                     break;
-                case 3:
+                case 0:
                     System.out.println("Afslutter programmet.");
                     return;
                 default:
-                    System.out.println("Ugyldigt valg. Prøv igen.");
+                    System.out.println("Ugyldigt valg.");
+                    scanner.nextLine();
             }
         }
     }

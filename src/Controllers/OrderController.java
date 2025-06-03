@@ -43,7 +43,7 @@ public class OrderController {
     	return order.addCustomer(customer);
     }
     
-    public double getTotalPrice() {
+    public double[] getTotalPrice() {
     	return order.getTotalPrice();
     }
 

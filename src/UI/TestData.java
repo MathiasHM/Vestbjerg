@@ -6,7 +6,11 @@ import Containers.Product;
 import Containers.ProductContainer;
 
 public class TestData {
+    private boolean isTestDataGenerated = false;
     public void generateTestData() {
+        if (isTestDataGenerated) {
+            return;
+        }
         // Generate test customers
         CustomerContainer customerContainer = CustomerContainer.getInstance();
         customerContainer.getCustomers().add(new Customer("business@gmail.com", 12345678));
@@ -20,5 +24,6 @@ public class TestData {
         productContainer.getProducts().add(new Product(4, "Laser Målestok", 499.99, 10));
         productContainer.getProducts().add(new Product(5, "1000 bier", 20, 10000));
         productContainer.getProducts().add(new Product(6, "Monopol Magnet", 1000000.00, 1));
+        isTestDataGenerated = true;
     }
 }

@@ -1,6 +1,9 @@
 package Containers;
 import Enums.Result;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 public class Line {
 
 	private Product product;
@@ -41,6 +44,8 @@ public class Line {
 
 	public String displayInformation() {
 		return this.product.getName() + "/" + this.product.getID() + "/"
-				+ this.product.getPrice() + "/" + this.quantity + "/" + this.subTotal;
+				+ NumberFormat.getCurrencyInstance(new Locale("da", "DK")).format(this.product.getPrice())
+				+ "/" + this.quantity + "/"
+				+ NumberFormat.getCurrencyInstance(new Locale("da", "DK")).format(this.subTotal);
 	}
 }
