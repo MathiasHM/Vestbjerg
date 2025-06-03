@@ -114,9 +114,13 @@ public class OrderUI {
                     if (email.equalsIgnoreCase("x")) {
                         break;
                     }
-                    boolean result = orderController.addCustomerByEmail(email);
-                    if (result) {
+                    Result result = orderController.addCustomerByEmail(email);
+                    if (result == Result.CUSTOMERADDED) {
                         System.out.println("Kunde tilføjet til ordren.");
+                        break;
+                    }
+                    else if (result == Result.CUSTOMERALREADYASSOCIATED) {
+                        System.out.println("Kunde er allerede tilføjet til ordren.");
                         break;
                     }
                     System.out.println("Kunde ikke fundet. Kontroller email.");
@@ -146,13 +150,19 @@ public class OrderUI {
                     break;
                 case 5:
                     System.out.println("Ordreroversigt:");
-                    System.out.println("Produkter i ordren:");
                     String[] lines = orderController.displayLines();
                     if (lines.length == 0) {
                         System.out.println("Ingen produkter i ordren.");
                     } else {
+                        System.out.println("Produkter i ordren:");
                         for (String line : lines) {
-                            System.out.println(line);
+                            String[] parts = line.split("/");
+                            System.out.print("/n");
+                            System.out.println(parts[0].trim());
+                            System.out.println("ID: " + parts[1].trim());
+                            System.out.println("Pris: " + parts[2].trim());
+                            System.out.println("Antal: " + parts[3].trim() + " kr.");
+                            System.out.println("Subtotal: " + parts[4].trim() + " kr.");
                         }
                     }
                     System.out.println("Total pris: " + orderController.getTotalPrice() + " kr.");

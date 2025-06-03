@@ -1,8 +1,8 @@
 package Containers;
 import Enums.Status;
-import Enums.Type;
+
 import java.util.ArrayList;
-import Containers.Line;
+
 import Enums.Result;
 
 public class Order {
@@ -30,10 +30,12 @@ public class Order {
     	for (Line l : lines) {
     		sumOfPrices += l.getSubTotal();
     	}
-    	
-    	if (customer.getCVR() != 0) {
-    		discount += 7.5;
-    	}
+
+		if (customer != null) {
+			if (customer.getCVR() != 0) {
+				discount += 7.5;
+			}
+		}
     	
     	if (shipment == null) {
     		discount += 5;
@@ -62,9 +64,15 @@ public class Order {
 		return dLines;
     }
     
-    public boolean addCustomer(Customer customer) {
-    	this.customer = customer;
-    	return true;
+    public Result addCustomer(Customer customer) {
+		if (this.customer != null) {
+			return Result.CUSTOMERALREADYASSOCIATED
+		}
+		if (customer == null) {
+			return Result.CUSTOMERNOTFOUND;
+		}
+		this.customer = customer;
+		return Result.CUSTOMERADDED;
     }
     
     public Result addProduct(Product product, int quantity) {

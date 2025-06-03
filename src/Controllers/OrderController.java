@@ -42,7 +42,7 @@ public class OrderController {
     	order.setShippingInformation(deliveryName, deliveryAddress, deliveryEmail);
     }
     
-    public boolean addCustomerByEmail(String email) {
+    public Result addCustomerByEmail(String email) {
     	CustomerController cC = new CustomerController();
     	Customer customer = cC.findCustomerByEmail(email);
     	return order.addCustomer(customer);
