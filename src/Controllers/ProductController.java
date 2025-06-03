@@ -9,7 +9,6 @@ public class ProductController {
 	}
 	
     public Product findProductByID(int productID) {
-        Product p = ProductContainer.getInstance().findProductByID(productID);
-        return p;
+        return ProductContainer.getInstance().findProductByID(productID);
     }
 }
