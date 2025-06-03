@@ -62,6 +62,6 @@ public class Line {
 
 	public String displayInformation() {
 		return this.product.getName() + "/" + this.product.getID() + "/"
-				+ this.product.getPrice() + "/" + this.quantity + this.subTotal;
+				+ this.product.getPrice() + "/" + this.quantity + "/" + this.subTotal;
 	}
 }

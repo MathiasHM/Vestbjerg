@@ -97,6 +97,5 @@ public class Order {
     		this.shipment.setInformation(deliveryName, deliveryAddress, deliveryEmail);
     	}
     }
-    
 }
     

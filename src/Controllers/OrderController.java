@@ -46,15 +46,16 @@ public class OrderController {
     public boolean addCustomerByEmail(String email) {
     	CustomerController cC = new CustomerController();
     	Customer customer = cC.findCustomerByEmail(email);
-    	
-    	boolean result = order.addCustomer(customer);
-    	return result;
+    	return order.addCustomer(customer);
     }
     
     public double getTotalPrice() {
     	return order.getTotalPrice();
     }
-    
+
+	public String[] displayLines() {
+		return order.displayLines().toArray(new String[0]);
+	}
     public boolean setOrderPending() {
     	order.setStatus(Status.PENDING);
     	order.setDate(LocalDateTime.now().toString());
