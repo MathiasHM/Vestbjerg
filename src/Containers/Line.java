@@ -19,29 +19,8 @@ public class Line {
 		return product;
 	}
 
-	public int getQuantity() {
-		return quantity;
-	}
-
 	public double getSubTotal() {
 		return this.subTotal;
-	}
-
-
-
-	public Result setQuantity(int quantity) {
-		if (quantity > product.getMaxThreshold()) {
-			return Result.MAXTHRESHOLDEXCEEDED;
-		}
-		else if (quantity < 1) {
-			this.product = null;
-			this.quantity = 0;
-			this.subTotal = 0;
-			return Result.QUANTITYLESSTHANONE;
-		}
-		this.quantity = quantity;
-		calculateSubTotal();
-		return Result.QUANTITYSET;
 	}
 
 	public Result changeQuantityBy(int quantityMod) {
