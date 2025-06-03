@@ -24,4 +24,7 @@ public class CustomerContainer {
     		}
     	return null;
     }
+    public ArrayList<Customer> getCustomers() {
+        return customers;
+    }
 }

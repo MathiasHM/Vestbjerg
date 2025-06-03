@@ -24,4 +24,7 @@ public class ProductContainer {
         	}
         return null;
     }
+    public ArrayList<Product> getProducts() {
+        return products;
+    }
 }
