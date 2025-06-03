@@ -50,9 +50,8 @@ public class Order {
     	return totalPrice;
     }
 
-    public boolean setStatus(Status status) {
+    public void setStatus(Status status) {
     	this.status = status;
-    	return true;
     }
     
     
@@ -78,8 +77,7 @@ public class Order {
     public Result addProduct(Product product, int quantity) {
     	for (Line l : lines) {
     		if (l.getProduct().equals(product)) {
-    			Result result = l.changeQuantityBy(quantity);
-    			return result;
+    			return l.changeQuantityBy(quantity);
     		}
     	}
 
@@ -91,8 +89,7 @@ public class Order {
     public Result removeProduct(Product product, int quantity) {
 		for (Line l : lines) {
 			if (l.getProduct().equals(product)) {
-				Result result = l.changeQuantityBy(- quantity);
-				return result;
+				return l.changeQuantityBy(- quantity);
 			}
 		}
 		return Result.PRODUCTNOTFOUND;

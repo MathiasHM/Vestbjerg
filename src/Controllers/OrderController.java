@@ -58,5 +58,6 @@ public class OrderController {
     public void setOrderPending() {
     	order.setStatus(Status.PENDING);
     	order.setDate(LocalDateTime.now().toString());
+		OrderContainer.getInstance().addOrder(order);
     }
 }
