@@ -27,8 +27,7 @@ public class OrderController {
     	
     	Result result = this.order.addProduct(product, quantity);
     	return result;
-    	//TODO error handling
-    }
+	}
     
     public Result removeProductByID(int productID, int quantity) {
     	ProductController pC = new ProductController();
@@ -56,9 +55,8 @@ public class OrderController {
 	public String[] displayLines() {
 		return order.displayLines().toArray(new String[0]);
 	}
-    public boolean setOrderPending() {
+    public void setOrderPending() {
     	order.setStatus(Status.PENDING);
     	order.setDate(LocalDateTime.now().toString());
-    	return OrderContainer.getInstance().addOrder(order);
     }
 }

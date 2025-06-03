@@ -15,7 +15,7 @@ public class OrderUI {
             .append("4. Slet Ordrer (dummy)\n")
             .append("5. Tilbage\n");
         while (true) {
-            System.out.println(menu.toString());
+            System.out.println(menu);
             System.out.print("Vælg en mulighed: ");
             int choice = scanner.nextInt();
             scanner.nextLine();
@@ -53,7 +53,7 @@ public class OrderUI {
                  .append("6. Send Ordren Videre\n")
                  .append("7. Tilbage Til Ordrermenuen\n");
         while (true) {
-            System.out.println(orderMenu.toString());
+            System.out.println(orderMenu);
             System.out.print("Vælg en mulighed: ");
             int choice = scanner.nextInt();
             scanner.nextLine();
@@ -109,9 +109,8 @@ public class OrderUI {
                     }
                     break;
                 case 3:
-                    String email = null;
                     System.out.print("Indtast kundens email (indtast \"x\" for at gå tilbage): ");
-                    email = scanner.nextLine();
+                    String email = scanner.nextLine();
                     if (email.equalsIgnoreCase("x")) {
                         break;
                     }
@@ -136,7 +135,7 @@ public class OrderUI {
                     System.out.println("Navn: " + deliveryName);
                     System.out.println("Adresse: " + deliveryAddress);
                     System.out.println("Email: " + deliveryEmail);
-                    System.out.print("Indtast 'ja' for at bekræfte eller 'nej' for at annullere: ");
+                    System.out.print("Indtast \"ja\" for at bekræfte eller \"nej\" for at annullere: ");
                     String confirmation = scanner.nextLine();
                     if (confirmation.equalsIgnoreCase("ja")) {
                         orderController.setShippingInformation(deliveryName, deliveryAddress, deliveryEmail);
@@ -157,7 +156,7 @@ public class OrderUI {
                         }
                     }
                     System.out.println("Total pris: " + orderController.getTotalPrice() + " kr.");
-                    System.out.println("tryk på enhver knap for at gå tilbage til menuen.");
+                    System.out.println("tryk på enter for at gå tilbage til menuen.");
                     scanner.nextLine(); // Any input continues the program.
                     break;
                 case 6:
