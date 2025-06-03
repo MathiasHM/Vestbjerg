@@ -76,6 +76,7 @@ public class Order {
     	}
 
     	Line line = new Line(product, quantity);
+		lines.add(line);
     	return Result.NEWLINECREATED;
     }
     

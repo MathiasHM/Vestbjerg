@@ -110,19 +110,17 @@ public class OrderUI {
                     break;
                 case 3:
                     String email = null;
-                    while (true) {
-                        System.out.print("Indtast kundens email (indtast \"x\" for at gå tilbage): ");
-                        email = scanner.nextLine();
-                        if (email.equalsIgnoreCase("x")) {
-                            break;
-                        }
-                        boolean result = orderController.addCustomerByEmail(email);
-                        if (result) {
-                            System.out.println("Kunde tilføjet til ordren.");
-                            break;
-                        }
-                        System.out.println("Kunde ikke fundet. Kontroller email.");
+                    System.out.print("Indtast kundens email (indtast \"x\" for at gå tilbage): ");
+                    email = scanner.nextLine();
+                    if (email.equalsIgnoreCase("x")) {
+                        break;
                     }
+                    boolean result = orderController.addCustomerByEmail(email);
+                    if (result) {
+                        System.out.println("Kunde tilføjet til ordren.");
+                        break;
+                    }
+                    System.out.println("Kunde ikke fundet. Kontroller email.");
                 case 4:
                     System.out.print("Indtast leveringsnavn: ");
                     String deliveryName = scanner.nextLine();
