@@ -24,7 +24,7 @@ public class CustomerContainer {
     		}
     	return null;
     }
-    public ArrayList<Customer> getCustomers() {
+    public ArrayList<Customer> getCustomers() { //Ikke en del af usecasen men til test
         return customers;
     }
 }

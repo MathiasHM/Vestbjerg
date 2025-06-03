@@ -24,7 +24,7 @@ public class ProductContainer {
         	}
         return null;
     }
-    public ArrayList<Product> getProducts() {
+    public ArrayList<Product> getProducts() { //Ikke en del af usecasen men til test
         return products;
     }
 }

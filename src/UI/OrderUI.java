@@ -66,11 +66,12 @@ public class OrderUI {
                         try {
                             int productId = Integer.parseInt(addInputArray[0].trim());
                             int quantity = Integer.parseInt(addInputArray[1].trim());
-                            if (orderController.addProductByID(productId, quantity) == Result.QUANTITYSET) {
+                            Result result = orderController.addProductByID(productId, quantity);
+                            if (result == Result.QUANTITYSET || result == Result.QUANTITYCHANGED || result == Result.NEWLINECREATED) {
                                 System.out.println(quantity + " af produkt ID " + productId + " tilføjet til ordren.");
-                            } else if (orderController.addProductByID(productId, quantity) == Result.MAXTHRESHOLDEXCEEDED) {
+                            } else if (result == Result.MAXTHRESHOLDEXCEEDED) {
                                 System.out.println("Det ønskede antal af produkter er for højt til at hente hjem.");
-                            } else if (orderController.addProductByID(productId, quantity) == Result.QUANTITYLESSTHANONE) {
+                            } else if (result == Result.QUANTITYLESSTHANONE) {
                                 System.out.println("Tilføj mindst et produkt.");
                             } else {
                                 System.out.println("Produkt ikke fundet. Kontroller produkt ID.");
@@ -91,7 +92,7 @@ public class OrderUI {
                             int productId = Integer.parseInt(removeInputArray[0].trim());
                             int quantity = Integer.parseInt(removeInputArray[1].trim());
                             Result result = orderController.removeProductByID(productId, quantity);
-                            if (result == Result.QUANTITYSET) {
+                            if (result == Result.QUANTITYSET || result == Result.QUANTITYCHANGED) {
                                 System.out.println(quantity + " af produkt ID " + productId + " fjernet fra ordren.");
                             } else if (result == Result.MAXTHRESHOLDEXCEEDED) {
                                 System.out.println("Det ønskede antal af produkter er for højt til at fjerne.");

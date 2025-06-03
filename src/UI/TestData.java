@@ -14,7 +14,6 @@ public class TestData {
 
         // Generate test products
         ProductContainer productContainer = ProductContainer.getInstance();
-        productContainer.getProducts().add(new Product(1, "Skruetrækker", 50.00, 10, "Skruetrækkere",
-        30));
+        productContainer.getProducts().add(new Product(1, "Product A", 100.0, 10));
     }
 }
