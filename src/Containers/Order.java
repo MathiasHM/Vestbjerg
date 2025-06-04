@@ -82,6 +82,7 @@ public class Order {
     	for (Line l : lines) {
     		if (l.getProduct().equals(product)) {
     			return l.changeQuantityBy(quantity);
+    	for (Line l : lines) {						//For-each loop
     		}
     	}
 
