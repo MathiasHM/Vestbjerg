@@ -1,12 +1,14 @@
 package Containers;
 import Enums.Status;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import Enums.Result;
 
 public class Order {
-    private String date;
+    private LocalDateTime date; // Date of the order.
+	// Time of day included in case of prices changing during the day.
     private Status status;
     private double totalPrice;
     private ArrayList<Line> lines;
@@ -14,13 +16,13 @@ public class Order {
     private Shipment shipment;
     
     public Order() {
-        this.date = "1970-01-01";	//Preset error date
+        this.date = LocalDateTime.MIN;	//Start of UNIX time for error handling
         this.status = Status.PROCESSING;
         this.lines = new ArrayList<Line>();	
         this.totalPrice = 0.0;
     }
     
-    public void setDate(String date) {
+    public void setDate(LocalDateTime date) {
     	this.date = date;
     }
     
