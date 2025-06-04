@@ -79,16 +79,15 @@ public class Order {
     }
     
     public Result addProduct(Product product, int quantity) {
-    	for (Line l : lines) {
-    		if (l.getProduct().equals(product)) {
-    			return l.changeQuantityBy(quantity);
-    	for (Line l : lines) {						//For-each loop
+    	for (Line l : lines) {							//For-each loop
+    		if (l.getProduct().equals(product)) {		//Check product line exists
+    			return l.changeQuantityBy(quantity);	//Change quantity
     		}
     	}
 
-    	Line line = new Line(product, quantity);
-		lines.add(line);
-    	return Result.NEWLINECREATED;
+    	Line line = new Line(product, quantity);		//If line doesn't exist, create new line
+		lines.add(line);								//Add new line to ArrayList
+    	return Result.NEWLINECREATED;					
     }
     
     public Result removeProduct(Product product, int quantity) {
