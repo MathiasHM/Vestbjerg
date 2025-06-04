@@ -14,9 +14,9 @@ public class Order {
     private Shipment shipment;
     
     public Order() {
-        this.date = "1970-01-01";
+        this.date = "1970-01-01";	//Preset error date
         this.status = Status.PROCESSING;
-        this.lines = new ArrayList<>();
+        this.lines = new ArrayList<Line>();	
         this.totalPrice = 0.0;
     }
     
