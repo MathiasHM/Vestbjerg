@@ -23,7 +23,8 @@ public class Order {
     private Shipment shipment;
 
     public Order() {
-        this.date = LocalDateTime.MIN;    //Start of UNIX time for error handling
+        this.date =
+                LocalDateTime.MIN;    //Start of UNIX time for error handling
         this.status = Status.PROCESSING;
         this.lines = new ArrayList<Line>();
     }
@@ -88,13 +89,16 @@ public class Order {
 
     public Result addProduct(Product product, int quantity) {
         for (Line l : lines) {                            //For-each loop
-            if (l.getProduct().equals(product)) {        //Check product line exists
+            if (l.getProduct()
+                    .equals(product)) {        //Check product line exists
                 return l.changeQuantityBy(quantity);    //Change quantity
             }
         }
 
-        Line line = new Line(product, quantity);        //If line doesn't exist, create new line
-        lines.add(line);                                //Add new line to ArrayList
+        Line line = new Line(product,
+                quantity);        //If line doesn't exist, create new line
+        lines.add(
+                line);                                //Add new line to ArrayList
         return Result.NEWLINECREATED;
     }
 
@@ -107,11 +111,15 @@ public class Order {
         return Result.PRODUCTNOTFOUND;
     }
 
-    public void setShippingInformation(String deliveryName, String deliveryAddress, String deliveryEmail) {
+    public void setShippingInformation(String deliveryName,
+                                       String deliveryAddress,
+                                       String deliveryEmail) {
         if (shipment == null) {
-            this.shipment = new Shipment(deliveryName, deliveryAddress, deliveryEmail);
+            this.shipment =
+                    new Shipment(deliveryName, deliveryAddress, deliveryEmail);
         } else {
-            this.shipment.setInformation(deliveryName, deliveryAddress, deliveryEmail);
+            this.shipment.setInformation(deliveryName, deliveryAddress,
+                    deliveryEmail);
         }
     }
 }

@@ -1,8 +1,8 @@
 /*
  * Line.java
  *
- * This class represents a line item in an order, containing a product, its quantity,
- * and the subtotal for that line.
+ * This class represents a line item in an order, containing a product, its
+ * quantity, and the subtotal for that line.
  *
  * DMA-CSD-V252 group 5 first semester project
  */
@@ -54,6 +54,10 @@ public class Line {
     }
 
     public String displayInformation() {
-        return this.product.getName() + "/" + this.product.getID() + "/" + NumberFormat.getCurrencyInstance(new Locale("da", "DK")).format(this.product.getPrice()) + "/" + this.quantity + "/" + NumberFormat.getCurrencyInstance(new Locale("da", "DK")).format(this.subTotal);
+        return this.product.getName() + "/" + this.product.getID() + "/" +
+                NumberFormat.getCurrencyInstance(new Locale("da", "DK"))
+                        .format(this.product.getPrice()) + "/" + this.quantity +
+                "/" + NumberFormat.getCurrencyInstance(new Locale("da", "DK"))
+                .format(this.subTotal);
     }
 }

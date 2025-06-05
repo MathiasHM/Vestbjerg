@@ -45,8 +45,11 @@ public class OrderController {
         return order.removeProduct(product, quantity);
     }
 
-    public void setShippingInformation(String deliveryName, String deliveryAddress, String deliveryEmail) {
-        order.setShippingInformation(deliveryName, deliveryAddress, deliveryEmail);
+    public void setShippingInformation(String deliveryName,
+                                       String deliveryAddress,
+                                       String deliveryEmail) {
+        order.setShippingInformation(deliveryName, deliveryAddress,
+                deliveryEmail);
     }
 
     public Result addCustomerByEmail(String email) {

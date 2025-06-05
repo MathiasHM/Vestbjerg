@@ -14,7 +14,8 @@ public class Shipment {
     private String address;
     private String email;
 
-    public Shipment(String deliveryName, String deliveryAddress, String deliveryEmail) {
+    public Shipment(String deliveryName, String deliveryAddress,
+                    String deliveryEmail) {
         setInformation(deliveryName, deliveryAddress, deliveryEmail);
     }
 
@@ -22,7 +23,8 @@ public class Shipment {
         return new String[]{name, address, email};
     }
 
-    public void setInformation(String deliveryName, String deliveryAddress, String deliveryEmail) {
+    public void setInformation(String deliveryName, String deliveryAddress,
+                               String deliveryEmail) {
         this.name = deliveryName;
         this.address = deliveryAddress;
         this.email = deliveryEmail;

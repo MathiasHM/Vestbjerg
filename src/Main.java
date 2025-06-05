@@ -18,7 +18,8 @@ public class Main {
     public static void main(String[] args) {
         while (true) {
             System.out.print('\u000C'); // Clear the console
-            System.out.println("Velkommen til Vestbjergs ordrerstyringssystem!");
+            System.out.println(
+                    "Velkommen til Vestbjergs ordrerstyringssystem!");
             System.out.println("Vælg en mulighed for at fortsætte.");
             System.out.print("""
                     1. Ordrer
@@ -38,7 +39,8 @@ public class Main {
                     TestData testData = new TestData();
                     testData.generateTestData();
                     System.out.println("Testdata genereret.");
-                    System.out.println("Du kan nu oprette ordrer med testdata.");
+                    System.out.println(
+                            "Du kan nu oprette ordrer med testdata.");
                     scanner.nextLine();
                     break;
                 case 0:
