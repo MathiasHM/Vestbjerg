@@ -9,21 +9,21 @@
 package Containers;
 
 public class Customer {
-	
+
     private String email;
-	private int CVR;
-    
-	public Customer(String email, int CVR) {
-		
-		this.email = email;
-		this.CVR = CVR;
-	}
-    
+    private int CVR;
+
+    public Customer(String email, int CVR) {
+
+        this.email = email;
+        this.CVR = CVR;
+    }
+
     public String getEmail() {
         return email;
     }
-    
+
     public int getCVR() {
-    	return CVR;
+        return CVR;
     }
 }

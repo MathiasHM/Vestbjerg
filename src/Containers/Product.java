@@ -13,15 +13,15 @@ public class Product {
     private String name;
     private double price;
     private int maxThreshold;
-    
+
     public Product(int productID, String name, double price,
-    		int maxThreshold) {
-    	this.productID = productID;
-    	this.name = name;
-    	this.price = price;
-    	this.maxThreshold = maxThreshold;
+                   int maxThreshold) {
+        this.productID = productID;
+        this.name = name;
+        this.price = price;
+        this.maxThreshold = maxThreshold;
     }
-    
+
     public int getID() {
         return productID;
     }
@@ -29,12 +29,12 @@ public class Product {
     public String getName() {
         return name;
     }
-    
+
     public double getPrice() {
-    	return price;
+        return price;
     }
-    
+
     public int getMaxThreshold() {
-    	return maxThreshold;
+        return maxThreshold;
     }
 }

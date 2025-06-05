@@ -10,51 +10,53 @@
 package Containers;
 
 import Enums.Result;
+
 import java.text.NumberFormat;
 import java.util.Locale;
 
 public class Line {
 
-	private Product product;
-	private int quantity;
-	private double subTotal;
+    private Product product;
+    private int quantity;
+    private double subTotal;
 
-	public Line(Product product, int quantity) {
-		this.product = product;
-		this.quantity = quantity;
-		calculateSubTotal();
-	}
-	private void calculateSubTotal() {
-		this.subTotal = product.getPrice() * quantity;
-	}
-	public Product getProduct() {
-		return product;
-	}
+    public Line(Product product, int quantity) {
+        this.product = product;
+        this.quantity = quantity;
+        calculateSubTotal();
+    }
 
-	public double getSubTotal() {
-		return this.subTotal;
-	}
+    private void calculateSubTotal() {
+        this.subTotal = product.getPrice() * quantity;
+    }
 
-	public Result changeQuantityBy(int quantityMod) {
-		int q = this.quantity + quantityMod;
-		if (q > product.getMaxThreshold()) {
-			return Result.MAXTHRESHOLDEXCEEDED;
-		}
-		else if (q < 1) {
-			this.product = null;
-			this.quantity = 0;
-			this.subTotal = 0;
-			return Result.QUANTITYLESSTHANONE;
-		}
-		this.quantity = q;
-		calculateSubTotal();
-		return Result.QUANTITYCHANGED;
-	}
+    public Product getProduct() {
+        return product;
+    }
 
-	public String displayInformation() {
-		return this.product.getName() + "/" + this.product.getID() + "/"
-				+ NumberFormat.getCurrencyInstance(new Locale("da", "DK")).format(this.product.getPrice())
-				+ "/" + this.quantity + "/"
-				+ NumberFormat.getCurrencyInstance(new Locale("da", "DK")).format(this.subTotal);
-	}
+    public double getSubTotal() {
+        return this.subTotal;
+    }
+
+    public Result changeQuantityBy(int quantityMod) {
+        int q = this.quantity + quantityMod;
+        if (q > product.getMaxThreshold()) {
+            return Result.MAXTHRESHOLDEXCEEDED;
+        } else if (q < 1) {
+            this.product = null;
+            this.quantity = 0;
+            this.subTotal = 0;
+            return Result.QUANTITYLESSTHANONE;
+        }
+        this.quantity = q;
+        calculateSubTotal();
+        return Result.QUANTITYCHANGED;
+    }
+
+    public String displayInformation() {
+        return this.product.getName() + "/" + this.product.getID() + "/"
+                + NumberFormat.getCurrencyInstance(new Locale("da", "DK")).format(this.product.getPrice())
+                + "/" + this.quantity + "/"
+                + NumberFormat.getCurrencyInstance(new Locale("da", "DK")).format(this.subTotal);
+    }
 }

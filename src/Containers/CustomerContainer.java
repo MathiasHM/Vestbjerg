@@ -26,12 +26,13 @@ public class CustomerContainer {
     }
 
     public Customer findCustomerByEmail(String customerEmail) {
-    	for (Customer customer : customers)
-    		if (customer.getEmail().equals(customerEmail)) {
-    			return customer;
-    		}
-    	return null;
+        for (Customer customer : customers)
+            if (customer.getEmail().equals(customerEmail)) {
+                return customer;
+            }
+        return null;
     }
+
     public ArrayList<Customer> getCustomers() { //Ikke en del af usecasen men til test
         return customers;
     }

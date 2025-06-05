@@ -10,22 +10,24 @@
 
 package UI;
 
-import Enums.Result;
 import Controllers.OrderController;
+import Enums.Result;
+
 import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.Scanner;
 
 public class OrderUI {
     Scanner scanner = new Scanner(System.in);
+
     public void openOrderMenu() {
         System.out.println("Ordrer UI begyndt.");
         StringBuilder menu = new StringBuilder();
         menu.append("1. Ny Ordrer\n")
-            .append("2. Se Ordrer (dummy)\n")
-            .append("3. Opdater Ordrer (dummy)\n")
-            .append("4. Slet Ordrer (dummy)\n")
-            .append("0. Tilbage\n");
+                .append("2. Se Ordrer (dummy)\n")
+                .append("3. Opdater Ordrer (dummy)\n")
+                .append("4. Slet Ordrer (dummy)\n")
+                .append("0. Tilbage\n");
         while (true) {
             System.out.print('\u000C'); // Clear the console
             System.out.println(menu);
@@ -57,18 +59,19 @@ public class OrderUI {
             }
         }
     }
+
     private void createOrder() {
         OrderController orderController = new OrderController();
         orderController.createOrder();
         System.out.println("Ordrer påbegyndt.");
         StringBuilder orderMenu = new StringBuilder();
         orderMenu.append("1. Tilføj Produkt\n")
-                 .append("2. Fjern Produkt\n")
-                 .append("3. Tilføj Kunde til ordren\n")
-                 .append("4. Tilføj Fragtoplysninger\n")
-                 .append("5. Ordreroversigt\n")
-                 .append("6. Send Ordren Videre\n")
-                 .append("0. Tilbage Til Ordrermenuen\n");
+                .append("2. Fjern Produkt\n")
+                .append("3. Tilføj Kunde til ordren\n")
+                .append("4. Tilføj Fragtoplysninger\n")
+                .append("5. Ordreroversigt\n")
+                .append("6. Send Ordren Videre\n")
+                .append("0. Tilbage Til Ordrermenuen\n");
         while (true) {
             System.out.print('\u000C');
             System.out.println(orderMenu);
@@ -149,8 +152,7 @@ public class OrderUI {
                             System.out.println("Ugyldig input. Sørg for at indtaste et gyldigt produkt ID og mængde som tal.");
                             scanner.nextLine();
                         }
-                    }
-                    else {
+                    } else {
                         System.out.println("Ugyldig input format. Brug venligst formatet \"produktID, mængde\".");
                         scanner.nextLine();
                     }
@@ -167,8 +169,7 @@ public class OrderUI {
                         System.out.println(email + " tilføjet til ordren.");
                         scanner.nextLine();
                         break;
-                    }
-                    else if (result == Result.CUSTOMERALREADYASSOCIATED) {
+                    } else if (result == Result.CUSTOMERALREADYASSOCIATED) {
                         System.out.println("En kunde er allerede tilføjet til ordren.");
                         scanner.nextLine();
                         break;

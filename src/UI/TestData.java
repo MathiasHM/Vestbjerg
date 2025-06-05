@@ -16,6 +16,7 @@ import Containers.ProductContainer;
 
 public class TestData {
     private boolean isTestDataGenerated = false;
+
     public void generateTestData() {
         if (isTestDataGenerated) {
             return;

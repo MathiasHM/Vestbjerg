@@ -15,7 +15,7 @@ public class ProductContainer {
     private ArrayList<Product> products;
 
     private ProductContainer() {
-        products = new ArrayList<Product>(); 
+        products = new ArrayList<Product>();
     }
 
     public static ProductContainer getInstance() {
@@ -27,11 +27,12 @@ public class ProductContainer {
 
     public Product findProductByID(int productID) {
         for (Product p : products)
-        	if (p.getID() == productID) {
-        		return p;
-        	}
+            if (p.getID() == productID) {
+                return p;
+            }
         return null;
     }
+
     public ArrayList<Product> getProducts() { //Ikke en del af usecasen men til test
         return products;
     }
