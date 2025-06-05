@@ -17,8 +17,6 @@ public class CustomerController {
     }
 
     public Customer findCustomerByEmail(String email) {
-        Customer customer =
-                CustomerContainer.getInstance().findCustomerByEmail(email);
-        return customer;
+        return CustomerContainer.getInstance().findCustomerByEmail(email);
     }
 }

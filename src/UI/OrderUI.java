@@ -29,11 +29,10 @@ public class OrderUI {
                 .append("3. Tilføj Kunde til ordren\n")
                 .append("4. Tilføj Fragtoplysninger\n")
                 .append("5. Ordreroversigt\n").append("6. Send Ordren Videre\n")
-                .append("0. Tilbage Til Ordrermenuen\n");
+                .append("0. Tilbage Til Ordrermenuen\n") .append("Vælg en mulighed: ");
         while (true) {
             System.out.print('\u000C');
             System.out.println(orderMenu);
-            System.out.print("Vælg en mulighed: ");
             int choice;
             String input = scanner.nextLine();
             try {
@@ -71,6 +70,7 @@ public class OrderUI {
                             System.out.println("Ugyldig input format. Brug venligst formatet \"produktID, mængde\".");
                         }
                         if (promptReturnToMenu()) break;
+                        System.out.print('\u000C');
                     }
                     break;
                 }
@@ -104,6 +104,7 @@ public class OrderUI {
                             System.out.println("Ugyldig input format. Brug venligst formatet \"produktID, mængde\".");
                         }
                         if (promptReturnToMenu()) break;
+                        System.out.print('\u000C');
                     }
                     break;
                 }
@@ -126,6 +127,7 @@ public class OrderUI {
                         }
                         System.out.println(email + " ikke fundet. Kontroller email.");
                         if (promptReturnToMenu()) break;
+                        System.out.print('\u000C');
                     }
                     break;
                 }
@@ -140,6 +142,7 @@ public class OrderUI {
                         if (deliveryName.isEmpty() || deliveryAddress.isEmpty() || deliveryEmail.isEmpty()) {
                             System.out.println("Alle felter skal udfyldes.");
                             if (promptReturnToMenu()) break;
+                            System.out.print('\u000C');
                             continue;
                         }
                         System.out.print('\u000C');
@@ -156,6 +159,7 @@ public class OrderUI {
                             System.out.println("Fragtoplysninger annulleret.");
                         }
                         if (promptReturnToMenu()) break;
+                        System.out.print('\u000C');
                     }
                     break;
                 }
@@ -207,6 +211,7 @@ public class OrderUI {
                     String sendConfirmation = scanner.nextLine();
                     if (!sendConfirmation.equalsIgnoreCase("ja")) {
                         System.out.println("Ordren er ikke sendt videre.");
+                        System.out.println("Tryk på enhver tast for at gå tilbage til ordrermenuen.");
                         scanner.nextLine();
                         break;
                     }
@@ -225,6 +230,7 @@ public class OrderUI {
                     String exitConfirmation = scanner.nextLine();
                     if (!exitConfirmation.equalsIgnoreCase("ja")) {
                         System.out.println("Går tilbage til ordrermenuen.");
+                        System.out.println("Tryk på enhver tast for at fortsætte.");
                         scanner.nextLine();
                         break;
                     }
@@ -232,6 +238,10 @@ public class OrderUI {
                 }
                 default:
                     System.out.println("Ugyldigt valg.");
+                    System.out.println("input skal være et tal mellem 0 og 6.");
+                    System.out.println("Tryk på Enter for at prøve igen.");
+                    scanner.nextLine();
+                    break;
             }
         }
     }

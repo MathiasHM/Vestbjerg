@@ -15,9 +15,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Order {
-    private LocalDateTime date; // Date of the order.
+    private LocalDateTime date; // never accessed directly, but used for Use Case
     // Time of day included in case of prices changing during the day.
-    private Status status;
+    private Status status; // never accessed directly, but used for Use Case
     private final ArrayList<Line> lines;
     private Customer customer;
     private Shipment shipment;
@@ -51,7 +51,7 @@ public class Order {
             discount += 5; // If no shipment information is provided, apply a 5% discount, should probably be a constant
         }
 
-        if (discount > 20) {
+        if (discount > 20) { // Cap the discount at 20%, is currently not able to happen, but just in case
             discount = 20; // Cap the discount at 20%, should probably be a constant
         }
         totalPrice[0] = sumOfPrices; // Total price before discount
@@ -93,6 +93,9 @@ public class Order {
         }
         if (product == null) {                //Check for valid product
             return Result.PRODUCTNOTFOUND;
+        }
+        if (product.getMaxThreshold() < quantity) { //Check for max threshold
+            return Result.MAXTHRESHOLDEXCEEDED;
         }
         for (Line l : lines) {                            //For-each loop
             if (l.getProduct()

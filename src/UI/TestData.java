@@ -9,10 +9,7 @@
 
 package UI;
 
-import Containers.Customer;
-import Containers.CustomerContainer;
-import Containers.Product;
-import Containers.ProductContainer;
+import Containers.*;
 
 public class TestData {
     private boolean isTestDataGenerated = false;
