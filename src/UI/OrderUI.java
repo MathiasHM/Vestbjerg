@@ -34,10 +34,10 @@ public class OrderUI {
             System.out.println(orderMenu);
             System.out.print("Vælg en mulighed: ");
             int choice = scanner.nextInt();
+            System.out.print('\u000C');
             scanner.nextLine();
             switch (choice) {
                 case 1:
-                    System.out.print('\u000C');
                     System.out.println(
                             "Indtast produkt ID og mængde som skal tilføjes (eks. \"123, 2\"");
                     System.out.println(
@@ -66,19 +66,29 @@ public class OrderUI {
                                 System.out.println(
                                         "Tryk på x for at gå tilbage til ordrermenuen eller en anden tast for at fortsætte.");
                                 if (scanner.nextLine().equalsIgnoreCase("x")) {
-                                    break; // Exit to main menu
+                                    break; // Exit to order menu
                                 }
+                                continue;
                             } else if (result == Result.MAXTHRESHOLDEXCEEDED) {
                                 System.out.println(
                                         "Det ønskede antal af produkter er for højt til at hente hjem.");
                                 scanner.nextLine();
                             } else if (result == Result.QUANTITYLESSTHANONE) {
                                 System.out.println("Tilføj mindst et produkt.");
-                                scanner.nextLine();
+                                System.out.printf("Tryk på x for at gå tilbage til ordrermenuen eller en anden tast for at fortsætte.");
+                                if (scanner.nextLine().equalsIgnoreCase("x")) {
+                                    break; // Exit to order menu
+                                }
+                                continue;
                             } else {
                                 System.out.println(
                                         "Produkt ikke fundet. Kontroller produkt ID.");
-                                scanner.nextLine();
+                                System.out.println(
+                                        "Tryk på x for at gå tilbage til ordrermenuen eller en anden tast for at fortsætte.");
+                                if (scanner.nextLine().equalsIgnoreCase("x")) {
+                                    break; // Exit to order menu
+                                }
+                                continue;
                             }
                         } catch (NumberFormatException e) {
                             System.out.println(
@@ -92,7 +102,6 @@ public class OrderUI {
                     }
                     continue;
                 case 2:
-                    System.out.print('\u000C');
                     System.out.println(
                             "Indtast produkt ID og mængde som skal fjernes (eks. \"123, 2\"");
                     System.out.println(
@@ -122,17 +131,28 @@ public class OrderUI {
                                 if (scanner.nextLine().equalsIgnoreCase("x")) {
                                     break; // Exit to main menu
                                 }
+                                continue; // Continue to the next iteration
                             } else if (result == Result.MAXTHRESHOLDEXCEEDED) {
                                 System.out.println(
                                         "Det ønskede antal af produkter er for højt til at fjerne.");
-                                scanner.nextLine();
+                                System.out.println(
+                                        "Tryk på x for at gå tilbage til ordrermenuen eller en anden tast for at fortsætte.");
+                                if (scanner.nextLine().equalsIgnoreCase("x")) {
+                                    break; // Exit to main menu
+                                }
+                                continue;
                             } else if (result == Result.QUANTITYLESSTHANONE) {
                                 System.out.println("Fjern mindst et produkt.");
                                 scanner.nextLine();
                             } else {
                                 System.out.println(
                                         "Produkt ikke fundet. Kontroller produkt ID.");
-                                scanner.nextLine();
+                                System.out.println(
+                                        "Tryk på x for at gå tilbage til ordrermenuen eller en anden tast for at fortsætte.");
+                                if (scanner.nextLine().equalsIgnoreCase("x")) {
+                                    break; // Exit to main menu
+                                }
+                                continue;
                             }
                         } catch (NumberFormatException e) {
                             System.out.println(
@@ -146,7 +166,6 @@ public class OrderUI {
                     }
                     continue;
                 case 3:
-                    System.out.print('\u000C');
                     System.out.print(
                             "Indtast kundens email (indtast \"x\" for at gå tilbage): ");
                     String email = scanner.nextLine();
@@ -161,15 +180,20 @@ public class OrderUI {
                     } else if (result == Result.CUSTOMERALREADYASSOCIATED) {
                         System.out.println(
                                 "En kunde er allerede tilføjet til ordren.");
+                        System.out.println(
+                                "Tryk på enhver tast for at fortsætte.");
                         scanner.nextLine();
                         break;
                     }
                     System.out.println(
                             email + " ikke fundet. Kontroller email.");
-                    scanner.nextLine();
+                    System.out.println(
+                            "Tryk på x for at gå tilbage til ordrermenuen eller en anden tast for at fortsætte.");
+                    if (scanner.nextLine().equalsIgnoreCase("x")) {
+                        break; // Exit to main menu
+                    }
                     continue;
                 case 4:
-                    System.out.print('\u000C');
                     System.out.print("Indtast leveringsnavn: ");
                     String deliveryName = scanner.nextLine();
                     System.out.print("Indtast leveringsadresse: ");
@@ -204,7 +228,6 @@ public class OrderUI {
                     scanner.nextLine();
                     break;
                 case 5:
-                    System.out.print('\u000C');
                     System.out.println("Ordreroversigt:");
                     String[] lines = orderController.displayLines();
                     if (lines.length == 0) {
@@ -236,7 +259,6 @@ public class OrderUI {
                     scanner.nextLine(); // Any input continues the program.
                     break;
                 case 6:
-                    System.out.println('\u000C');
                     if (orderController.displayLines().length == 0) {
                         System.out.println(
                                 "Ingen produkter i ordren. Du kan ikke sende en tom ordre.");
