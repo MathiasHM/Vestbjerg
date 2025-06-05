@@ -1,6 +1,15 @@
-package Containers;
-import Enums.Result;
+/*
+ * Line.java
+ *
+ * This class represents a line item in an order, containing a product, its quantity,
+ * and the subtotal for that line.
+ *
+ * DMA-CSD-V252 group 5 first semester project
+ */
 
+package Containers;
+
+import Enums.Result;
 import java.text.NumberFormat;
 import java.util.Locale;
 

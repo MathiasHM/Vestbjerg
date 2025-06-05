@@ -1,7 +1,17 @@
-package UI;
-import Controllers.OrderController;
-import Enums.Result;
+/*
+ * OrderUI.java
+ *
+ * This class is a user interface for managing orders. Currently, it allows users to create orders,
+ * during which they can add and remove products, associate customers, set shipping information,
+ * view order details, and send orders for confirmation.
+ *
+ * DMA-CSD-V252 group 5 first semester project
+ */
 
+package UI;
+
+import Enums.Result;
+import Controllers.OrderController;
 import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.Scanner;

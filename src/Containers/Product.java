@@ -1,3 +1,11 @@
+/*
+ * Product.java
+ *
+ * This class represents a product with an ID, name, price, and maximum threshold.
+ *
+ * DMA-CSD-V252 group 5 first semester project
+ */
+
 package Containers;
 
 public class Product {

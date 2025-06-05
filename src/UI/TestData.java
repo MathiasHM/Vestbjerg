@@ -1,3 +1,12 @@
+/*
+ * TestData.java
+ *
+ * This class is a utility for generating test data for customers and products.
+ * It ensures that test data is only generated once to avoid duplication.
+ *
+ * DMA-CSD-V252 group 5 first semester project
+ */
+
 package UI;
 
 import Containers.Customer;

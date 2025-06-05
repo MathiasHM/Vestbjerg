@@ -1,6 +1,15 @@
+/*
+ * Main.java
+ *
+ * This main class is the entry point for the Vestbjerg order management system.
+ * It provides an initial menu for users to interact with the system,
+ * allowing them to manage orders or generate test data.
+ *
+ * DMA-CSD-V252 group 5 first semester project
+ */
+
 import UI.OrderUI;
 import UI.TestData;
-
 import java.util.Scanner;
 
 

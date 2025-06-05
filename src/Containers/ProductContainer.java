@@ -1,3 +1,11 @@
+/*
+ * ProductContainer.java
+ *
+ * This class represents a product container, allowing for the management and retrieval of products.
+ *
+ * DMA-CSD-V252 group 5 first semester project
+ */
+
 package Containers;
 
 import java.util.ArrayList;

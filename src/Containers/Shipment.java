@@ -1,3 +1,11 @@
+/*
+ * Shipment.java
+ *
+ * This class represents a shipment, allowing for the management and retrieval of shipment information.
+ *
+ * DMA-CSD-V252 group 5 first semester project
+ */
+
 package Containers;
 
 public class Shipment {

@@ -1,12 +1,23 @@
+/*
+ * OrderController.java
+ *
+ * This class is a controller for managing order-related operations.
+ * Currently, it allows for the creation of orders, adding and removing products,
+ * setting shipping information, adding customers, calculating total prices,
+ * displaying order lines, and setting the order status to pending,
+ * as an integral part of the "Create Order" use case.
+ *
+ * DMA-CSD-V252 group 5 first semester project
+ */
+
 package Controllers;
 
+import Enums.Status;
+import Enums.Result;
 import Containers.Order;
 import Containers.OrderContainer;
-import Enums.Status;
 import Containers.Product;
-import Enums.Result;
 import Containers.Customer;
-
 import java.time.LocalDateTime;
 
 public class OrderController {

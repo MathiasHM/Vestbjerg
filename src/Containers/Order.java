@@ -1,10 +1,17 @@
-package Containers;
-import Enums.Status;
+/*
+ * Order.java
+ *
+ * This class represents an order, containing relevant details such as the date, status, and lines of products.
+ *
+ * DMA-CSD-V252 group 5 first semester project
+ */
 
+package Containers;
+
+import Enums.Status;
+import Enums.Result;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-
-import Enums.Result;
 
 public class Order {
     private LocalDateTime date; // Date of the order.

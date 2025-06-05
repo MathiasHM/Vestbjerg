@@ -1,3 +1,11 @@
+/*
+ * Customer.java
+ *
+ * This class represents a customer with an email and a CVR number.
+ *
+ * DMA-CSD-V252 group 5 first semester project
+ */
+
 package Containers;
 
 public class Customer {
