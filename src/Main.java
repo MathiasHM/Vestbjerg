@@ -16,24 +16,21 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        while (true) {
-            System.out.print('\u000C'); // Clear the console
-            System.out.println(
-                    "Velkommen til Vestbjergs ordrerstyringssystem!");
-            System.out.println("Vælg en mulighed for at fortsætte.");
-            System.out.print("""
-                    1. Ordrer
-                    2. Generer testdata
-                    0. Afslut
-                    """);
+        StringBuilder sb = new StringBuilder();
+        sb.append("Velkommen til Vestbjergs ordrerstyringssystem!\n")
+                .append("Vælg en mulighed for at fortsætte.\n")
+                .append("1. Opret Ordrer\n").append("2. Generer testdata\n")
+                .append("0. Afslut\n").append("Vælg en mulighed: ");
+        while (true) { // Infinite loop to keep the menu active until the user chooses to exit
+            System.out.print('\u000C'); // Clear the console (bluej specific)
+            System.out.println(sb.toString());
             Scanner scanner = new Scanner(System.in);
-            System.out.print("Vælg en mulighed: ");
             int choice = scanner.nextInt();
             scanner.nextLine();
             switch (choice) {
                 case 1:
                     OrderUI orderUI = new OrderUI();
-                    orderUI.openOrderMenu();
+                    orderUI.createOrder();
                     break;
                 case 2:
                     TestData testData = new TestData();

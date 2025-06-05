@@ -19,46 +19,7 @@ import java.util.Scanner;
 
 public class OrderUI {
     Scanner scanner = new Scanner(System.in);
-
-    public void openOrderMenu() {
-        System.out.println("Ordrer UI begyndt.");
-        StringBuilder menu = new StringBuilder();
-        menu.append("1. Ny Ordrer\n").append("2. Se Ordrer (dummy)\n")
-                .append("3. Opdater Ordrer (dummy)\n")
-                .append("4. Slet Ordrer (dummy)\n").append("0. Tilbage\n");
-        while (true) {
-            System.out.print('\u000C'); // Clear the console
-            System.out.println(menu);
-            System.out.print("Vælg en mulighed: ");
-            int choice = scanner.nextInt();
-            scanner.nextLine();
-            switch (choice) {
-                case 1:
-                    createOrder();
-                    break;
-                case 2:
-                    System.out.println("Funktion ikke implementeret endnu.");
-                    scanner.nextLine(); // Any input continues the program.
-                    break;
-                case 3:
-                    System.out.println("Funktion ikke implementeret endnu.");
-                    scanner.nextLine();
-                    break;
-                case 4:
-                    System.out.println("Funktion ikke implementeret endnu.");
-                    scanner.nextLine();
-                    break;
-                case 0:
-                    System.out.println("Går ud af Ordrermenuen.");
-                    return;
-                default:
-                    System.out.println("Ugyldigt valg.");
-                    scanner.nextLine();
-            }
-        }
-    }
-
-    private void createOrder() {
+    public void createOrder() {
         OrderController orderController = new OrderController();
         orderController.createOrder();
         System.out.println("Ordrer påbegyndt.");
