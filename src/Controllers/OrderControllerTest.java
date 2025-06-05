@@ -10,7 +10,7 @@ public class OrderControllerTest {
     // Path: create - add product - add customer - price calc
     @Test
     public void fullOrderFlowWithDiscounts() {
-        new TestData().generateTestData();                 // products + customers
+        new TestData().generateTestData(); // products + customers
 
         OrderController oc = new OrderController();
         oc.createOrder();
@@ -22,8 +22,8 @@ public class OrderControllerTest {
 
         double[] price = oc.getTotalPrice();
         assertAll(
-            () -> assertEquals(200.0, price[0], 0.01),     // 2×100
-            () -> assertEquals(12.5,  price[1], 0.01),     // 7.5 % + 5 % (no ship)
+            () -> assertEquals(200.0, price[0], 0.01), // 2×100
+            () -> assertEquals(12.5,  price[1], 0.01), // 7.5 % + 5 % (no ship)
             () -> assertEquals(175.0, price[2], 0.01)
         );
     }
@@ -34,7 +34,7 @@ public class OrderControllerTest {
         new TestData().generateTestData();
         OrderController oc = new OrderController();
         oc.createOrder();
-        oc.addProductByID(2, 1);                           // any valid product
+        oc.addProductByID(2, 1); // any valid product
 
         assertEquals(Result.LINEREMOVED,
                      oc.removeProductByID(2, 1));
@@ -48,6 +48,6 @@ public class OrderControllerTest {
         oc.createOrder();
 
         assertEquals(Result.MAXTHRESHOLDEXCEEDED,
-                     oc.addProductByID(2, 999));           // threshold is 5
+                     oc.addProductByID(2, 999)); // threshold is 5
     }
 }
