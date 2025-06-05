@@ -18,7 +18,7 @@ public class Order {
     private LocalDateTime date; // Date of the order.
     // Time of day included in case of prices changing during the day.
     private Status status;
-    private ArrayList<Line> lines;
+    private final ArrayList<Line> lines;
     private Customer customer;
     private Shipment shipment;
 

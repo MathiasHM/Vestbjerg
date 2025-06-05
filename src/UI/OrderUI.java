@@ -23,11 +23,7 @@ public class OrderUI {
     public void openOrderMenu() {
         System.out.println("Ordrer UI begyndt.");
         StringBuilder menu = new StringBuilder();
-        menu.append("1. Ny Ordrer\n")
-                .append("2. Se Ordrer (dummy)\n")
-                .append("3. Opdater Ordrer (dummy)\n")
-                .append("4. Slet Ordrer (dummy)\n")
-                .append("0. Tilbage\n");
+        menu.append("1. Ny Ordrer\n").append("2. Se Ordrer (dummy)\n").append("3. Opdater Ordrer (dummy)\n").append("4. Slet Ordrer (dummy)\n").append("0. Tilbage\n");
         while (true) {
             System.out.print('\u000C'); // Clear the console
             System.out.println(menu);
@@ -65,13 +61,7 @@ public class OrderUI {
         orderController.createOrder();
         System.out.println("Ordrer påbegyndt.");
         StringBuilder orderMenu = new StringBuilder();
-        orderMenu.append("1. Tilføj Produkt\n")
-                .append("2. Fjern Produkt\n")
-                .append("3. Tilføj Kunde til ordren\n")
-                .append("4. Tilføj Fragtoplysninger\n")
-                .append("5. Ordreroversigt\n")
-                .append("6. Send Ordren Videre\n")
-                .append("0. Tilbage Til Ordrermenuen\n");
+        orderMenu.append("1. Tilføj Produkt\n").append("2. Fjern Produkt\n").append("3. Tilføj Kunde til ordren\n").append("4. Tilføj Fragtoplysninger\n").append("5. Ordreroversigt\n").append("6. Send Ordren Videre\n").append("0. Tilbage Til Ordrermenuen\n");
         while (true) {
             System.out.print('\u000C');
             System.out.println(orderMenu);
@@ -228,11 +218,9 @@ public class OrderUI {
                             System.out.println("Subtotal: " + parts[4].trim());
                         }
                     }
-                    System.out.println("Total pris: " +
-                            NumberFormat.getCurrencyInstance(new Locale("da", "DK")).format(orderController.getTotalPrice()[0]));
+                    System.out.println("Total pris: " + NumberFormat.getCurrencyInstance(new Locale("da", "DK")).format(orderController.getTotalPrice()[0]));
                     System.out.println("Rabat: " + orderController.getTotalPrice()[1] + "%");
-                    System.out.println("Total pris efter rabat: " +
-                            NumberFormat.getCurrencyInstance(new Locale("da", "DK")).format(orderController.getTotalPrice()[2]));
+                    System.out.println("Total pris efter rabat: " + NumberFormat.getCurrencyInstance(new Locale("da", "DK")).format(orderController.getTotalPrice()[2]));
                     scanner.nextLine(); // Any input continues the program.
                     break;
                 case 6:

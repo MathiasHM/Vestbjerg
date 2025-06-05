@@ -54,9 +54,6 @@ public class Line {
     }
 
     public String displayInformation() {
-        return this.product.getName() + "/" + this.product.getID() + "/"
-                + NumberFormat.getCurrencyInstance(new Locale("da", "DK")).format(this.product.getPrice())
-                + "/" + this.quantity + "/"
-                + NumberFormat.getCurrencyInstance(new Locale("da", "DK")).format(this.subTotal);
+        return this.product.getName() + "/" + this.product.getID() + "/" + NumberFormat.getCurrencyInstance(new Locale("da", "DK")).format(this.product.getPrice()) + "/" + this.quantity + "/" + NumberFormat.getCurrencyInstance(new Locale("da", "DK")).format(this.subTotal);
     }
 }

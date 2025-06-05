@@ -14,8 +14,7 @@ public class Product {
     private double price;
     private int maxThreshold;
 
-    public Product(int productID, String name, double price,
-                   int maxThreshold) {
+    public Product(int productID, String name, double price, int maxThreshold) {
         this.productID = productID;
         this.name = name;
         this.price = price;

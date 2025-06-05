@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class CustomerContainer {
     private static CustomerContainer instance;
-    private ArrayList<Customer> customers;
+    private final ArrayList<Customer> customers;
 
     private CustomerContainer() {
         customers = new ArrayList<>();
