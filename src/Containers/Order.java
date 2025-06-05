@@ -88,6 +88,15 @@ public class Order {
     }
 
     public Result addProduct(Product product, int quantity) {
+        if (quantity <= 0) {                //Check for valid quantity
+            return Result.QUANTITYLESSTHANONE;
+        }
+        if (product == null) {                //Check for valid product
+            return Result.PRODUCTNOTFOUND;
+        }
+        if (product.getMaxThreshold() < quantity) { //Check for max threshold
+            return Result.MAXTHRESHOLDEXCEEDED;
+        }
         for (Line l : lines) {                            //For-each loop
             if (l.getProduct()
                     .equals(product)) {        //Check product line exists
@@ -103,6 +112,15 @@ public class Order {
     }
 
     public Result removeProduct(Product product, int quantity) {
+        if (quantity <= 0) {                //Check for valid quantity
+            return Result.QUANTITYLESSTHANONE;
+        }
+        if (product == null) {                //Check for valid product
+            return Result.PRODUCTNOTFOUND;
+        }
+        if (product.getMaxThreshold() < quantity) { //Check for max threshold
+            return Result.MAXTHRESHOLDEXCEEDED;
+        }
         for (Line l : lines) {
             if (l.getProduct().equals(product)) {
                 return l.changeQuantityBy(-quantity);

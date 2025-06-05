@@ -215,8 +215,7 @@ public class OrderUI {
                         System.out.println("Produkter i ordren:");
                         for (String line : lines) {
                             String[] parts = line.split("/");
-                            System.out.print("/n");
-                            System.out.println(parts[0].trim());
+                            System.out.println("/n" + parts[0].trim());
                             System.out.println("ID: " + parts[1].trim());
                             System.out.println("Pris: " + parts[2].trim());
                             System.out.println("Antal: " + parts[3].trim());

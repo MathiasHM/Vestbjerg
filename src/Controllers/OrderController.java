@@ -34,14 +34,26 @@ public class OrderController {
     }
 
     public Result addProductByID(int productID, int quantity) {
+        if (quantity <= 0) {
+            return Result.QUANTITYLESSTHANONE;
+        }
         ProductController pC = new ProductController();
         Product product = pC.findProductByID(productID);
+        if (product == null) {
+            return Result.PRODUCTNOTFOUND;
+        }
         return this.order.addProduct(product, quantity);
     }
 
     public Result removeProductByID(int productID, int quantity) {
+        if (quantity <= 0) {
+            return Result.QUANTITYLESSTHANONE;
+        }
         ProductController pC = new ProductController();
         Product product = pC.findProductByID(productID);
+        if (product == null) {
+            return Result.PRODUCTNOTFOUND;
+        }
         return order.removeProduct(product, quantity);
     }
 

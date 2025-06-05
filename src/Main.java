@@ -38,6 +38,7 @@ public class Main {
                     System.out.println("Testdata genereret.");
                     System.out.println(
                             "Du kan nu oprette ordrer med testdata.");
+                    System.out.println("Tryk på Enter for at fortsætte.");
                     scanner.nextLine();
                     break;
                 case 0:
@@ -45,6 +46,7 @@ public class Main {
                     return;
                 default:
                     System.out.println("Ugyldigt valg.");
+                    System.out.println("Tryk på Enter for at prøve igen.");
                     scanner.nextLine();
             }
         }
