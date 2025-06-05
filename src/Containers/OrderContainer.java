@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class OrderContainer {
     private static OrderContainer instance;
-    private final ArrayList<Order> orders;
+    private final ArrayList<Order> orders; //not used yet, but shows up in the debugger
 
     private OrderContainer() {
         orders = new ArrayList<>();
@@ -25,7 +25,7 @@ public class OrderContainer {
         return instance;
     }
 
-    public boolean addOrder(Order order) {
+    public boolean addOrder(Order order) { //return value never used, but can be useful for testing
         if (order == null) {
             return false;
         }
