@@ -21,7 +21,7 @@ public class CustomerContainer {
 
     public static CustomerContainer getInstance() {
         if (instance == null) {
-            instance = new CustomerContainer();
+            instance = new CustomerContainer(); // Lazy initialization of the singleton instance
         }
         return instance;
     }
@@ -35,6 +35,6 @@ public class CustomerContainer {
     }
 
     public ArrayList<Customer> getCustomers() { //Ikke en del af usecasen men til test
-        return customers;
+        return customers; //should be an unmodifiable list in production code
     }
 }

@@ -20,12 +20,15 @@ public class OrderContainer {
 
     public static OrderContainer getInstance() {
         if (instance == null) {
-            instance = new OrderContainer();
+            instance = new OrderContainer(); // Lazy initialization of the singleton instance
         }
         return instance;
     }
 
     public boolean addOrder(Order order) {
+        if (order == null) {
+            return false;
+        }
         orders.add(order);
         return true;
     }

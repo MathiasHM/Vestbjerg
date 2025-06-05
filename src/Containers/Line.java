@@ -16,7 +16,7 @@ import java.util.Locale;
 
 public class Line {
 
-    private Product product;
+    private final Product product;
     private int quantity;
     private double subTotal;
 
@@ -43,10 +43,10 @@ public class Line {
         if (q > product.getMaxThreshold()) {
             return Result.MAXTHRESHOLDEXCEEDED;
         } else if (q < 1) {
-            this.product = null;
+            //Deleting the instance could cause null pointer exceptions
             this.quantity = 0;
             this.subTotal = 0;
-            return Result.QUANTITYLESSTHANONE;
+            return Result.LINEREMOVED;
         }
         this.quantity = q;
         calculateSubTotal();
@@ -54,10 +54,13 @@ public class Line {
     }
 
     public String displayInformation() {
+        if (this.quantity == 0) { // If quantity is zero, no information to display
+            return "";
+        }
         return this.product.getName() + "/" + this.product.getID() + "/" +
-                NumberFormat.getCurrencyInstance(new Locale("da", "DK"))
+                NumberFormat.getCurrencyInstance(Locale.of("da", "DK"))
                         .format(this.product.getPrice()) + "/" + this.quantity +
-                "/" + NumberFormat.getCurrencyInstance(new Locale("da", "DK"))
+                "/" + NumberFormat.getCurrencyInstance(Locale.of("da", "DK"))
                 .format(this.subTotal);
     }
 }

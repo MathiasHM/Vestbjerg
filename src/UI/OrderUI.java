@@ -19,6 +19,7 @@ import java.util.Scanner;
 
 public class OrderUI {
     Scanner scanner = new Scanner(System.in);
+
     public void createOrder() {
         OrderController orderController = new OrderController();
         orderController.createOrder();
@@ -33,201 +34,132 @@ public class OrderUI {
             System.out.print('\u000C');
             System.out.println(orderMenu);
             System.out.print("Vælg en mulighed: ");
-            int choice = scanner.nextInt();
+            int choice;
+            String input = scanner.nextLine();
+            try {
+                choice = Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                choice = -1;
+            }
             System.out.print('\u000C');
-            scanner.nextLine();
             switch (choice) {
-                case 1:
-                    System.out.println(
-                            "Indtast produkt ID og mængde som skal tilføjes (eks. \"123, 2\"");
-                    System.out.println(
-                            "eller indtast \"x\" for at gå tilbage til ordrermenuen: ");
-                    String addInput = scanner.nextLine();
-                    if (addInput.equalsIgnoreCase("x")) {
-                        break;
-                    }
-                    String[] addInputArray = addInput.split(",");
-                    if (addInputArray.length == 2) {
-                        try {
-                            int productId =
-                                    Integer.parseInt(addInputArray[0].trim());
-                            int quantity =
-                                    Integer.parseInt(addInputArray[1].trim());
-                            Result result =
-                                    orderController.addProductByID(productId,
-                                            quantity);
-                            if (result == Result.QUANTITYSET ||
-                                    result == Result.QUANTITYCHANGED ||
-                                    result == Result.NEWLINECREATED) {
-                                System.out.println(
-                                        quantity + " af produkt ID " +
-                                                productId +
-                                                " tilføjet til ordren.");
-                                System.out.println(
-                                        "Tryk på x for at gå tilbage til ordrermenuen eller en anden tast for at fortsætte.");
-                                if (scanner.nextLine().equalsIgnoreCase("x")) {
-                                    break; // Exit to order menu
+                case 1: {
+                    while (true) {
+                        System.out.println("Indtast produkt ID og mængde som skal tilføjes (eks. \"123, 2\")");
+                        System.out.println("eller indtast \"x\" for at gå tilbage til ordrermenuen: ");
+                        String addInput = scanner.nextLine();
+                        if (shouldReturnToMenu(addInput)) break;
+                        String[] addInputArray = addInput.split(",");
+                        if (addInputArray.length == 2) {
+                            try {
+                                int productId = Integer.parseInt(addInputArray[0].trim());
+                                int quantity = Integer.parseInt(addInputArray[1].trim());
+                                Result result = orderController.addProductByID(productId, quantity);
+                                if (result == Result.QUANTITYCHANGED || result == Result.NEWLINECREATED) {
+                                    System.out.println(quantity + " af produkt ID " + productId + " tilføjet til ordren.");
+                                } else if (result == Result.MAXTHRESHOLDEXCEEDED) {
+                                    System.out.println("Det ønskede antal af produkter er for højt til at hente hjem.");
+                                } else if (result == Result.QUANTITYLESSTHANONE) {
+                                    System.out.println("Tilføj mindst et produkt.");
+                                } else {
+                                    System.out.println("Produkt ikke fundet. Kontroller produkt ID.");
                                 }
-                                continue;
-                            } else if (result == Result.MAXTHRESHOLDEXCEEDED) {
-                                System.out.println(
-                                        "Det ønskede antal af produkter er for højt til at hente hjem.");
-                                scanner.nextLine();
-                            } else if (result == Result.QUANTITYLESSTHANONE) {
-                                System.out.println("Tilføj mindst et produkt.");
-                                System.out.printf("Tryk på x for at gå tilbage til ordrermenuen eller en anden tast for at fortsætte.");
-                                if (scanner.nextLine().equalsIgnoreCase("x")) {
-                                    break; // Exit to order menu
-                                }
-                                continue;
-                            } else {
-                                System.out.println(
-                                        "Produkt ikke fundet. Kontroller produkt ID.");
-                                System.out.println(
-                                        "Tryk på x for at gå tilbage til ordrermenuen eller en anden tast for at fortsætte.");
-                                if (scanner.nextLine().equalsIgnoreCase("x")) {
-                                    break; // Exit to order menu
-                                }
-                                continue;
+                            } catch (NumberFormatException e) {
+                                System.out.println("Ugyldig input. Sørg for at indtaste et gyldigt produkt ID og mængde som tal.");
                             }
-                        } catch (NumberFormatException e) {
-                            System.out.println(
-                                    "Ugyldig input. Sørg for at indtaste et gyldigt produkt ID og mængde som tal.");
-                            scanner.nextLine();
+                        } else {
+                            System.out.println("Ugyldig input format. Brug venligst formatet \"produktID, mængde\".");
                         }
-                    } else {
-                        System.out.println(
-                                "Ugyldig input format. Brug venligst formatet \"produktID, mængde\".");
-                        scanner.nextLine();
+                        if (promptReturnToMenu()) break;
                     }
-                    continue;
-                case 2:
-                    System.out.println(
-                            "Indtast produkt ID og mængde som skal fjernes (eks. \"123, 2\"");
-                    System.out.println(
-                            "eller indtast \"x\" for at gå tilbage til ordrermenuen: ");
-                    String removeInput = scanner.nextLine();
-                    if (removeInput.equalsIgnoreCase("x")) {
-                        break;
-                    }
-                    String[] removeInputArray = removeInput.split(",");
-                    if (removeInputArray.length == 2) {
-                        try {
-                            int productId = Integer.parseInt(
-                                    removeInputArray[0].trim());
-                            int quantity = Integer.parseInt(
-                                    removeInputArray[1].trim());
-                            Result result =
-                                    orderController.removeProductByID(productId,
-                                            quantity);
-                            if (result == Result.QUANTITYSET ||
-                                    result == Result.QUANTITYCHANGED) {
-                                System.out.println(
-                                        quantity + " af produkt ID " +
-                                                productId +
-                                                " fjernet fra ordren.");
-                                System.out.println(
-                                        "Tryk på x for at gå tilbage til ordrermenuen eller en anden tast for at fortsætte.");
-                                if (scanner.nextLine().equalsIgnoreCase("x")) {
-                                    break; // Exit to main menu
-                                }
-                                continue; // Continue to the next iteration
-                            } else if (result == Result.MAXTHRESHOLDEXCEEDED) {
-                                System.out.println(
-                                        "Det ønskede antal af produkter er for højt til at fjerne.");
-                                System.out.println(
-                                        "Tryk på x for at gå tilbage til ordrermenuen eller en anden tast for at fortsætte.");
-                                if (scanner.nextLine().equalsIgnoreCase("x")) {
-                                    break; // Exit to main menu
-                                }
-                                continue;
-                            } else if (result == Result.QUANTITYLESSTHANONE) {
-                                System.out.println("Fjern mindst et produkt.");
-                                scanner.nextLine();
-                            } else {
-                                System.out.println(
-                                        "Produkt ikke fundet. Kontroller produkt ID.");
-                                System.out.println(
-                                        "Tryk på x for at gå tilbage til ordrermenuen eller en anden tast for at fortsætte.");
-                                if (scanner.nextLine().equalsIgnoreCase("x")) {
-                                    break; // Exit to main menu
-                                }
-                                continue;
-                            }
-                        } catch (NumberFormatException e) {
-                            System.out.println(
-                                    "Ugyldig input. Sørg for at indtaste et gyldigt produkt ID og mængde som tal.");
-                            scanner.nextLine();
-                        }
-                    } else {
-                        System.out.println(
-                                "Ugyldig input format. Brug venligst formatet \"produktID, mængde\".");
-                        scanner.nextLine();
-                    }
-                    continue;
-                case 3:
-                    System.out.print(
-                            "Indtast kundens email (indtast \"x\" for at gå tilbage): ");
-                    String email = scanner.nextLine();
-                    if (email.equalsIgnoreCase("x")) {
-                        break;
-                    }
-                    Result result = orderController.addCustomerByEmail(email);
-                    if (result == Result.CUSTOMERADDED) {
-                        System.out.println(email + " tilføjet til ordren.");
-                        scanner.nextLine();
-                        break;
-                    } else if (result == Result.CUSTOMERALREADYASSOCIATED) {
-                        System.out.println(
-                                "En kunde er allerede tilføjet til ordren.");
-                        System.out.println(
-                                "Tryk på enhver tast for at fortsætte.");
-                        scanner.nextLine();
-                        break;
-                    }
-                    System.out.println(
-                            email + " ikke fundet. Kontroller email.");
-                    System.out.println(
-                            "Tryk på x for at gå tilbage til ordrermenuen eller en anden tast for at fortsætte.");
-                    if (scanner.nextLine().equalsIgnoreCase("x")) {
-                        break; // Exit to main menu
-                    }
-                    continue;
-                case 4:
-                    System.out.print("Indtast leveringsnavn: ");
-                    String deliveryName = scanner.nextLine();
-                    System.out.print("Indtast leveringsadresse: ");
-                    String deliveryAddress = scanner.nextLine();
-                    System.out.print("Indtast leveringsemail: ");
-                    String deliveryEmail = scanner.nextLine();
-                    if (deliveryName.isEmpty() || deliveryAddress.isEmpty() ||
-                            deliveryEmail.isEmpty()) {
-                        System.out.println("Alle felter skal udfyldes.");
-                        System.out.println(
-                                "Tryk på x for at gå tilbage til ordrermenuen eller en anden tast for at fortsætte.");
-                        if (scanner.nextLine().equalsIgnoreCase("x")) {
-                            break; // Exit to main menu
-                        }
-                        continue;
-                    }
-                    System.out.print('\u000C');
-                    System.out.println("Er disse oplysninger korrekte?");
-                    System.out.println("Navn: " + deliveryName);
-                    System.out.println("Adresse: " + deliveryAddress);
-                    System.out.println("Email: " + deliveryEmail);
-                    System.out.print(
-                            "Indtast \"ja\" for at bekræfte eller \"nej\" for at annullere: ");
-                    String confirmation = scanner.nextLine();
-                    if (confirmation.equalsIgnoreCase("ja")) {
-                        orderController.setShippingInformation(deliveryName,
-                                deliveryAddress, deliveryEmail);
-                        System.out.println("Fragtoplysninger opdateret.");
-                    } else {
-                        System.out.println("Fragtoplysninger annulleret.");
-                    }
-                    scanner.nextLine();
                     break;
-                case 5:
+                }
+                case 2: {
+                    while (true) {
+                        System.out.println("Indtast produkt ID og mængde som skal fjernes (eks. \"123, 2\")");
+                        System.out.println("eller indtast \"x\" for at gå tilbage til ordrermenuen: ");
+                        String removeInput = scanner.nextLine();
+                        if (shouldReturnToMenu(removeInput)) break;
+                        String[] removeInputArray = removeInput.split(",");
+                        if (removeInputArray.length == 2) {
+                            try { // Parse and check the input to get product ID and quantity
+                                int productId = Integer.parseInt(removeInputArray[0].trim());
+                                int quantity = Integer.parseInt(removeInputArray[1].trim());
+                                Result result = orderController.removeProductByID(productId, quantity);
+                                if (result == Result.QUANTITYCHANGED) {
+                                    System.out.println(quantity + " af produkt ID " + productId + " fjernet fra ordren.");
+                                } else if (result == Result.MAXTHRESHOLDEXCEEDED) {
+                                    System.out.println("Det ønskede antal af produkter er for højt til at fjerne.");
+                                } else if (result == Result.QUANTITYLESSTHANONE) {
+                                    System.out.println("Fjern mindst et produkt.");
+                                } else if (result == Result.LINEREMOVED) {
+                                    System.out.println("Produkt ID " + productId + " er fjernet fra ordren, da mængden er nul.");
+                                } else {
+                                    System.out.println("Produkt ikke fundet. Kontroller produkt ID.");
+                                }
+                            } catch (NumberFormatException e) {
+                                System.out.println("Ugyldig input. Sørg for at indtaste et gyldigt produkt ID og mængde som tal.");
+                            }
+                        } else {
+                            System.out.println("Ugyldig input format. Brug venligst formatet \"produktID, mængde\".");
+                        }
+                        if (promptReturnToMenu()) break;
+                    }
+                    break;
+                }
+                case 3: {
+                    while (true) {
+                        System.out.print("Indtast kundens email (indtast \"x\" for at gå tilbage): ");
+                        String email = scanner.nextLine();
+                        if (shouldReturnToMenu(email)) break;
+                        Result result = orderController.addCustomerByEmail(email);
+                        if (result == Result.CUSTOMERADDED) {
+                            System.out.println(email + " tilføjet til ordren.");
+                            System.out.println("Tryk på enhver tast for at fortsætte.");
+                            scanner.nextLine();
+                            break;
+                        } else if (result == Result.CUSTOMERALREADYASSOCIATED) {
+                            System.out.println("En kunde er allerede tilføjet til ordren.");
+                            System.out.println("Tryk på enhver tast for at fortsætte.");
+                            scanner.nextLine();
+                            break;
+                        }
+                        System.out.println(email + " ikke fundet. Kontroller email.");
+                        if (promptReturnToMenu()) break;
+                    }
+                    break;
+                }
+                case 4: {
+                    while (true) {
+                        System.out.print("Indtast leveringsnavn: ");
+                        String deliveryName = scanner.nextLine();
+                        System.out.print("Indtast leveringsadresse: ");
+                        String deliveryAddress = scanner.nextLine();
+                        System.out.print("Indtast leveringsemail: ");
+                        String deliveryEmail = scanner.nextLine();
+                        if (deliveryName.isEmpty() || deliveryAddress.isEmpty() || deliveryEmail.isEmpty()) {
+                            System.out.println("Alle felter skal udfyldes.");
+                            if (promptReturnToMenu()) break;
+                            continue;
+                        }
+                        System.out.print('\u000C');
+                        System.out.println("Er disse oplysninger korrekte?");
+                        System.out.println("Navn: " + deliveryName);
+                        System.out.println("Adresse: " + deliveryAddress);
+                        System.out.println("Email: " + deliveryEmail);
+                        System.out.print("Indtast \"ja\" for at bekræfte eller \"nej\" for at annullere: ");
+                        String confirmation = scanner.nextLine();
+                        if (confirmation.equalsIgnoreCase("ja")) {
+                            orderController.setShippingInformation(deliveryName, deliveryAddress, deliveryEmail);
+                            System.out.println("Fragtoplysninger opdateret.");
+                        } else {
+                            System.out.println("Fragtoplysninger annulleret.");
+                        }
+                        if (promptReturnToMenu()) break;
+                    }
+                    break;
+                }
+                case 5: {
                     System.out.println("Ordreroversigt:");
                     String[] lines = orderController.displayLines();
                     if (lines.length == 0) {
@@ -238,7 +170,7 @@ public class OrderUI {
                         System.out.println("Produkter i ordren:");
                         for (String line : lines) {
                             String[] parts = line.split("/");
-                            System.out.println("/n" + parts[0].trim());
+                            System.out.println("\n" + parts[0].trim());
                             System.out.println("ID: " + parts[1].trim());
                             System.out.println("Pris: " + parts[2].trim());
                             System.out.println("Antal: " + parts[3].trim());
@@ -247,18 +179,19 @@ public class OrderUI {
                     }
                     System.out.println("Total pris: " +
                             NumberFormat.getCurrencyInstance(
-                                            new Locale("da", "DK"))
+                                            Locale.of("da", "DK"))
                                     .format(orderController.getTotalPrice()[0]));
                     System.out.println(
                             "Rabat: " + orderController.getTotalPrice()[1] +
                                     "%");
                     System.out.println("Total pris efter rabat: " +
                             NumberFormat.getCurrencyInstance(
-                                            new Locale("da", "DK"))
+                                            Locale.of("da", "DK"))
                                     .format(orderController.getTotalPrice()[2]));
-                    scanner.nextLine(); // Any input continues the program.
+                    scanner.nextLine();
                     break;
-                case 6:
+                }
+                case 6: {
                     if (orderController.displayLines().length == 0) {
                         System.out.println(
                                 "Ingen produkter i ordren. Du kan ikke sende en tom ordre.");
@@ -281,8 +214,9 @@ public class OrderUI {
                     System.out.println("Ordren er nu sat til PENDING.");
                     System.out.println("Ordren afventer kundens bekræftelse.");
                     scanner.nextLine();
-                    return; // Exit to main menu
-                case 0:
+                    return;
+                }
+                case 0: {
                     System.out.println(
                             "Er du sikker på at du vil forlade ordrermenuen?");
                     System.out.println("Dette vil slette den nuværende ordre.");
@@ -294,10 +228,21 @@ public class OrderUI {
                         scanner.nextLine();
                         break;
                     }
-                    return; // Exit to main menu
+                    return;
+                }
                 default:
                     System.out.println("Ugyldigt valg.");
             }
         }
+    }
+
+    private boolean shouldReturnToMenu(String input) {
+        return input.trim().equalsIgnoreCase("x");
+    }
+
+    private boolean promptReturnToMenu() {
+        System.out.println("Tryk på x for at gå tilbage til ordrermenuen eller en anden tast for at fortsætte.");
+        String input = scanner.nextLine();
+        return shouldReturnToMenu(input);
     }
 }

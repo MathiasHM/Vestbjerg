@@ -42,17 +42,17 @@ public class Order {
         }
 
         if (customer != null) {
-            if (customer.getCVR() != 0) {
+            if (customer.getCVR() != 0) { // If CVR is not zero, it's a business customer
                 discount += 7.5;
             }
         }
 
         if (shipment == null) {
-            discount += 5;
+            discount += 5; // If no shipment information is provided, apply a 5% discount, should probably be a constant
         }
 
         if (discount > 20) {
-            discount = 20;
+            discount = 20; // Cap the discount at 20%, should probably be a constant
         }
         totalPrice[0] = sumOfPrices; // Total price before discount
         totalPrice[1] = discount; // Discount percentage
@@ -94,9 +94,6 @@ public class Order {
         if (product == null) {                //Check for valid product
             return Result.PRODUCTNOTFOUND;
         }
-        if (product.getMaxThreshold() < quantity) { //Check for max threshold
-            return Result.MAXTHRESHOLDEXCEEDED;
-        }
         for (Line l : lines) {                            //For-each loop
             if (l.getProduct()
                     .equals(product)) {        //Check product line exists
@@ -117,9 +114,6 @@ public class Order {
         }
         if (product == null) {                //Check for valid product
             return Result.PRODUCTNOTFOUND;
-        }
-        if (product.getMaxThreshold() < quantity) { //Check for max threshold
-            return Result.MAXTHRESHOLDEXCEEDED;
         }
         for (Line l : lines) {
             if (l.getProduct().equals(product)) {

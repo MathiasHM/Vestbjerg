@@ -10,5 +10,5 @@
 package Enums;
 
 public enum Status {
-    PROCESSING, PENDING,
+    PROCESSING, PENDING
 }
