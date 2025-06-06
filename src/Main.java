@@ -25,8 +25,13 @@ public class Main {
             System.out.print('\u000C'); // Clear the console (bluej specific)
             System.out.println(sb.toString());
             Scanner scanner = new Scanner(System.in);
-            int choice = scanner.nextInt();
-            scanner.nextLine();
+            int choice;
+            String input = scanner.nextLine();
+            try {
+                choice = Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                choice = -1;
+            }
             switch (choice) {
                 case 1:
                     OrderUI orderUI = new OrderUI();
