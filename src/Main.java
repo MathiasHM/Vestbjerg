@@ -19,7 +19,7 @@ public class Main {
         StringBuilder sb = new StringBuilder();
         sb.append("Velkommen til Vestbjergs ordrerstyringssystem!\n")
                 .append("Vælg en mulighed for at fortsætte.\n")
-                .append("1. Opret Ordrer\n").append("2. Generer testdata\n")
+                .append("1. Opret Ordre\n").append("2. Generer testdata\n")
                 .append("0. Afslut\n").append("Vælg en mulighed: ");
         while (true) { // Infinite loop to keep the menu active until the user chooses to exit
             System.out.print('\u000C'); // Clear the console (bluej specific)
@@ -28,7 +28,7 @@ public class Main {
             int choice;
             String input = scanner.nextLine();
             try {
-                choice = Integer.parseInt(input);
+                choice = Integer.parseInt(input); // ikke brug scanner.nextInt()
             } catch (NumberFormatException e) {
                 choice = -1;
             }

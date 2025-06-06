@@ -23,13 +23,14 @@ public class OrderUI {
     public void createOrder() {
         OrderController orderController = new OrderController();
         orderController.createOrder();
-        System.out.println("Ordrer påbegyndt.");
+        System.out.println("Ordre påbegyndt.");
         StringBuilder orderMenu = new StringBuilder();
         orderMenu.append("1. Tilføj Produkt\n").append("2. Fjern Produkt\n")
                 .append("3. Tilføj Kunde til ordren\n")
                 .append("4. Tilføj Fragtoplysninger\n")
                 .append("5. Ordreroversigt\n").append("6. Send Ordren Videre\n")
-                .append("0. Tilbage Til Ordrermenuen\n") .append("Vælg en mulighed: ");
+                .append("0. Tilbage Til Hovedmenuen\n") .append("Vælg en " +
+                        "mulighed: ");
         while (true) {
             System.out.print('\u000C');
             System.out.println(orderMenu);
@@ -45,7 +46,7 @@ public class OrderUI {
                 case 1: {
                     while (true) {
                         System.out.println("Indtast produkt ID og mængde som skal tilføjes (eks. \"123, 2\")");
-                        System.out.println("eller indtast \"x\" for at gå tilbage til ordrermenuen: ");
+                        System.out.println("eller indtast \"x\" for at gå tilbage til ordremenuen: ");
                         String addInput = scanner.nextLine();
                         if (shouldReturnToMenu(addInput)) break;
                         String[] addInputArray = addInput.split(",");
@@ -164,7 +165,7 @@ public class OrderUI {
                     break;
                 }
                 case 5: {
-                    System.out.println("Ordreroversigt:");
+                    System.out.println("Ordreoversigt:");
                     String[] lines = orderController.displayLines();
                     if (lines.length == 0) {
                         System.out.println("Ingen produkter i ordren.");
@@ -211,7 +212,7 @@ public class OrderUI {
                     String sendConfirmation = scanner.nextLine();
                     if (!sendConfirmation.equalsIgnoreCase("ja")) {
                         System.out.println("Ordren er ikke sendt videre.");
-                        System.out.println("Tryk på enhver tast for at gå tilbage til ordrermenuen.");
+                        System.out.println("Tryk på enhver tast for at gå tilbage til ordremenuen.");
                         scanner.nextLine();
                         break;
                     }
@@ -223,13 +224,13 @@ public class OrderUI {
                 }
                 case 0: {
                     System.out.println(
-                            "Er du sikker på at du vil forlade ordrermenuen?");
+                            "Er du sikker på at du vil forlade ordremenuen?");
                     System.out.println("Dette vil slette den nuværende ordre.");
                     System.out.print(
                             "Indtast \"ja\" for at bekræfte eller \"nej\" for at annullere: ");
                     String exitConfirmation = scanner.nextLine();
                     if (!exitConfirmation.equalsIgnoreCase("ja")) {
-                        System.out.println("Går tilbage til ordrermenuen.");
+                        System.out.println("Går tilbage til ordremenuen.");
                         System.out.println("Tryk på enhver tast for at fortsætte.");
                         scanner.nextLine();
                         break;
@@ -251,7 +252,7 @@ public class OrderUI {
     }
 
     private boolean promptReturnToMenu() {
-        System.out.println("Tryk på x for at gå tilbage til ordrermenuen eller en anden tast for at fortsætte.");
+        System.out.println("Tryk på x for at gå tilbage til ordremenuen eller en anden tast for at fortsætte.");
         String input = scanner.nextLine();
         return shouldReturnToMenu(input);
     }
