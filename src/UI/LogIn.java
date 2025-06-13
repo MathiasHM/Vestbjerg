@@ -146,11 +146,11 @@ public class LogIn extends JDialog {
 				this.dispose(); 
 				SelectType select = new SelectType();
 				select.setModal(true); 
-				select.setVisible(true);
+				select.setVisible(true); //d
 			}
 		});
 		
 	}
-	
+		
 	
 }
