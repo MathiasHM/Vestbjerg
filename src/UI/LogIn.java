@@ -140,9 +140,9 @@ public class LogIn extends JDialog {
 		
 		
 		btnNewButton.addActionListener(e -> {
-			String Brugernavn = textField.getText();
-			char[] kode = passwordField.getPassword();
-			if (Brugernavn.equals("abc") && kode[0] == 'a' && kode[1] == 'b' && kode[2] == 'c') {
+			String brugernavn = textField.getText();
+			String kode = new String(passwordField.getPassword());
+			if (brugernavn.equals("abc") && kode.equals("abc")) {
 				this.dispose(); 
 				SelectType select = new SelectType();
 				select.setModal(true); 
