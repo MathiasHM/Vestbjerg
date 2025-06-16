@@ -112,7 +112,7 @@ public class LogIn extends JDialog {
 		panel_2.add(textField, gbc_textField);
 		textField.setColumns(10);
 		
-		JLabel lblNewLabel_1 = new JLabel("Kode");
+		JLabel lblNewLabel_1 = new JLabel("Adgangskode");
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
 		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel_1.gridx = 2;
@@ -143,10 +143,9 @@ public class LogIn extends JDialog {
 			String brugernavn = textField.getText();
 			String kode = new String(passwordField.getPassword());
 			if (brugernavn.equals("abc") && kode.equals("abc")) {
-				this.dispose(); 
+				dispose(); 
 				SelectType select = new SelectType();
 				select.setModal(true); 
-				select.setVisible(true); //d
 			}
 		});
 		

@@ -46,6 +46,8 @@ public class SelectType extends JDialog {
 		gbl_contentPanel.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		gbl_contentPanel.rowWeights = new double[]{0.0, 1.0, 1.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
 		contentPanel.setLayout(gbl_contentPanel);
+		setResizable(false);
+		setLocationRelativeTo(null);
 		
 			JLabel lblNewLabel = new JLabel("Vælg dit adgangsniveau");
 			GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
@@ -106,8 +108,17 @@ public class SelectType extends JDialog {
 				bG.add(rdbtnNewRadioButton);
 				bG.add(rdbtnNewRadioButton_1);
 				
-				
-			
-	}
+				okButton.addActionListener(e -> {
+					new UseCaseMenu();
+					dispose();
 
+				});
+				
+				cancelButton.addActionListener(e -> {
+					this.dispose();
+				});
+				
+				setVisible(true);
+				
+	}
 }
