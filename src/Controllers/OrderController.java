@@ -77,6 +77,11 @@ public class OrderController {
     public String[] displayLines() {
         return order.displayLines().toArray(new String[0]);
     }
+    
+    public String[] testLines() {
+    	String[] myStrings = {"1", "2", "3", "4"};
+    	return myStrings;
+    }
 
     public void setOrderPending() {
         order.setStatus(Status.PENDING);
