@@ -93,11 +93,14 @@ public class MainWindow {
 		panel_3.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Fjern Produkt");
+		btnNewButton_2.setBackground(new Color(255, 128, 128));
 		btnNewButton_2.setForeground(new Color(64, 0, 0));
 		panel_3.add(btnNewButton_2);
 		
 		JList list = new JList();
 		panel_2.add(list, BorderLayout.CENTER);
+		
+		frame.setVisible(true);
 	}
 
 }
