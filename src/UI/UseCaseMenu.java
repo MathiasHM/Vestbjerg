@@ -95,6 +95,7 @@ public class UseCaseMenu extends JFrame{
 	        	switch ((String) comboBox.getSelectedItem()) {
 	        	case "Create order":
 	        		
+	        		MainWindow mWindow = new MainWindow();
 	        		// TODO forbind med Oliver's UI
 	        		frame.dispose();
 	        		break;
