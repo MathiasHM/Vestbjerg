@@ -138,10 +138,8 @@ public class MainWindow {
 		JButton btnNewButton = new JButton("Tilføj kunde");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				System.out.println("suck");
 				KundeUI kUI = new KundeUI();
-				if (!kUI.getCustomerEmail.equals(null)) {
-					
-				}
 			}
 		});
 		panel_9.add(btnNewButton);

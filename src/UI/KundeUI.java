@@ -49,7 +49,7 @@ public class KundeUI extends JDialog {
     private JList<String> itemList;
     private JFormattedTextField formattedField;
 	DefaultListModel<String> søgResultater;
-	private String customerEmail;
+	public String customerEmail;
 
 	/**
 	 * Launch the application.
@@ -66,9 +66,6 @@ public class KundeUI extends JDialog {
 
 	public KundeUI() {
 		new TestData().generateTestData();
-		
-		String tempCustomerEmail = null;
-		customerEmail = null;
 		søgResultater = new DefaultListModel<>();
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
@@ -122,16 +119,11 @@ public class KundeUI extends JDialog {
 			contentPanel.add(scrollPane, gbc_scrollPane);
 			
 			JList list = new JList<>(søgResultater);
-			list.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					System.out.println("suck");
-				}
-			});
 			list.addListSelectionListener(
 					new ListSelectionListener() {
 						public void valueChanged(ListSelectionEvent event) {
-							getContentPane().setFocusable(true);
+							formattedField.setText((String) list.getSelectedValue());
+							customerEmail = (String) list.getSelectedValue();
 						}
 				
 			});
@@ -155,11 +147,11 @@ public class KundeUI extends JDialog {
 				buttonPane.add(cancelButton);
 			
 				okButton.addActionListener(e -> {
-					//customerEmail = tempCustomerEmail; //TODO implement tempCustomerEmail on customer highlighted.
 					dispose();
 					
 				});
 				cancelButton.addActionListener(e -> {
+					customerEmail = null;
 					dispose();
 					
 				});
