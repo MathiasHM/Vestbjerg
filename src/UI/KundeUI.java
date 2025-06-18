@@ -45,6 +45,7 @@ public class KundeUI extends JDialog {
     private JList<String> itemList;
     private JFormattedTextField formattedField;
 	DefaultListModel<String> søgResultater;
+	private Customer selectedCustomer;
 
 	/**
 	 * Launch the application.
@@ -59,10 +60,8 @@ public class KundeUI extends JDialog {
 		}
 	}
 
-	/**
-	 * Create the dialog.
-	 */
 	public KundeUI() {
+		selectedCustomer = null;
 		søgResultater = new DefaultListModel<>();
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
@@ -155,9 +154,6 @@ public class KundeUI extends JDialog {
 					// TODO ¨åben Oliver's UI.
 					
 				});
-				
-				
-				
 	}
 	
 	public void updateList(String filter) {
