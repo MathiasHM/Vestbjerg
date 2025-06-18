@@ -96,7 +96,6 @@ public class UseCaseMenu extends JFrame{
 	        	case "Create order":
 	        		
 	        		MainWindow mWindow = new MainWindow();
-	        		// TODO forbind med Oliver's UI
 	        		frame.dispose();
 	        		break;
 	        	default:
