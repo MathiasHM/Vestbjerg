@@ -230,6 +230,7 @@ public class MainWindow {
 		JButton btnNewButton_1 = new JButton("Tilføj levering");
 		panel_17.add(btnNewButton_1);
 		
+		
 		JPanel panel_18 = new JPanel();
 		panel_18.setBackground(new Color(163, 163, 163));
 		FlowLayout flowLayout_3 = (FlowLayout) panel_18.getLayout();
@@ -237,7 +238,18 @@ public class MainWindow {
 		panel_12.add(panel_18);
 		
 		JCheckBox chckbxNewCheckBox = new JCheckBox("Ingen levering");
+		chckbxNewCheckBox.setSelected(true);
+		chckbxNewCheckBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (chckbxNewCheckBox.isSelected()) {
+					System.out.println("Implementér en NO SHIPMENT "
+							+ "OPTION IDIOT");
+				} //TODO implement no-shipment option. Ideally greyed out
+				//Shipment info.
+			}
+		});
 		panel_18.add(chckbxNewCheckBox);
+		
 		
 		JPanel panel_13 = new JPanel();
 		panel_13.setBackground(new Color(128, 128, 128));
@@ -252,7 +264,8 @@ public class MainWindow {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				KundeUI kUI = new KundeUI();
-				if (oC.addCustomerByEmail(kUI.customerEmail) == Result.CUSTOMERALREADYASSOCIATED) {
+				if (oC.addCustomerByEmail(kUI.customerEmail) == Result.CUSTOMERALREADYASSOCIATED 
+					&& kUI.customerEmail != null && kUI.isDisposed) {
 					System.out.println("Kunde allerede tilføjet.");
 				} else if (kUI.isDisposed && kUI.customerEmail != null) {
 					oC.addCustomerByEmail(kUI.customerEmail);
@@ -261,7 +274,9 @@ public class MainWindow {
 					
 					lblNewLabel_4.setText("Dummy navn");
 					lblNewLabel_6.setText(oC.getCustomerEmail());
-					lblNewLabel_8.setText("" + oC.getCustomerCVR());
+					if (oC.getCustomerCVR() != 0) {
+						lblNewLabel_8.setText("" + oC.getCustomerCVR());
+					}
 				}
 				//TODO håndtér customerEmail fra KundeUI.
 			}

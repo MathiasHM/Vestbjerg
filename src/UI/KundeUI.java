@@ -70,6 +70,7 @@ public class KundeUI extends JDialog {
 		søgResultater = new DefaultListModel<>();
 		setBounds(650, 450, 450, 300);
 		isDisposed = false;
+		customerEmail = null;
 		setModal(true);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
