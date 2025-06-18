@@ -58,22 +58,9 @@ public class UseCaseMenu extends JFrame{
 	    JPanel mainPanel = new JPanel();
 	    mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 	    frame.setContentPane(mainPanel);
-
-	    // --- Top button ---
-	    JButton topButton = new JButton("Log ud");
-	    topButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-	    topButton.setMaximumSize(new Dimension(200, 30));
-	    
-	    topButton.addActionListener(e -> {
-			LogIn logUd = new LogIn();
-			
-			logUd.setVisible(true);
-			frame.dispose();
-		});
 	    
 	    
-	    mainPanel.add(Box.createRigidArea(new Dimension(0, 10))); // Top spacing
-	    mainPanel.add(topButton);
+	    mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
 	    
 	    
 
@@ -108,6 +95,7 @@ public class UseCaseMenu extends JFrame{
 	        	switch ((String) comboBox.getSelectedItem()) {
 	        	case "Create order":
 	        		
+	        		MainWindow mWindow = new MainWindow();
 	        		// TODO forbind med Oliver's UI
 	        		frame.dispose();
 	        		break;
@@ -129,8 +117,38 @@ public class UseCaseMenu extends JFrame{
 	    
 	    mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
 	    mainPanel.add(picturePanel);
+	    
+	    JPanel panel = new JPanel();
+	    picturePanel.add(panel, BorderLayout.SOUTH);
+	    
+	    JButton btnNewButton_1 = new JButton("Gå videre");
+	    panel.add(btnNewButton_1);
+	    
+	    JButton btnNewButton = new JButton("Log ud");
+	    panel.add(btnNewButton);
 	    frame.setVisible(true);
+	    
+	    btnNewButton_1.addActionListener(e -> {
+	    	switch ((String) comboBox.getSelectedItem()) {
+        	case "Create order":
+        		MainWindow mainWindow = new MainWindow();
+        		
+        		// TODO forbind med Oliver's UI
+        		frame.dispose();
+        		break;
+        	default:
+        		System.out.println("Ikke implementeret endnu");
+        	}
+        	
+        	
+			
+		});
 
+	    btnNewButton.addActionListener(e -> {
+	    	LogIn logUd = new LogIn();
+			logUd.setVisible(true);
+			frame.dispose();
+		});
 	}
 	
 
