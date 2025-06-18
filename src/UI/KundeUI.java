@@ -49,7 +49,7 @@ public class KundeUI extends JDialog {
     private JList<String> itemList;
     private JFormattedTextField formattedField;
 	DefaultListModel<String> søgResultater;
-	public String customerEmail;
+	public String customerEmail = new String("");
 
 	/**
 	 * Launch the application.
@@ -63,11 +63,12 @@ public class KundeUI extends JDialog {
 			e.printStackTrace();
 		}
 	}
-
+	
 	public KundeUI() {
 		new TestData().generateTestData();
 		søgResultater = new DefaultListModel<>();
-		setBounds(100, 100, 450, 300);
+		setBounds(650, 450, 450, 300);
+		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -77,6 +78,7 @@ public class KundeUI extends JDialog {
 		gbl_contentPanel.columnWeights = new double[]{1.0, 1.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
 		gbl_contentPanel.rowWeights = new double[]{0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
 		contentPanel.setLayout(gbl_contentPanel);
+		setVisible(true);
 		setTitle("find kunde på email");
 			formattedField = new JFormattedTextField();
 			updateList("");
@@ -122,7 +124,7 @@ public class KundeUI extends JDialog {
 			list.addListSelectionListener(
 					new ListSelectionListener() {
 						public void valueChanged(ListSelectionEvent event) {
-							formattedField.setText((String) list.getSelectedValue());
+							//formattedField.setText((String) list.getSelectedValue());
 							customerEmail = (String) list.getSelectedValue();
 						}
 				
@@ -151,7 +153,7 @@ public class KundeUI extends JDialog {
 					
 				});
 				cancelButton.addActionListener(e -> {
-					customerEmail = null;
+					//customerEmail = null;
 					dispose();
 					
 				});

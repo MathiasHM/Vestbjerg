@@ -25,6 +25,8 @@ import javax.swing.JScrollPane;
 import javax.swing.Box;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.ActionEvent;
 
 public class MainWindow {
@@ -64,6 +66,7 @@ public class MainWindow {
 		oC.createOrder();
 		frame = new JFrame();
 		frame.setBounds(400, 300, 800, 600);
+		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		
@@ -138,8 +141,8 @@ public class MainWindow {
 		JButton btnNewButton = new JButton("Tilføj kunde");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("suck");
 				KundeUI kUI = new KundeUI();
+				//TODO håndtér customerEmail fra KundeUI.
 			}
 		});
 		panel_9.add(btnNewButton);
