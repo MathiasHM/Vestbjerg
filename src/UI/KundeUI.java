@@ -1,25 +1,50 @@
 package UI;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 
+import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
+import Containers.Customer; // lev med det
+import Containers.CustomerContainer;
+import Controllers.OrderController;
+
 import java.awt.GridBagLayout;
+import java.awt.Image;
+
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.net.URL;
+
 import javax.swing.JLabel;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
+import javax.swing.JList;
+import javax.swing.JScrollPane;
+import java.util.ArrayList;
 
 public class KundeUI extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private DefaultListModel<String> listModel;
+    private JList<String> itemList;
+    private JFormattedTextField formattedField;
+	DefaultListModel<String> søgResultater;
 
 	/**
 	 * Launch the application.
@@ -46,95 +71,66 @@ public class KundeUI extends JDialog {
 		gbl_contentPanel.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_contentPanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_contentPanel.columnWeights = new double[]{1.0, 1.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
-		gbl_contentPanel.rowWeights = new double[]{0.0, 1.0, 1.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
+		gbl_contentPanel.rowWeights = new double[]{0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
 		contentPanel.setLayout(gbl_contentPanel);
+		setTitle("find kunde på email");
 		
-			JPanel panel = new JPanel();
-			GridBagConstraints gbc_panel = new GridBagConstraints();
-			gbc_panel.insets = new Insets(0, 0, 5, 5);
-			gbc_panel.fill = GridBagConstraints.BOTH;
-			gbc_panel.gridx = 1;
-			gbc_panel.gridy = 0;
-			contentPanel.add(panel, gbc_panel);
-		
-			JLabel lblNewLabel_3 = new JLabel("Kunde");
-			GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
-			gbc_lblNewLabel_3.insets = new Insets(0, 0, 5, 5);
-			gbc_lblNewLabel_3.gridx = 1;
-			gbc_lblNewLabel_3.gridy = 1;
-			contentPanel.add(lblNewLabel_3, gbc_lblNewLabel_3);
-		
-			JPanel panel3 = new JPanel();
-			GridBagConstraints gbc_panel3 = new GridBagConstraints();
-			gbc_panel3.insets = new Insets(0, 0, 5, 5);
-			gbc_panel3.fill = GridBagConstraints.BOTH;
-			gbc_panel3.gridx = 0;
-			gbc_panel3.gridy = 2;
-			contentPanel.add(panel3, gbc_panel3);
-		
-			JLabel lblNewLabel = new JLabel("Email");
-			GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-			gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-			gbc_lblNewLabel.gridx = 1;
-			gbc_lblNewLabel.gridy = 2;
-			contentPanel.add(lblNewLabel, gbc_lblNewLabel);
-		
-			textField_1 = new JTextField();
-			GridBagConstraints gbc_textField_1 = new GridBagConstraints();
-			gbc_textField_1.insets = new Insets(0, 0, 5, 5);
-			gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
-			gbc_textField_1.gridx = 3;
-			gbc_textField_1.gridy = 2;
-			contentPanel.add(textField_1, gbc_textField_1);
-			textField_1.setColumns(10);
-		
-			JPanel panel1 = new JPanel();
-			GridBagConstraints gbc_panel1 = new GridBagConstraints();
-			gbc_panel1.insets = new Insets(0, 0, 5, 5);
-			gbc_panel1.fill = GridBagConstraints.BOTH;
-			gbc_panel1.gridx = 0;
-			gbc_panel1.gridy = 4;
-			contentPanel.add(panel1, gbc_panel1);
-		
-			JLabel lblNewLabel_1 = new JLabel("CVR");
-			GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-			gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
-			gbc_lblNewLabel_1.gridx = 1;
-			gbc_lblNewLabel_1.gridy = 4;
-			contentPanel.add(lblNewLabel_1, gbc_lblNewLabel_1);
-		
-			textField = new JTextField();
-			GridBagConstraints gbc_textField = new GridBagConstraints();
-			gbc_textField.insets = new Insets(0, 0, 5, 5);
-			gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-			gbc_textField.gridx = 3;
-			gbc_textField.gridy = 4;
-			contentPanel.add(textField, gbc_textField);
-			textField.setColumns(10);
-		
-			JPanel panel2 = new JPanel();
-			GridBagConstraints gbc_panel2 = new GridBagConstraints();
-			gbc_panel2.insets = new Insets(0, 0, 0, 5);
-			gbc_panel2.fill = GridBagConstraints.BOTH;
-			gbc_panel2.gridx = 0;
-			gbc_panel2.gridy = 6;
-			contentPanel.add(panel2, gbc_panel);
-		
-			JLabel lblNewLabel_2 = new JLabel("Muligvis navn her (følger ikke programmet)");
-			GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
-			gbc_lblNewLabel_2.insets = new Insets(0, 0, 0, 5);
-			gbc_lblNewLabel_2.gridx = 1;
-			gbc_lblNewLabel_2.gridy = 6;
-			contentPanel.add(lblNewLabel_2, gbc_lblNewLabel_2);
-		
-			textField_2 = new JTextField();
-			GridBagConstraints gbc_textField_2 = new GridBagConstraints();
-			gbc_textField_2.insets = new Insets(0, 0, 0, 5);
-			gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
-			gbc_textField_2.gridx = 3;
-			gbc_textField_2.gridy = 6;
-			contentPanel.add(textField_2, gbc_textField_2);
-			textField_2.setColumns(10);
+		søgResultater = new DefaultListModel<>();
+		søgResultater.addElement("BørgeJensen");
+		søgResultater.addElement("Cool");
+		søgResultater.addElement("ofkgpt");
+
+			JFormattedTextField formattedTextField = new JFormattedTextField();
+//			formattedTextField.addFocusListener(new FocusListener() {
+//				@Override public void focusGained(FocusEvent e) {
+//					System.out.println("smd");
+//				}
+//				
+//				@Override public void focusLost(FocusEvent e) {
+//					System.out.println("Lost");
+//				}
+//			});
+			
+			formattedTextField.getDocument().addDocumentListener(new DocumentListener() {
+	            public void insertUpdate(DocumentEvent e) {
+	                updateList(formattedField.getText().trim());
+	            }
+
+	            public void removeUpdate(DocumentEvent e) {
+	                updateList(formattedField.getText().trim());
+	            }
+
+	            public void changedUpdate(DocumentEvent e) {
+	                updateList(formattedField.getText().trim());
+	            }
+	        });
+			
+			
+			GridBagConstraints gbc_formattedTextField = new GridBagConstraints();
+			gbc_formattedTextField.gridwidth = 9;
+			gbc_formattedTextField.insets = new Insets(0, 0, 5, 0);
+			gbc_formattedTextField.fill = GridBagConstraints.HORIZONTAL;
+			gbc_formattedTextField.gridx = 0;
+			gbc_formattedTextField.gridy = 1;
+			contentPanel.add(formattedTextField, gbc_formattedTextField);
+			
+			
+			
+			JScrollPane scrollPane = new JScrollPane();
+			GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+			gbc_scrollPane.gridheight = 5;
+			gbc_scrollPane.gridwidth = 9;
+			gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
+			gbc_scrollPane.fill = GridBagConstraints.BOTH;
+			gbc_scrollPane.gridx = 0;
+			gbc_scrollPane.gridy = 2;
+			contentPanel.add(scrollPane, gbc_scrollPane);
+			
+			JList list = new JList<>(søgResultater);
+			scrollPane.setViewportView(list);
+			
+			
+			
 		
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -159,6 +155,18 @@ public class KundeUI extends JDialog {
 					// TODO ¨åben Oliver's UI.
 					
 				});
+				
+				
+				
 	}
-
+	
+	public void updateList(String filter) {
+		søgResultater.clear();
+		for (Customer c : CustomerContainer.getInstance().getCustomers()) {
+			if (filter.toLowerCase().contains(c.getEmail().toLowerCase())) {
+				søgResultater.addElement(c.getEmail());
+			}
+		}
+	}
+	
 }
