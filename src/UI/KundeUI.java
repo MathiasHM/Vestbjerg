@@ -45,7 +45,7 @@ public class KundeUI extends JDialog {
     private JList<String> itemList;
     private JFormattedTextField formattedField;
 	DefaultListModel<String> søgResultater;
-	private Customer selectedCustomer;
+	private String customerEmail;
 
 	/**
 	 * Launch the application.
@@ -61,7 +61,7 @@ public class KundeUI extends JDialog {
 	}
 
 	public KundeUI() {
-		selectedCustomer = null;
+		customerEmail = null;
 		søgResultater = new DefaultListModel<>();
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
@@ -88,18 +88,6 @@ public class KundeUI extends JDialog {
 			formattedField.getDocument().addDocumentListener(new DocumentListener() {
 	            public void insertUpdate(DocumentEvent e) {
 	            	System.out.println("Virker");
-	                updateList(formattedField.getText().trim());
-	            }
-
-	            public void removeUpdate(DocumentEvent e) {
-	            	System.out.println("Virker");
-
-	                updateList(formattedField.getText().trim());
-	            }
-
-	            public void changedUpdate(DocumentEvent e) {
-	            	System.out.println("Virker");
-
 	                updateList(formattedField.getText().trim());
 	            }
 	        });
@@ -145,6 +133,7 @@ public class KundeUI extends JDialog {
 				buttonPane.add(cancelButton);
 			
 				okButton.addActionListener(e -> {
+					//customerEmail = tempCustomerEmail; //TODO implement tempCustomerEmail on customer highlighted.
 					dispose();
 					//returner værdier
 					
