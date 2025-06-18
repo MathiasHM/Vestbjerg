@@ -49,7 +49,8 @@ public class KundeUI extends JDialog {
     private JList<String> itemList;
     private JFormattedTextField formattedField;
 	DefaultListModel<String> søgResultater;
-	public String customerEmail = new String("");
+	public String customerEmail;
+	public boolean isDisposed = false;
 
 	/**
 	 * Launch the application.
@@ -65,9 +66,11 @@ public class KundeUI extends JDialog {
 	}
 	
 	public KundeUI() {
-		new TestData().generateTestData();
+		TestData.generate();
 		søgResultater = new DefaultListModel<>();
 		setBounds(650, 450, 450, 300);
+		isDisposed = false;
+		setModal(true);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -78,7 +81,6 @@ public class KundeUI extends JDialog {
 		gbl_contentPanel.columnWeights = new double[]{1.0, 1.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
 		gbl_contentPanel.rowWeights = new double[]{0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
 		contentPanel.setLayout(gbl_contentPanel);
-		setVisible(true);
 		setTitle("find kunde på email");
 			formattedField = new JFormattedTextField();
 			updateList("");
@@ -150,13 +152,16 @@ public class KundeUI extends JDialog {
 			
 				okButton.addActionListener(e -> {
 					dispose();
+					isDisposed = true;
 					
 				});
 				cancelButton.addActionListener(e -> {
-					//customerEmail = null;
+					customerEmail = null;
 					dispose();
-					
+					isDisposed = true;
 				});
+				
+				setVisible(true);
 	}
 	
 	public void updateList(String filter) {

@@ -15,6 +15,8 @@ import java.awt.Color;
 import javax.swing.JList;
 
 import Controllers.OrderController;
+import Enums.Result;
+
 import javax.swing.JScrollBar;
 import java.awt.Component;
 import javax.swing.BoxLayout;
@@ -61,7 +63,7 @@ public class MainWindow {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		
+		TestData.generate();
 		oC = new OrderController();
 		oC.createOrder();
 		frame = new JFrame();
@@ -138,15 +140,6 @@ public class MainWindow {
 		flowLayout_1.setAlignment(FlowLayout.LEFT);
 		panel_4.add(panel_9, BorderLayout.SOUTH);
 		
-		JButton btnNewButton = new JButton("Tilføj kunde");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				KundeUI kUI = new KundeUI();
-				//TODO håndtér customerEmail fra KundeUI.
-			}
-		});
-		panel_9.add(btnNewButton);
-		
 		JPanel panel_10 = new JPanel();
 		panel_10.setBackground(new Color(128, 128, 128));
 		FlowLayout flowLayout = (FlowLayout) panel_10.getLayout();
@@ -200,7 +193,7 @@ public class MainWindow {
 		flowLayout_8.setAlignment(FlowLayout.LEFT);
 		verticalBox_1.add(panel_19);
 		
-		JLabel lblNewLabel_4 = new JLabel("Dummy navn");
+		JLabel lblNewLabel_4 = new JLabel("Kunde mangler");
 		panel_19.add(lblNewLabel_4);
 		
 		JPanel panel_21 = new JPanel();
@@ -208,7 +201,7 @@ public class MainWindow {
 		flowLayout_10.setAlignment(FlowLayout.LEFT);
 		verticalBox_1.add(panel_21);
 		
-		JLabel lblNewLabel_6 = new JLabel("Dummy email");
+		JLabel lblNewLabel_6 = new JLabel("Kunde mangler");
 		panel_21.add(lblNewLabel_6);
 		
 		JPanel panel_23 = new JPanel();
@@ -216,7 +209,7 @@ public class MainWindow {
 		flowLayout_12.setAlignment(FlowLayout.LEFT);
 		verticalBox_1.add(panel_23);
 		
-		JLabel lblNewLabel_8 = new JLabel("Dummy CVR-nr");
+		JLabel lblNewLabel_8 = new JLabel("Ingen CVR");
 		panel_23.add(lblNewLabel_8);
 		
 		JPanel panel_5 = new JPanel();
@@ -255,12 +248,34 @@ public class MainWindow {
 		JLabel lblNewLabel_2 = new JLabel("Fragtoplysninger");
 		panel_13.add(lblNewLabel_2);
 		
+		JButton btnNewButton = new JButton("Tilføj kunde");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				KundeUI kUI = new KundeUI();
+				if (oC.addCustomerByEmail(kUI.customerEmail) == Result.CUSTOMERALREADYASSOCIATED) {
+					System.out.println("Kunde allerede tilføjet.");
+				} else if (kUI.isDisposed && kUI.customerEmail != null) {
+					oC.addCustomerByEmail(kUI.customerEmail);
+					System.out.println("Indtastet Email: " + kUI.customerEmail);
+					System.out.println("Associeret Email: " + oC.getCustomerEmail());
+					
+					lblNewLabel_4.setText("Dummy navn");
+					lblNewLabel_6.setText(oC.getCustomerEmail());
+					lblNewLabel_8.setText("" + oC.getCustomerCVR());
+				}
+				//TODO håndtér customerEmail fra KundeUI.
+			}
+		});
+		panel_9.add(btnNewButton);
+		
 		JPanel panel_14 = new JPanel();
 		panel_14.setBackground(new Color(163, 163, 163));
 		panel_5.add(panel_14, BorderLayout.CENTER);
 		panel_3.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{panel_4, panel_5, panel_9, panel_10, panel_11, panel_12, panel_13, panel_14, lblNewLabel_1, btnNewButton, lblNewLabel_2, panel_17, panel_18, btnNewButton_1, chckbxNewCheckBox, verticalBox, verticalBox_1, panel_8, lblNewLabel_3, panel_19, lblNewLabel_4, panel_20, panel_21, lblNewLabel_5, lblNewLabel_6, panel_22, panel_23, lblNewLabel_7, lblNewLabel_8}));
 		
 		frame.setVisible(true);
+		
+		
 	}
 
 }

@@ -69,6 +69,16 @@ public class OrderController {
         Customer customer = cC.findCustomerByEmail(email);
         return order.addCustomer(customer);
     }
+    
+    public String getCustomerEmail() {
+    	return order.getCustomer().getEmail();
+    }
+    
+    public int getCustomerCVR() {
+    	if (order.getCustomer().getEmail() == null) return 0;
+    	return order.getCustomer().getCVR();
+    }
+    
 
     public double[] getTotalPrice() {
         return order.getTotalPrice();

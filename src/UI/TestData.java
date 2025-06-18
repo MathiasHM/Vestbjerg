@@ -12,9 +12,18 @@ package UI;
 import Containers.*;
 
 public class TestData {
-    private boolean isTestDataGenerated = false;
+    private static boolean isTestDataGenerated = false;
+    private static TestData instance;
 
-    public void generateTestData() {
+    public static void generate() {
+    	if (instance == null) {
+    		generateTestData();
+    		instance = new TestData();
+    	}
+    	return;
+    }
+    
+    private static void generateTestData() {
         if (isTestDataGenerated) {
             return;
         }

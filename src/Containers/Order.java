@@ -86,6 +86,11 @@ public class Order {
         this.customer = customer;
         return Result.CUSTOMERADDED;
     }
+    
+    public Customer getCustomer() {
+    	if (this.customer == null) return new Customer("Eksempel", 0); 
+    	return this.customer;
+    }
 
     public Result addProduct(Product product, int quantity) {
         if (quantity <= 0) {                //Check for valid quantity
