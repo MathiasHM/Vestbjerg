@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import Containers.Customer; // lev med det
 import Containers.CustomerContainer;
@@ -36,6 +38,8 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import java.util.ArrayList;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class KundeUI extends JDialog {
 
@@ -61,6 +65,9 @@ public class KundeUI extends JDialog {
 	}
 
 	public KundeUI() {
+		new TestData().generateTestData();
+		
+		String tempCustomerEmail = null;
 		customerEmail = null;
 		søgResultater = new DefaultListModel<>();
 		setBounds(100, 100, 450, 300);
@@ -75,20 +82,21 @@ public class KundeUI extends JDialog {
 		contentPanel.setLayout(gbl_contentPanel);
 		setTitle("find kunde på email");
 			formattedField = new JFormattedTextField();
-//			formattedTextField.addFocusListener(new FocusListener() {
-//				@Override public void focusGained(FocusEvent e) {
-//					System.out.println("smd");
-//				}
-//				
-//				@Override public void focusLost(FocusEvent e) {
-//					System.out.println("Lost");
-//				}
-//			});
+			updateList("");
 			
 			formattedField.getDocument().addDocumentListener(new DocumentListener() {
 	            public void insertUpdate(DocumentEvent e) {
-	            	System.out.println("Virker");
+	            	System.out.println(formattedField.getText().trim());
 	                updateList(formattedField.getText().trim());
+	            }
+
+	            public void removeUpdate(DocumentEvent e) {
+	            	System.out.println(formattedField.getText().trim());
+	                updateList(formattedField.getText().trim());
+	            }
+
+	            public void changedUpdate(DocumentEvent e) {
+	            	// Nødvendig, behøves ikke blive brugt
 	            }
 	        });
 			
@@ -114,6 +122,20 @@ public class KundeUI extends JDialog {
 			contentPanel.add(scrollPane, gbc_scrollPane);
 			
 			JList list = new JList<>(søgResultater);
+			list.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					System.out.println("suck");
+				}
+			});
+			list.addListSelectionListener(
+					new ListSelectionListener() {
+						public void valueChanged(ListSelectionEvent event) {
+							getContentPane().setFocusable(true);
+						}
+				
+			});
+			
 			scrollPane.setViewportView(list);
 			
 			
@@ -135,12 +157,10 @@ public class KundeUI extends JDialog {
 				okButton.addActionListener(e -> {
 					//customerEmail = tempCustomerEmail; //TODO implement tempCustomerEmail on customer highlighted.
 					dispose();
-					//returner værdier
 					
 				});
 				cancelButton.addActionListener(e -> {
 					dispose();
-					// TODO ¨åben Oliver's UI.
 					
 				});
 	}
@@ -148,7 +168,7 @@ public class KundeUI extends JDialog {
 	public void updateList(String filter) {
 		søgResultater.clear();
 		for (Customer c : CustomerContainer.getInstance().getCustomers()) {
-			if (filter.toLowerCase().contains(c.getEmail().toLowerCase())) {
+			if (c.getEmail().toLowerCase().contains(filter.toLowerCase())) {
 				søgResultater.addElement(c.getEmail());
 			}
 		}
