@@ -63,6 +63,7 @@ public class KundeUI extends JDialog {
 	 * Create the dialog.
 	 */
 	public KundeUI() {
+		søgResultater = new DefaultListModel<>();
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -74,13 +75,7 @@ public class KundeUI extends JDialog {
 		gbl_contentPanel.rowWeights = new double[]{0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
 		contentPanel.setLayout(gbl_contentPanel);
 		setTitle("find kunde på email");
-		
-		søgResultater = new DefaultListModel<>();
-		søgResultater.addElement("BørgeJensen");
-		søgResultater.addElement("Cool");
-		søgResultater.addElement("ofkgpt");
-
-			JFormattedTextField formattedTextField = new JFormattedTextField();
+			formattedField = new JFormattedTextField();
 //			formattedTextField.addFocusListener(new FocusListener() {
 //				@Override public void focusGained(FocusEvent e) {
 //					System.out.println("smd");
@@ -91,16 +86,21 @@ public class KundeUI extends JDialog {
 //				}
 //			});
 			
-			formattedTextField.getDocument().addDocumentListener(new DocumentListener() {
+			formattedField.getDocument().addDocumentListener(new DocumentListener() {
 	            public void insertUpdate(DocumentEvent e) {
+	            	System.out.println("Virker");
 	                updateList(formattedField.getText().trim());
 	            }
 
 	            public void removeUpdate(DocumentEvent e) {
+	            	System.out.println("Virker");
+
 	                updateList(formattedField.getText().trim());
 	            }
 
 	            public void changedUpdate(DocumentEvent e) {
+	            	System.out.println("Virker");
+
 	                updateList(formattedField.getText().trim());
 	            }
 	        });
@@ -112,7 +112,7 @@ public class KundeUI extends JDialog {
 			gbc_formattedTextField.fill = GridBagConstraints.HORIZONTAL;
 			gbc_formattedTextField.gridx = 0;
 			gbc_formattedTextField.gridy = 1;
-			contentPanel.add(formattedTextField, gbc_formattedTextField);
+			contentPanel.add(formattedField, gbc_formattedTextField);
 			
 			
 			
