@@ -24,6 +24,8 @@ import java.awt.GridLayout;
 import javax.swing.JScrollPane;
 import javax.swing.Box;
 import java.awt.Dimension;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MainWindow {
 
@@ -57,7 +59,9 @@ public class MainWindow {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
 		oC = new OrderController();
+		oC.createOrder();
 		frame = new JFrame();
 		frame.setBounds(400, 300, 800, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -91,7 +95,7 @@ public class MainWindow {
 		flowLayout_4.setAlignment(FlowLayout.LEFT);
 		panel_6.add(panel_15);
 		
-		JButton btnNewButton_2 = new JButton("Tilføj Profukt(er)");
+		JButton btnNewButton_2 = new JButton("Tilføj produkt(er)");
 		panel_15.add(btnNewButton_2);
 		
 		JPanel panel_16 = new JPanel();
@@ -132,6 +136,11 @@ public class MainWindow {
 		panel_4.add(panel_9, BorderLayout.SOUTH);
 		
 		JButton btnNewButton = new JButton("Tilføj kunde");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		panel_9.add(btnNewButton);
 		
 		JPanel panel_10 = new JPanel();
