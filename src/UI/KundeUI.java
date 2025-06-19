@@ -49,7 +49,7 @@ public class KundeUI extends JDialog {
     private JList<String> itemList;
     private JFormattedTextField formattedField;
 	DefaultListModel<String> søgResultater;
-	public String customerEmail;
+	private String customerEmail;
 	public boolean isDisposed = false;
 
 	/**
@@ -172,6 +172,10 @@ public class KundeUI extends JDialog {
 				søgResultater.addElement(c.getEmail());
 			}
 		}
+	}
+	
+	public String getCustomerEmail() {
+		return this.customerEmail;
 	}
 	
 }

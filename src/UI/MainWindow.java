@@ -20,6 +20,8 @@ import Enums.Result;
 import javax.swing.JScrollBar;
 import java.awt.Component;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
+
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 import javax.swing.JCheckBox;
 import java.awt.GridLayout;
@@ -35,6 +37,7 @@ public class MainWindow {
 
 	private JFrame frame;
 	private OrderController oC;
+	private DefaultListModel<String> productResults;
 
 	/**
 	 * Launch the application.
@@ -64,8 +67,9 @@ public class MainWindow {
 	 */
 	private void initialize() {
 		TestData.generate();
-		oC = new OrderController();
+		OrderController oC = new OrderController();
 		oC.createOrder();
+		productResults = new DefaultListModel<>();
 		frame = new JFrame();
 		frame.setBounds(400, 300, 800, 600);
 		frame.setLocationRelativeTo(null);
@@ -89,41 +93,85 @@ public class MainWindow {
 		
 		JPanel panel_2 = new JPanel();
 		panel_1.add(panel_2);
-		panel_2.setLayout(new BorderLayout(0, 0));
+		panel_2.setLayout(new BoxLayout(panel_2, BoxLayout.Y_AXIS));
 		
 		JPanel panel_6 = new JPanel();
-		panel_2.add(panel_6, BorderLayout.SOUTH);
-		panel_6.setLayout(new BoxLayout(panel_6, BoxLayout.X_AXIS));
+		panel_2.add(panel_6);
+		panel_6.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_15 = new JPanel();
+		panel_15.setBackground(new Color(192, 192, 192));
 		FlowLayout flowLayout_4 = (FlowLayout) panel_15.getLayout();
 		flowLayout_4.setAlignment(FlowLayout.LEFT);
-		panel_6.add(panel_15);
+		panel_6.add(panel_15, BorderLayout.NORTH);
 		
-		JButton btnNewButton_2 = new JButton("Tilføj produkt(er)");
-		panel_15.add(btnNewButton_2);
-		
-		JPanel panel_16 = new JPanel();
-		FlowLayout flowLayout_5 = (FlowLayout) panel_16.getLayout();
-		flowLayout_5.setAlignment(FlowLayout.RIGHT);
-		panel_6.add(panel_16);
-		
-		JButton btnNewButton_3 = new JButton("Fjern produkt(er)");
-		btnNewButton_3.setForeground(new Color(255, 128, 128));
-		btnNewButton_3.setBackground(new Color(128, 0, 0));
-		panel_16.add(btnNewButton_3);
-		
-		JPanel panel_7 = new JPanel();
-		panel_7.setBackground(new Color(192, 192, 192));
-		panel_2.add(panel_7, BorderLayout.NORTH);
-		panel_7.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
-		
-		JLabel lblNewLabel = new JLabel("Produkt(er)");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
-		panel_7.add(lblNewLabel);
+		JLabel lblNewLabel = new JLabel("Produktsøgning");
+		panel_15.add(lblNewLabel);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		panel_2.add(scrollPane, BorderLayout.CENTER);
+		panel_6.add(scrollPane, BorderLayout.CENTER);
+		
+		
+		
+		JPanel panel_7 = new JPanel();
+		panel_2.add(panel_7);
+		panel_7.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panel_16 = new JPanel();
+		panel_16.setBackground(new Color(192, 192, 192));
+		FlowLayout flowLayout_5 = (FlowLayout) panel_16.getLayout();
+		flowLayout_5.setAlignment(FlowLayout.LEFT);
+		panel_7.add(panel_16, BorderLayout.NORTH);
+		
+		JLabel lblNewLabel_9 = new JLabel("Kurv");
+		panel_16.add(lblNewLabel_9);
+		
+		JPanel panel_24 = new JPanel();
+		panel_7.add(panel_24, BorderLayout.SOUTH);
+		panel_24.setLayout(new BoxLayout(panel_24, BoxLayout.X_AXIS));
+		
+		JPanel panel_25 = new JPanel();
+		panel_24.add(panel_25);
+		panel_25.setLayout(new BoxLayout(panel_25, BoxLayout.X_AXIS));
+		
+		JPanel panel_29 = new JPanel();
+		FlowLayout flowLayout_13 = (FlowLayout) panel_29.getLayout();
+		flowLayout_13.setAlignment(FlowLayout.LEFT);
+		panel_25.add(panel_29);
+		
+		JButton btnNewButton_2 = new JButton("Fjern produkt(er)");
+		btnNewButton_2.setForeground(new Color(255, 128, 128));
+		btnNewButton_2.setBackground(new Color(128, 0, 0));
+		panel_29.add(btnNewButton_2);
+		
+		JPanel panel_30 = new JPanel();
+		panel_25.add(panel_30);
+		
+		JPanel panel_26 = new JPanel();
+		panel_24.add(panel_26);
+		panel_26.setLayout(new BoxLayout(panel_26, BoxLayout.X_AXIS));
+		
+		JPanel panel_27 = new JPanel();
+		FlowLayout flowLayout_14 = (FlowLayout) panel_27.getLayout();
+		flowLayout_14.setAlignment(FlowLayout.LEFT);
+		panel_26.add(panel_27);
+		
+		JLabel lblNewLabel_10 = new JLabel("Pris:");
+		panel_27.add(lblNewLabel_10);
+		
+		JPanel panel_28 = new JPanel();
+		FlowLayout flowLayout_15 = (FlowLayout) panel_28.getLayout();
+		flowLayout_15.setAlignment(FlowLayout.RIGHT);
+		panel_26.add(panel_28);
+		
+		JLabel lblNewLabel_12 = new JLabel("1799,95");
+		panel_28.add(lblNewLabel_12);
+		
+		JLabel lblNewLabel_11 = new JLabel("DKK");
+		panel_28.add(lblNewLabel_11);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		panel_7.add(scrollPane_1, BorderLayout.CENTER);
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setBackground(new Color(192, 192, 192));
@@ -264,12 +312,12 @@ public class MainWindow {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				KundeUI kUI = new KundeUI();
-				if (oC.addCustomerByEmail(kUI.customerEmail) == Result.CUSTOMERALREADYASSOCIATED 
-					&& kUI.customerEmail != null && kUI.isDisposed) {
+				if (oC.addCustomerByEmail(kUI.getCustomerEmail()) == Result.CUSTOMERALREADYASSOCIATED 
+					&& kUI.getCustomerEmail() != null && kUI.isDisposed) {
 					System.out.println("Kunde allerede tilføjet.");
-				} else if (kUI.isDisposed && kUI.customerEmail != null) {
-					oC.addCustomerByEmail(kUI.customerEmail);
-					System.out.println("Indtastet Email: " + kUI.customerEmail);
+				} else if (kUI.isDisposed && kUI.getCustomerEmail() != null) {
+					oC.addCustomerByEmail(kUI.getCustomerEmail());
+					System.out.println("Indtastet Email: " + kUI.getCustomerEmail());
 					System.out.println("Associeret Email: " + oC.getCustomerEmail());
 					
 					lblNewLabel_4.setText("Dummy navn");
