@@ -182,12 +182,7 @@ public class MainWindow {
 		for (Product p : pC.getProducts()) {
 			products.add(p);
 		}
-		
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> Stashed changes
+
 		String columns[] = {"Produkt ID", "Navn", "Pris", "Max antal"};
 		Object[][] data = new Object[products.size()][4];
 		int i = 0;
@@ -206,9 +201,6 @@ public class MainWindow {
 			}
 		};
 		
-		
-		
->>>>>>> Stashed changes
 		JScrollPane scrollPane = new JScrollPane();
 		panel_31.add(scrollPane, BorderLayout.CENTER);
 		
