@@ -184,7 +184,10 @@ public class MainWindow {
 		}
 		
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
 		String columns[] = {"Produkt ID", "Navn", "Pris", "Max antal"};
 		Object[][] data = new Object[products.size()][4];
 		int i = 0;
