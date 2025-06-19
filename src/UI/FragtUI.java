@@ -40,6 +40,8 @@ public class FragtUI extends JDialog {
 	public FragtUI() {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
+		setModal(true);
+		setLocationRelativeTo(null);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
@@ -159,6 +161,7 @@ public class FragtUI extends JDialog {
 					// TODO ¨åben Oliver's UI.
 					
 				});
+		setVisible(true);
 	}
 
 }
