@@ -278,8 +278,12 @@ public class MainWindow {
 		JButton btnNewButton_1 = new JButton("Tilføj levering");
 			btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Gjort");
 				FragtUI fUI = new FragtUI();
+				String[] shipInfo = fUI.getShipInfo();
+				if (fUI.getShipInfo() != null) {
+				System.out.println(shipInfo[0] + shipInfo[1] + shipInfo[2]);
+				oC.setShippingInformation(shipInfo[0], shipInfo[1], shipInfo[2]);
+				}
 			}
 		});
 		panel_17.add(btnNewButton_1);

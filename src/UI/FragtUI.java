@@ -17,9 +17,10 @@ public class FragtUI extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField textField; // adress
+	private JTextField textField_1; // navn
+	private JTextField textField_2; // email
+	private String[] shipInfo;
 
 	/**
 	 * Launch the application.
@@ -152,6 +153,11 @@ public class FragtUI extends JDialog {
 				buttonPane.add(cancelButton);
 			
 				okButton.addActionListener(e -> {
+					shipInfo = new String[3];
+					shipInfo[0] = textField_1.getText();
+					shipInfo[1] = textField.getText();
+					shipInfo[2] = textField_2.getText();
+					System.out.println(shipInfo[0] + shipInfo[1] + shipInfo[2]); // debug fjern senere
 					dispose();
 					//returner værdier
 					
@@ -163,5 +169,7 @@ public class FragtUI extends JDialog {
 				});
 		setVisible(true);
 	}
-
+	public String[] getShipInfo() {
+		return shipInfo;
+	}
 }
