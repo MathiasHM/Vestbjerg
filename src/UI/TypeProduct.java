@@ -20,7 +20,7 @@ public class TypeProduct extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 
 	/**
-	 * Launch the application.
+	 * launch the application.
 	 */
 	public static void main(String[] args) {
 		try {
