@@ -294,7 +294,7 @@ public class OrderConfirmationUI extends JDialog {
 					// åben usecase menu
 				    dispose();    
 				});
-		
+				setVisible(true);
 	}
 //
 }
