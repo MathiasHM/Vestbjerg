@@ -9,12 +9,16 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
+import Containers.Customer;
 import Containers.Order;
 import Controllers.OrderController;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -161,7 +165,17 @@ public class OrderConfirmationUI extends JDialog {
 				gbc_lblNewLabel_1.gridy = 1;
 				panel1.add(lblNewLabel_1, gbc_lblNewLabel_1);
 			
-				JLabel lblNewLabel_2 = new JLabel("addres");
+//				public void setShippingInformation(String deliveryName,
+//                        String deliveryAddress,
+//                        String deliveryEmail) {
+//						order.setShippingInformation(deliveryName, deliveryAddress,
+//						deliveryEmail);
+//						}
+//				controller.setShippingInformation(deliveryName, deliveryAddress, "");
+				JLabel lblNewLabel_2 = new JLabel("Navn og Adresse: " // controller.
+						//setShippingInformation(deliveryName, deliveryAddress, ""
+								);
+				
 				GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
 				gbc_lblNewLabel_2.gridwidth = 2;
 				gbc_lblNewLabel_2.anchor = GridBagConstraints.WEST;
@@ -170,7 +184,7 @@ public class OrderConfirmationUI extends JDialog {
 				gbc_lblNewLabel_2.gridy = 2;
 				panel1.add(lblNewLabel_2, gbc_lblNewLabel_2);
 			
-				JLabel lblNewLabel_3 = new JLabel("addres 2");
+				JLabel lblNewLabel_3 = new JLabel("CVR: " + controller.getCustomerCVR());
 				GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
 				gbc_lblNewLabel_3.gridwidth = 2;
 				gbc_lblNewLabel_3.anchor = GridBagConstraints.WEST;
@@ -179,7 +193,13 @@ public class OrderConfirmationUI extends JDialog {
 				gbc_lblNewLabel_3.gridy = 3;
 				panel1.add(lblNewLabel_3, gbc_lblNewLabel_3);
 			
-				JLabel lblNewLabel_5 = new JLabel("att");
+//				public Customer getCustomer() {
+//			    	if (this.customer == null) return new Customer("Eksempel", 0); 
+//			    	return this.customer;
+//			    }
+				
+				
+				JLabel lblNewLabel_5 = new JLabel("Email: " + controller.getCustomerEmail());
 				GridBagConstraints gbc_lblNewLabel_5 = new GridBagConstraints();
 				gbc_lblNewLabel_5.gridwidth = 2;
 				gbc_lblNewLabel_5.anchor = GridBagConstraints.WEST;
@@ -188,14 +208,18 @@ public class OrderConfirmationUI extends JDialog {
 				gbc_lblNewLabel_5.gridy = 4;
 				panel1.add(lblNewLabel_5, gbc_lblNewLabel_5);
 			
-				JLabel lblNewLabel_8 = new JLabel("New label");
+				JLabel lblNewLabel_8 = new JLabel("");
 				GridBagConstraints gbc_lblNewLabel_8 = new GridBagConstraints();
 				gbc_lblNewLabel_8.insets = new Insets(0, 0, 5, 5);
 				gbc_lblNewLabel_8.gridx = 0;
 				gbc_lblNewLabel_8.gridy = 5;
 				panel1.add(lblNewLabel_8, gbc_lblNewLabel_8);
-			
-				JLabel lblNewLabel_6 = new JLabel("Dato");
+				
+				LocalDate dato = LocalDateTime.now().toLocalDate();
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+				String datoTekst = dato.format(formatter);
+				
+				JLabel lblNewLabel_6 = new JLabel("Dato: " + datoTekst);
 				GridBagConstraints gbc_lblNewLabel_6 = new GridBagConstraints();
 				gbc_lblNewLabel_6.gridwidth = 2;
 				gbc_lblNewLabel_6.anchor = GridBagConstraints.WEST;
@@ -204,7 +228,7 @@ public class OrderConfirmationUI extends JDialog {
 				gbc_lblNewLabel_6.gridy = 7;
 				panel1.add(lblNewLabel_6, gbc_lblNewLabel_6);
 			
-				JLabel lblNewLabel_7 = new JLabel("New label");
+				JLabel lblNewLabel_7 = new JLabel("");
 				GridBagConstraints gbc_lblNewLabel_7 = new GridBagConstraints();
 				gbc_lblNewLabel_7.insets = new Insets(0, 0, 5, 5);
 				gbc_lblNewLabel_7.gridx = 0;
