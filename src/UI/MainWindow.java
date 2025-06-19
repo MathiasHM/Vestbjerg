@@ -344,11 +344,13 @@ public class MainWindow {
 		JPanel panel_14 = new JPanel();
 		panel_14.setBackground(new Color(163, 163, 163));
 		panel_5.add(panel_14, BorderLayout.CENTER);
-		panel_3.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{panel_4, panel_5, panel_9, panel_10, panel_11, panel_12, panel_13, panel_14, lblNewLabel_1, btnNewButton, lblNewLabel_2, panel_17, panel_18, btnNewButton_1, chckbxNewCheckBox, verticalBox, verticalBox_1, panel_8, lblNewLabel_3, panel_19, lblNewLabel_4, panel_20, panel_21, lblNewLabel_5, lblNewLabel_6, panel_22, panel_23, lblNewLabel_7, lblNewLabel_8}));
-		
+		panel_3.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{panel_4, 
+			panel_5, panel_9, panel_10, panel_11, panel_12, panel_13, panel_14, lblNewLabel_1, 
+			btnNewButton, lblNewLabel_2, panel_17, panel_18, btnNewButton_1, chckbxNewCheckBox, 
+			verticalBox, verticalBox_1, panel_8, lblNewLabel_3, panel_19, lblNewLabel_4, panel_20, 
+			panel_21, lblNewLabel_5, lblNewLabel_6, panel_22, panel_23, 
+			lblNewLabel_7, lblNewLabel_8}));
 		frame.setVisible(true);
-		
-		
-	}
+		}
 
 }
