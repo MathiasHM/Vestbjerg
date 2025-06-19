@@ -18,6 +18,7 @@ import javax.swing.event.ListSelectionListener;
 
 import Containers.Customer; // lev med det
 import Containers.CustomerContainer;
+import Controllers.CustomerController;
 import Controllers.OrderController;
 
 import java.awt.GridBagLayout;
@@ -51,6 +52,8 @@ public class KundeUI extends JDialog {
 	DefaultListModel<String> søgResultater;
 	private String customerEmail;
 	public boolean isDisposed = false;
+	private ArrayList<String> emails;
+	private CustomerController customerController = new CustomerController();
 
 	/**
 	 * Launch the application.
@@ -167,10 +170,8 @@ public class KundeUI extends JDialog {
 	
 	public void updateList(String filter) {
 		søgResultater.clear();
-		for (Customer c : CustomerContainer.getInstance().getCustomers()) {
-			if (c.getEmail().toLowerCase().contains(filter.toLowerCase())) {
-				søgResultater.addElement(c.getEmail());
-			}
+		for (String email : customerController.sortCustomersByEmail(filter)) {
+			søgResultater.addElement(email);
 		}
 	}
 	

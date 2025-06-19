@@ -281,7 +281,7 @@ public class MainWindow {
 				FragtUI fUI = new FragtUI();
 				String[] shipInfo = fUI.getShipInfo();
 				if (fUI.getShipInfo() != null) {
-				System.out.println(shipInfo[0] + shipInfo[1] + shipInfo[2]);
+				System.out.println(shipInfo[0] + shipInfo[1] + shipInfo[2]); // for debugging
 				oC.setShippingInformation(shipInfo[0], shipInfo[1], shipInfo[2]);
 				}
 			}

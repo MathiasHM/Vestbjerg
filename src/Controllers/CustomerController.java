@@ -10,6 +10,7 @@ package Controllers;
 
 import Containers.Customer;
 import Containers.CustomerContainer;
+import java.util.ArrayList;
 
 public class CustomerController {
 
@@ -18,5 +19,15 @@ public class CustomerController {
 
     public Customer findCustomerByEmail(String email) {
         return CustomerContainer.getInstance().findCustomerByEmail(email);
+    }
+
+    public ArrayList<String> sortCustomersByEmail(String key) {
+        ArrayList<String> emailList = new ArrayList<>();
+        for (Customer c : CustomerContainer.getInstance().getCustomers()) {
+            if (c.getEmail().toLowerCase().contains(key.toLowerCase())) {
+                emailList.add(c.getEmail());
+			}
+        }
+        return emailList;
     }
 }
