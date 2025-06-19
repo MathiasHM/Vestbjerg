@@ -13,6 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -45,6 +47,7 @@ import java.awt.event.FocusListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.RowFilter;
 
 public class MainWindow {
@@ -149,17 +152,34 @@ public class MainWindow {
 		textField.setColumns(10);
 		
 		//kig ned
+		
 		textField.getDocument().addDocumentListener(new DocumentListener() {
-		    private void updateFilter() {
+		    
+			public void insertUpdate(DocumentEvent e) {
+				updateFilter();
+			}
+
+			public void removeUpdate(DocumentEvent e) {
+				updateFilter();
+			}
+
+			public void changedUpdate(DocumentEvent e) {
+				updateFilter();
+			}
+		    
+			private void updateFilter() {
 		        String text = textField.getText();
 		        if (text.trim().length() == 0) {
 		            rowSorter.setRowFilter(null); 
 		        } else {
-		        	rowSorter.setRowFilter(new RowFilter<DefaultTableModel, Integer>() {
+		        	rowSorter.setRowFilter(new RowFilter<TableModel, Integer>() {
+		        		//override method from RowFilter to only sort by results from columns 0 and 1.
 		        		@Override
-		        		public boolean include(Entry<? extends DefaultTableModel, ? extends Integer> entry) {
+		        		public boolean include(Entry<? extends TableModel, ? extends Integer> entry) {
 		        			for (int i = 0; i <= 1; i++) {
 		        				Object value = entry.getValue(i);
+		        				
+		        				//generic check to see if one string contains another
 		        				if (value != null && value.toString().toLowerCase().contains(text.toLowerCase())) {
 		        					return true;
 		        				}
@@ -168,19 +188,8 @@ public class MainWindow {
 		        			return false;
 		        		}
 		        	});
-		        
-		    }
-		    public void insertUpdate(DocumentEvent e) {
-		        updateFilter();
-		    }
-
-		    public void removeUpdate(DocumentEvent e) {
-		        updateFilter();
-		    }
-
-		    public void changedUpdate(DocumentEvent e) {
-		        updateFilter();
-		    }
+		        }
+			}
 		});
 		
 		//kig op
@@ -219,6 +228,24 @@ public class MainWindow {
 		
 		rowSorter = new TableRowSorter<>(table.getModel());
 		table.setRowSorter(rowSorter);
+		
+		
+		
+		
+		
+		ListSelectionModel selectionModel = table.getSelectionModel();
+		selectionModel.addListSelectionListener(new ListSelectionListener() {
+
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				ProductUI pUI = new ProductUI();
+			}
+			
+		});
+		
+		
+		
+		
 		
 		//kig op
 		
