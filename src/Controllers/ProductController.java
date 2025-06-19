@@ -10,6 +10,7 @@ package Controllers;
 
 import Containers.Product;
 import Containers.ProductContainer;
+import java.util.ArrayList;
 
 public class ProductController {
 
@@ -19,4 +20,8 @@ public class ProductController {
     public Product findProductByID(int productID) {
         return ProductContainer.getInstance().findProductByID(productID);
     }
+
+	public ArrayList<Product> getProducts() {
+		return ProductContainer.getInstance().getProducts();
+	}
 }

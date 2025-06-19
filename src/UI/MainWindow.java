@@ -11,10 +11,17 @@ import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+
 import java.awt.Color;
 import javax.swing.JList;
 
 import Controllers.OrderController;
+import Controllers.ProductController;
 import Enums.Result;
 
 import javax.swing.JScrollBar;
@@ -23,6 +30,9 @@ import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
+
+import Containers.Product;
+
 import javax.swing.JCheckBox;
 import java.awt.GridLayout;
 import javax.swing.JScrollPane;
@@ -31,13 +41,20 @@ import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
+import javax.swing.RowFilter;
 
 public class MainWindow {
 
 	private JFrame frame;
 	private OrderController oC;
-	private DefaultListModel<String> productResults;
+	private JTable table;
+	private JTextField textField;
+	private TableRowSorter<TableModel> rowSorter;
+	private DefaultTableModel model;
+	private ArrayList<Product> products;
 
 	/**
 	 * Launch the application.
@@ -68,8 +85,9 @@ public class MainWindow {
 	private void initialize() {
 		TestData.generate();
 		OrderController oC = new OrderController();
+		ProductController pC = new ProductController();
 		oC.createOrder();
-		productResults = new DefaultListModel<>();
+		rowSorter = new TableRowSorter();
 		frame = new JFrame();
 		frame.setBounds(400, 300, 800, 600);
 		frame.setLocationRelativeTo(null);
@@ -108,10 +126,48 @@ public class MainWindow {
 		JLabel lblNewLabel = new JLabel("Produktsøgning");
 		panel_15.add(lblNewLabel);
 		
+		JPanel panel_31 = new JPanel();
+		panel_6.add(panel_31, BorderLayout.CENTER);
+		panel_31.setLayout(new BorderLayout(0, 0));
+		
+		textField = new JTextField();
+		panel_31.add(textField, BorderLayout.NORTH);
+		textField.setColumns(10);
+		
+		//kig ned
+		textField.getDocument().addDocumentListener(new DocumentListener() {
+		    private void updateFilter() {
+		        String text = textField.getText();
+		        if (text.trim().length() == 0) {
+		            rowSorter.setRowFilter(null); 
+		        } else {
+		        	rowSorter.setRowFilter(RowFilter.regexFilter("(?i)^"+ text));
+		        }
+		    }
+		    public void insertUpdate(DocumentEvent e) {
+		        updateFilter();
+		    }
+
+		    public void removeUpdate(DocumentEvent e) {
+		        updateFilter();
+		    }
+
+		    public void changedUpdate(DocumentEvent e) {
+		        updateFilter();
+		    }
+		});
+		//kig op
+		
+		products = new ArrayList<>();
+		for (Product p : pC.getProducts()) {
+			products.add(p);
+		}
+		
+		
+		
+		
 		JScrollPane scrollPane = new JScrollPane();
-		panel_6.add(scrollPane, BorderLayout.CENTER);
-		
-		
+		panel_31.add(scrollPane, BorderLayout.CENTER);
 		
 		JPanel panel_7 = new JPanel();
 		panel_2.add(panel_7);
