@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
+import Containers.Order;
 import Controllers.OrderController;
 
 import java.awt.GridBagLayout;
@@ -47,7 +48,7 @@ public class OrderConfirmationUI extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public OrderConfirmationUI() {
+	public OrderConfirmationUI(Order order) {
 		setBounds(100, 100, 600, 600);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -102,6 +103,7 @@ public class OrderConfirmationUI extends JDialog {
 //					subTotal += elementPris;
 //					subtotal, kald på line getLineSubtotal()
 //				}
+				
 //				moms = (float) (subTotal * 0.25);
 //				total = moms + subTotal;
 //				total, skal lave en kald til ordre getTotalPrice();				
