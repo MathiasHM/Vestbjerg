@@ -104,6 +104,7 @@ public class MainWindow {
 				frame.dispose();
 				Order orderCopy = oC.getOrder();
 				new OrderConfirmationUI(orderCopy, oC.displayLines());
+				// brug Regex for segregering af information inde i selve OrderConfirmation
 			}
 		});
 		btnNewButton_4.setForeground(Color.BLACK);
