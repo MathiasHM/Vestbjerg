@@ -103,6 +103,12 @@ public class MainWindow {
 		panel.add(btnNewButton_4);
 		
 		JButton btnNewButton_3_1 = new JButton("Annullér");
+		btnNewButton_3_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				UseCaseMenu useCaseMenu = new UseCaseMenu();
+			}
+		});
 		panel.add(btnNewButton_3_1);
 		
 		JPanel panel_1 = new JPanel();
@@ -162,9 +168,6 @@ public class MainWindow {
 		for (Product p : pC.getProducts()) {
 			products.add(p);
 		}
-		
-		
-		
 		
 		JScrollPane scrollPane = new JScrollPane();
 		panel_31.add(scrollPane, BorderLayout.CENTER);
