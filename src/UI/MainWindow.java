@@ -276,6 +276,12 @@ public class MainWindow {
 		panel_12.add(panel_17);
 		
 		JButton btnNewButton_1 = new JButton("Tilføj levering");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Gjort");
+				FragtUI fUI = new FragtUI();
+			}
+		});
 		panel_17.add(btnNewButton_1);
 		
 		
