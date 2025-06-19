@@ -87,7 +87,6 @@ public class MainWindow {
 		OrderController oC = new OrderController();
 		ProductController pC = new ProductController();
 		oC.createOrder();
-		rowSorter = new TableRowSorter();
 		frame = new JFrame();
 		frame.setBounds(400, 300, 800, 600);
 		frame.setLocationRelativeTo(null);
@@ -147,8 +146,20 @@ public class MainWindow {
 		        if (text.trim().length() == 0) {
 		            rowSorter.setRowFilter(null); 
 		        } else {
-		        	rowSorter.setRowFilter(RowFilter.regexFilter("(?i)^"+ text));
-		        }
+		        	rowSorter.setRowFilter(new RowFilter<DefaultTableModel, Integer>() {
+		        		@Override
+		        		public boolean include(Entry<? extends DefaultTableModel, ? extends Integer> entry) {
+		        			for (int i = 0; i <= 1; i++) {
+		        				Object value = entry.getValue(i);
+		        				if (value != null && value.toString().toLowerCase().contains(text.toLowerCase())) {
+		        					return true;
+		        				}
+		        			}
+		        			
+		        			return false;
+		        		}
+		        	});
+		        
 		    }
 		    public void insertUpdate(DocumentEvent e) {
 		        updateFilter();
@@ -162,15 +173,50 @@ public class MainWindow {
 		        updateFilter();
 		    }
 		});
+		
 		//kig op
+		
+		//kig ned
 		
 		products = new ArrayList<>();
 		for (Product p : pC.getProducts()) {
 			products.add(p);
 		}
 		
+<<<<<<< Updated upstream
+=======
+		String columns[] = {"Produkt ID", "Navn", "Pris", "Max antal"};
+		Object[][] data = new Object[products.size()][4];
+		int i = 0;
+		for (Product p : products) {
+			data[i][0] = p.getID();
+			data[i][1] = p.getName();
+			data[i][2] = p.getPrice();
+			data[i][3] = p.getMaxThreshold();
+			i ++;
+		}
+		
+		model = new DefaultTableModel(data, columns) {
+			private static final long serialVersionUID = 1L;
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+		
+		
+		
+>>>>>>> Stashed changes
 		JScrollPane scrollPane = new JScrollPane();
 		panel_31.add(scrollPane, BorderLayout.CENTER);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		table.setModel(model);
+		
+		rowSorter = new TableRowSorter<>(table.getModel());
+		table.setRowSorter(rowSorter);
+		
+		//kig op
 		
 		JPanel panel_7 = new JPanel();
 		panel_2.add(panel_7);
