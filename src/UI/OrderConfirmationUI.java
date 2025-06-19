@@ -11,7 +11,6 @@ import javax.swing.border.EmptyBorder;
 
 import Containers.Order;
 import Controllers.OrderController;
-
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
@@ -27,11 +26,10 @@ public class OrderConfirmationUI extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTable table;
 	private boolean setStatus = false;
-	private float subTotal = 0;
-	private float moms = 0;
-	private float total = 0;
+	private OrderController controller;
 	List<String[]> list = new ArrayList<>();
 	
+
 	/**
 	 * Launch the application.
 	 */
@@ -49,7 +47,7 @@ public class OrderConfirmationUI extends JDialog {
 	 * Create the dialog.
 	 */
 	//Order order
-	public OrderConfirmationUI(Order order, String[] lineInformation) {
+	public OrderConfirmationUI(Order orderCopy, String[] lineInformation) {
 		setBounds(100, 100, 600, 600);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -62,31 +60,33 @@ public class OrderConfirmationUI extends JDialog {
 			contentPanel.add(panel, BorderLayout.CENTER);
 			
 			
+// --------------------------------------------------------------------------------------------------
 
-				String[] columnNames = {"Beskrivelse","Antal", "Enhed", "stk. pris", "pris"};
-			//	for () {
-				String[][] rawData = {
-						
-					    {"Printerpapir A4", "5", "pakker", "25.00", ""},
-					    {"Blækpatron sort", "2", "stk", "150.00", ""},
-					    {"Hæfteklammer", "3", "æsker", "15.00", "45.00"}
-						
-					};
-				
-			//	}
-				// virker 
-				for (int i = 0; i < rawData.length; i++) {
-					float antal = Float.parseFloat(rawData[i][1]);
-					float stk = Float.parseFloat(rawData[i][3].replace(",", "."));
-					float elementPris = antal * stk;
-					rawData[i][4] = Float.toString(elementPris);
-					subTotal += elementPris;
-				}
-				moms = (float) (subTotal * 0.25);
-				total = moms + subTotal;
-			//	total -= discount;
-				System.out.println("virker" + total);
-				
+			
+			String[] columnNames = {"Beskrivelse","Antal", "Enhed", "stk. pris", "pris"};
+//			//	for () {
+//				String[][] rawData = {
+//						
+//					    {"Printerpapir A4", "5", "pakker", "25.00", ""},
+//					    {"Blækpatron sort", "2", "stk", "150.00", ""},
+//					    {"Hæfteklammer", "3", "æsker", "15.00", "45.00"}
+//						
+//					};
+////				-----------------------------------------------------------------------
+//			//	}
+//				// virker ------------------------------------------
+//				for (int i = 0; i < rawData.length; i++) {
+//					float antal = Float.parseFloat(rawData[i][1]);
+//					float stk = Float.parseFloat(rawData[i][3].replace(",", "."));
+//					float elementPris = antal * stk;
+//					rawData[i][4] = Float.toString(elementPris);
+//					subTotal += elementPris;
+//				}
+//				moms = (float) (subTotal * 0.25);
+//				total = moms + subTotal;
+//			//	total -= discount;
+//				System.out.println("virker" + total);
+				//-----------------------------------------------------------------
 //				for (int i = 0; i < rawData.length; i++) {
 //					float antal = Float.parseFloat(rawData[i][1]);
 //					float stk = Float.parseFloat(rawData[i][3].replace(",", "."));
@@ -94,27 +94,31 @@ public class OrderConfirmationUI extends JDialog {
 //					subTotal += elementPris;
 //					subtotal, kald på line getLineSubtotal()
 //				}
-				
+//				
 //				moms = (float) (subTotal * 0.25);
 //				total = moms + subTotal;
+//				
 //				total, skal lave en kald til ordre getTotalPrice();				
 //				System.out.println("virker" + total);
 				
-				
-				String newSubTotal = Float.toString(subTotal);
-				String newMoms = Float.toString(moms);
-				String newTotal = Float.toString(total);
+				// brug igen--------------------------------
+//				String newSubTotal = Float.toString(subTotal);
+//				String newMoms = Float.toString(moms);
+//				String newTotal = Float.toString(total);
 			//	String newDiscount = Float.toString(discount);
-				String[][] data = {
-						{"Printerpapir A4", "5", "pakker", "25.00", "125.00"},
-					    {"Blækpatron sort", "2", "stk", "150.00", "300.00"},
-					    {"Hæfteklammer", "3", "æsker", "15.00", "45.00"},
-						{"", "", "", "", ""},
-						{"", "", "Discount", "", ""},//newDiscount},
-					    {"", "", "Subtotal", "", newSubTotal},
-					    {"", "", "Moms (25%)", "", newMoms},
-					    {"", "", "Total DKK", "", newTotal}
-				};
+//				String[][] data = {
+//						{"Printerpapir A4", "5", "pakker", "25.00", "125.00"},
+//					    {"Blækpatron sort", "2", "stk", "150.00", "300.00"},
+//					    {"Hæfteklammer", "3", "æsker", "15.00", "45.00"},
+//						{"", "", "", "", ""},
+//						{"", "", "Discount", "", ""},//newDiscount},
+//					    {"", "", "Subtotal", "", newSubTotal},
+//					    {"", "", "Moms (25%)", "", newMoms},
+//					    {"", "", "Total DKK", "", newTotal}
+//				}; //----------------------------------------------
+//				
+				// kald data
+				
 //				for (rawData raw : element) {
 //					(float) rawData[2] * (float) rawData[rawData[4] = (String) rawData[5]
 //					int length = rawData[0].length()				
@@ -128,11 +132,8 @@ public class OrderConfirmationUI extends JDialog {
 //				
 //				}
 				
-				table = new JTable(data, columnNames);
-				JScrollPane scrollPane1 = new JScrollPane(table);
 				
-				panel.add(scrollPane1);
-				
+//				
 				
 			JPanel panel1 = new JPanel();
 			contentPanel.add(panel1, BorderLayout.NORTH);
@@ -233,9 +234,57 @@ public class OrderConfirmationUI extends JDialog {
 				cancelButton.setActionCommand("Annullér");
 				buttonPane.add(cancelButton);
 			
+				
+				
+				
+				
+				
+//				for (String line : controller.displayLines()) {
+//				    String[] split = line.split("/");
+//				    String navn = split[0];
+//				    String id = split[1];
+//				    String pris = split[2];
+//				    String antal = split[3];
+//				    String subtotal = split[4];
+//				}
+				
+				
+				ArrayList<String> lines = orderCopy.displayLines();
+				String[] linesArray = lines.toArray(new String[0]);
+				
+				int antalLinjer = linesArray.length;
+				String[][] data = new String[antalLinjer + 4][5];
+			
+				for (int i = 0; i < antalLinjer; i++) {
+					 String[] split = linesArray[i].split("/");
+					 data[i] = split;
+				}
+				
+				data[antalLinjer] = new String[] {"", "", "", "", ""};
+				
+				double[] total1 = orderCopy.getTotalPrice();
+				String subtotal = Double.toString(total1[0]);
+				String discount = Double.toString(total1[1]);
+				String totalprice = Double.toString(total1[2]);
+				
+				data[antalLinjer + 1] = new String[] {"", "", "Subtotal", "", subtotal};
+				data[antalLinjer + 2] = new String[] {"", "", "Discount", "", discount};
+				data[antalLinjer + 3] = new String[] {"", "", "Total DKK", "", totalprice};
+						
+
+				table = new JTable(data, columnNames);
+				JScrollPane scrollPane1 = new JScrollPane(table);
+				
+				panel.add(scrollPane1);
 				okButton.addActionListener(e -> {
+				//	order.setStatus(Status.CONFIRMED);
+//					public void setOrderPending() {
+//				        order.setStatus(Status.PENDING);
+//				        order.setDate(LocalDateTime.now());
+//				        OrderContainer.getInstance().addOrder(order);
+//				    } 
+					controller.setOrderPending();
 					
-			         
 					
 				    dispose();    
 				});
