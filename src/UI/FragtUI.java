@@ -118,7 +118,7 @@ public class FragtUI extends JDialog {
 			gbc_panel3.fill = GridBagConstraints.BOTH;
 			gbc_panel3.gridx = 0;
 			gbc_panel3.gridy = 6;
-			contentPanel.add(panel3, gbc_panel1);
+			contentPanel.add(panel3, gbc_panel3);
 		
 			JLabel lblNewLabel_2 = new JLabel("Navn");
 			GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
