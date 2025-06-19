@@ -225,12 +225,8 @@ public class MainWindow {
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		table.setModel(model);
-		
 		rowSorter = new TableRowSorter<>(table.getModel());
 		table.setRowSorter(rowSorter);
-		
-		
-		
 		
 		
 		ListSelectionModel selectionModel = table.getSelectionModel();
@@ -238,7 +234,42 @@ public class MainWindow {
 
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
-				ProductUI pUI = new ProductUI();
+				if (!e.getValueIsAdjusting()) {
+					int viewRow = table.getSelectedRow();
+					
+					if (viewRow != -1) {
+						int modelRow = table.convertRowIndexToModel(viewRow);
+						String[] info = new String[4];
+						
+						for (int i = 0; i < 4; i++) {
+							info[i] = model.getValueAt(modelRow, i).toString();
+						}
+						
+						if (info[0] != null && info[1] != null && info[2] != null && info[3] != null) {
+							ProductUI pUI = new ProductUI(info);
+							
+							if (pUI.getIsAccepted()) { //TODO review: Integer.parseInt(info[0]) er muligvis en questionable måde at finde productID
+								Result x = oC.addProductByID(Integer.parseInt(info[0]), pUI.getAmount());
+								if (x.equals(Result.QUANTITYLESSTHANONE)) {
+									pUI = new ProductUI(info);
+								}
+								
+								if (x.equals(Result.PRODUCTNOTFOUND)) {
+									System.out.println("ERROR: Product not found.");
+									return;
+								}
+								
+								if (x.equals(Result.MAXTHRESHOLDEXCEEDED)) {
+									pUI = new ProductUI(info);
+									
+								}
+								
+								
+							}
+							
+						}
+					}
+				}
 			}
 			
 		});

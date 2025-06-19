@@ -2,14 +2,24 @@ package UI;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.BoxLayout;
 import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
+
+import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.awt.event.ActionEvent;
 
 public class ProductUI extends JDialog {
 
@@ -17,7 +27,7 @@ public class ProductUI extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private int amount = 1;
 	private boolean isAccepted = false;
-	private JTextField textField;
+	private JFormattedTextField textField;
 	
 	/**
 	 * Launch the application.
@@ -35,8 +45,10 @@ public class ProductUI extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public ProductUI() {
+	public ProductUI(String[] info) {
+		
 		setBounds(100, 100, 450, 300);
+		setModal(true);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -47,7 +59,7 @@ public class ProductUI extends JDialog {
 			flowLayout.setAlignment(FlowLayout.LEFT);
 			contentPanel.add(panel, BorderLayout.NORTH);
 			{
-				JLabel lblNewLabel = new JLabel("New label");
+				JLabel lblNewLabel = new JLabel(info[1]);
 				panel.add(lblNewLabel);
 			}
 		}
@@ -104,7 +116,7 @@ public class ProductUI extends JDialog {
 						flowLayout.setAlignment(FlowLayout.LEFT);
 						panel_2.add(panel_3);
 						{
-							JLabel lblNewLabel_4 = new JLabel("Dummy");
+							JLabel lblNewLabel_4 = new JLabel(info[0]);
 							panel_3.add(lblNewLabel_4);
 						}
 					}
@@ -114,7 +126,7 @@ public class ProductUI extends JDialog {
 						flowLayout.setAlignment(FlowLayout.LEFT);
 						panel_2.add(panel_3);
 						{
-							JLabel lblNewLabel_5 = new JLabel("Dummy");
+							JLabel lblNewLabel_5 = new JLabel(info[2] + " kr.");
 							panel_3.add(lblNewLabel_5);
 						}
 					}
@@ -124,7 +136,7 @@ public class ProductUI extends JDialog {
 						flowLayout.setAlignment(FlowLayout.LEFT);
 						panel_2.add(panel_3);
 						{
-							JLabel lblNewLabel_6 = new JLabel("Dummy");
+							JLabel lblNewLabel_6 = new JLabel(info[3]);
 							panel_3.add(lblNewLabel_6);
 						}
 					}
@@ -149,12 +161,25 @@ public class ProductUI extends JDialog {
 					FlowLayout flowLayout = (FlowLayout) panel_2.getLayout();
 					flowLayout.setAlignment(FlowLayout.LEFT);
 					panel_1.add(panel_2);
-					{
-						textField = new JTextField();
+					
+						textField = new JFormattedTextField();
 						panel_2.add(textField);
 						textField.setColumns(10);
-					}
+						textField.setText("" + 1);
+						String oldText = textField.getText();
+						
+						textField.addPropertyChangeListener(new PropertyChangeListener() {
+
+							@Override
+							public void propertyChange(PropertyChangeEvent evt) {
+								//TODO KÆMPE TODO HER FÆRDIGGØR LOGIKKEN FOR AT SIKRE AT KUN TAL KAN INDSÆTTES
+							}
+							
+						});
+						
+						
 				}
+								
 			}
 		}
 		{
@@ -162,17 +187,38 @@ public class ProductUI extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
+				JButton okButton = new JButton("Tilføj");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						dispose();
+						setIsAccepted(true);
+						
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
-				JButton cancelButton = new JButton("Cancel");
+				JButton cancelButton = new JButton("Annullér");
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
+			
+			setVisible(true);
 		}
+	}
+	
+	public void setIsAccepted(boolean state) {
+		isAccepted = state;
+	}
+	
+	public boolean getIsAccepted() {
+		return isAccepted;
+	}
+	
+	public int getAmount() {
+		return amount;
 	}
 
 }
