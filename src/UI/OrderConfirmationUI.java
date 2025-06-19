@@ -37,7 +37,7 @@ public class OrderConfirmationUI extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			OrderConfirmationUI dialog = new OrderConfirmationUI();
+			OrderConfirmationUI dialog = new OrderConfirmationUI(null, args);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -48,7 +48,8 @@ public class OrderConfirmationUI extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public OrderConfirmationUI(Order order) {
+	//Order order
+	public OrderConfirmationUI(Order order, String[] lineInformation) {
 		setBounds(100, 100, 600, 600);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -61,17 +62,7 @@ public class OrderConfirmationUI extends JDialog {
 			contentPanel.add(panel, BorderLayout.CENTER);
 			
 			
-//				for (int i = 0; i < x; i++) {
-//					String colum1 = input.getColumn1(i);
-//					String colum2 = input.getColumn1(i);
-//					String colum3 = input.getColumn1(i);
-//					String colum4 = input.getColumn1(i);
-//					String colum5 = input.getColumn1(i);
-//					String[] rawData = {colum1, colum2, colum3, colum4, colum5};
-//					list.add(rawData);
-//				}
-//				return list.toArray(new String[0][]);
-//			
+
 				String[] columnNames = {"Beskrivelse","Antal", "Enhed", "stk. pris", "pris"};
 			//	for () {
 				String[][] rawData = {
@@ -232,31 +223,29 @@ public class OrderConfirmationUI extends JDialog {
 				buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 				getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			
-				JButton okButton = new JButton("OK");
-				okButton.setActionCommand("OK");
+				JButton okButton = new JButton("Bekræft");
+				okButton.setActionCommand("Bekræft");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			
 			
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.setActionCommand("Cancel");
+				JButton cancelButton = new JButton("Annullér");
+				cancelButton.setActionCommand("Annullér");
 				buttonPane.add(cancelButton);
 			
+				okButton.addActionListener(e -> {
+					
+			         
+					
+				    dispose();    
+				});
+				cancelButton.addActionListener(e -> {
+					// slet alt i mainwindow
+					new UseCaseMenu();
+					// åben usecase menu
+				    dispose();    
+				});
 		
 	}
-
-
-//		object 2
-//		object 4
-//		object 2*4= object 5 
-//		public double[] getTotalPrice() {
-//        return order.getTotalPrice();
-//    }
-		// element 5 orderController.getTotalPrice()
-//		for (loop alle elementer) {
-//			
-//		
-		
-	
 
 }
