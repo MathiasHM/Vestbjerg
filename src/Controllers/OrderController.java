@@ -98,4 +98,8 @@ public class OrderController {
         order.setDate(LocalDateTime.now());
         OrderContainer.getInstance().addOrder(order);
     }
+
+    public Order getOrder() {
+        return order;
+    }
 }

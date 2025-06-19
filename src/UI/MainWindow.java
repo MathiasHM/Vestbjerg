@@ -31,6 +31,7 @@ import javax.swing.DefaultListModel;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
+import Containers.Order;
 import Containers.Product;
 
 import javax.swing.JCheckBox;
@@ -98,6 +99,13 @@ public class MainWindow {
 		panel.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
 		
 		JButton btnNewButton_4 = new JButton("Bekræft");
+				btnNewButton_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				Order orderCopy = oC.getOrder();
+				new OrderConfirmationUI(orderCopy, oC.displayLines());
+			}
+		});
 		btnNewButton_4.setForeground(Color.BLACK);
 		panel.add(btnNewButton_4);
 		
