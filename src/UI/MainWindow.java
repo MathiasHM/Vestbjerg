@@ -33,6 +33,7 @@ import javax.swing.DefaultListModel;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
+import Containers.Line;
 import Containers.Order;
 import Containers.Product;
 
@@ -49,6 +50,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.RowFilter;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 public class MainWindow {
 
@@ -58,11 +61,14 @@ public class MainWindow {
 	private JTextField textField;
 	private TableRowSorter<TableModel> rowSorter;
 	private DefaultTableModel model;
+	private DefaultTableModel model_1;
 	private ArrayList<Product> products;
+	private ArrayList<String[]> orderLines;
 	private JCheckBox chckbxNewCheckBox;
 	private JLabel lblNewLabel_16 = new JLabel("Ingen Levering Valgt");
 	private JLabel lblNewLabel_17 = new JLabel("Ingen Levering Valgt");
 	private JLabel lblNewLabel_18 = new JLabel("Ingen Levering Valgt");
+	private JLabel lblNewLabel_12;
 
 
 	/**
@@ -113,12 +119,12 @@ public class MainWindow {
 				&& lblNewLabel_16.getText().equals("Ingen Levering Valgt")
 				&& lblNewLabel_17.getText().equals("Ingen Levering Valgt")
 				&& lblNewLabel_18.getText().equals("Ingen Levering Valgt")) {
-					// For specifikke uintuitive anvendelser af UI lageret
+					// For specifikke uintuitive anvendelser af UI laget
 					oC.setShippingInformation("", "", "");
 				}
 				frame.dispose();
-				new OrderConfirmationUI(oC.getShipmentInformation, oC.getCustomerCVR,
-				oC.getCustomerEmail, oC.displayLines(), oC.getTotalPrice);
+				new OrderConfirmationUI(oC.getShipmentInformation(), oC.getCustomerCVR(),
+				oC.getCustomerEmail(), oC.displayLines(), oC.getTotalPrice());
 				// brug Regex for segregering af information inde i selve OrderConfirmation
 			}
 		});
@@ -209,12 +215,13 @@ public class MainWindow {
 		
 		//kig ned
 		
+		//TODO Skal laves om, så der ikke kaldes metoder på p, men på pC, som så henter de nødvendige informationer. #3-lags-arkitektur
 		products = new ArrayList<>();
 		for (Product p : pC.getProducts()) {
 			products.add(p);
 		}
 
-		String columns[] = {"Produkt ID", "Navn", "Pris", "Max antal"};
+		String[] columns = {"Produkt ID", "Navn", "Pris", "Max antal"};
 		Object[][] data = new Object[products.size()][4];
 		int i = 0;
 		for (Product p : products) {
@@ -267,12 +274,8 @@ public class MainWindow {
 							
 							if (pUI.getIsAccepted()) { //TODO review: Integer.parseInt(info[0]) er muligvis en questionable måde at finde productID
 								oC.addProductByID(Integer.parseInt(info[0]), pUI.getAmount());
-								System.out.println("\n\n\n\n\nNy liste:\n\n");
-								for (String s : oC.displayLines()) {
-									System.out.println(s);
-								}
+								updateOrderTable();
 							}
-							
 						}
 					}
 				}
@@ -337,14 +340,31 @@ public class MainWindow {
 		flowLayout_15.setAlignment(FlowLayout.RIGHT);
 		panel_26.add(panel_28);
 		
-		JLabel lblNewLabel_12 = new JLabel("1799,95");
+		//TODO Vurdér, hvordan vi skal vise prisen inklusiv rabatter osv.
+		lblNewLabel_12 = new JLabel("" + NumberFormat.getCurrencyInstance(Locale.of("da", "DK"))
+        .format(0D));
 		panel_28.add(lblNewLabel_12);
 		
 		JLabel lblNewLabel_11 = new JLabel("DKK");
 		panel_28.add(lblNewLabel_11);
+
+		
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
 		panel_7.add(scrollPane_1, BorderLayout.CENTER);
+		
+		model_1 = new DefaultTableModel(new Object[0][0], new String[] {}) {
+			private static final long serialVersionUID = 2L;
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+		
+		JTable table_1 = new JTable();
+		scrollPane_1.setViewportView(table_1);
+		table_1.setModel(model_1);
+		
+		
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setBackground(new Color(192, 192, 192));
@@ -581,10 +601,35 @@ public class MainWindow {
 		panel_3.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{panel_4, panel_5, panel_9, panel_10, panel_11, panel_12, panel_13, panel_14, lblNewLabel_1, btnNewButton, lblNewLabel_2, panel_17, panel_18, btnNewButton_1, chckbxNewCheckBox, verticalBox, verticalBox_1, panel_8, lblNewLabel_3, panel_19, lblNewLabel_4, panel_20, panel_21, lblNewLabel_5, lblNewLabel_6, panel_22, panel_23, lblNewLabel_7, lblNewLabel_8, panel_32, panel_33, panel_34, panel_35, panel_36, panel_37, panel_38, panel_39, lblNewLabel_13, lblNewLabel_14, lblNewLabel_15, lblNewLabel_16, lblNewLabel_17, lblNewLabel_18}));
 		frame.setVisible(true);
 		}
+	
 	public void setShipmentVisible() {
 		String[] shipInfo = oC.getShipmentInformation();
 		lblNewLabel_16.setText(shipInfo[0]);
 		lblNewLabel_17.setText(shipInfo[1]);
 		lblNewLabel_18.setText(shipInfo[2]);
+	}
+	
+	public void updateOrderTable() {
+		orderLines = new ArrayList<>();
+		for (String line : oC.displayLines()) {
+			String[] orderLine = line.split("/");
+			orderLines.add(orderLine);
+		}
+		
+		
+		String[] columns_1 = {"Navn", "Pris", "Antal", "Subtotal"};
+		Object[][] data_1 = new Object[orderLines.size()][5];
+		int i_1 = 0;
+		for (String[] line : orderLines) {
+			data_1[i_1][0] = line[0];
+			data_1[i_1][1] = line[2];
+			data_1[i_1][2] = line[3];
+			data_1[i_1][3] = line[4];
+			i_1 ++;
+		}
+		
+		model_1.setDataVector(data_1, columns_1);
+		lblNewLabel_12.setText("" + NumberFormat.getCurrencyInstance(Locale.of("da", "DK"))
+        .format(oC.getTotalPrice()[2]));
 	}
 }

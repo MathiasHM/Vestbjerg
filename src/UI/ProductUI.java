@@ -240,6 +240,12 @@ public class ProductUI extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Annullér");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						setIsAccepted(false);
+						dispose();
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
