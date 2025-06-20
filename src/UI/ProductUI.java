@@ -242,9 +242,4 @@ public class ProductUI extends JDialog {
 	public int getAmount() {
 		return amount;
 	}
-	
-	public void updateOldText() {
-		oldText = textField.getText();
-	}
-
 }
