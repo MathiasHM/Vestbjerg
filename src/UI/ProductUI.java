@@ -20,6 +20,7 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class ProductUI extends JDialog {
 
@@ -48,7 +49,8 @@ public class ProductUI extends JDialog {
 	 */
 	public ProductUI(String[] info) {
 		
-		
+		JLabel lblNewLabel_8 = new JLabel("");
+		lblNewLabel_8.setForeground(new Color(255, 0, 0));
 		int max = Integer.parseInt(info[3]);
 		int min = 1;
 		setBounds(100, 100, 450, 300);
@@ -173,6 +175,18 @@ public class ProductUI extends JDialog {
 				}
 								
 			}
+			{
+				JPanel panel_1 = new JPanel();
+				panel.add(panel_1);
+				{
+					JPanel panel_2 = new JPanel();
+					panel_1.add(panel_2);
+					{
+						
+						panel_2.add(lblNewLabel_8);
+					}
+				}
+			}
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -182,8 +196,21 @@ public class ProductUI extends JDialog {
 				JButton okButton = new JButton("Tilføj");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						dispose();
-						setIsAccepted(true);
+						String s = textField.getText();
+						if (s.matches("^[0-9]+$")) {
+							int t = Integer.parseInt(s);
+							if (t < min) {
+								lblNewLabel_8.setText("Fejl, tilføj mindst én eller annullér.");
+								textField.setText("" + min);
+							}
+							if (t > max) {
+								lblNewLabel_8.setText("Fejl, der kan højst bestilles " + max + " ad gangen.");
+								textField.setText("" + max);
+							}
+						} else {
+							lblNewLabel_8.setText("Fejl, antal skal være et tal.");
+							textField.setText("" + min);
+						}
 						
 					}
 				});
