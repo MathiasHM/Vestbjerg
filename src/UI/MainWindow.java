@@ -117,7 +117,6 @@ public class MainWindow {
 					oC.setShippingInformation("", "", "");
 				}
 				frame.dispose();
-				OrderController orderControllerCopy = oC;
 				new OrderConfirmationUI(oC.getShipmentInformation, oC.getCustomerCVR,
 				oC.getCustomerEmail, oC.displayLines(), oC.getTotalPrice);
 				// brug Regex for segregering af information inde i selve OrderConfirmation
