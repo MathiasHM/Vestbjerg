@@ -142,5 +142,9 @@ public class Order {
                     deliveryEmail);
         }
     }
+    
+    public String[] getShipmentInformation() {
+    	return shipment.getShipmentInformation();
+    }
 }
     
