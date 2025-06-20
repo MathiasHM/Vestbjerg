@@ -47,7 +47,8 @@ public class OrderConfirmationUI extends JDialog {
 	/**
 	 * Create the dialog.
 	 */	
-	public OrderConfirmationUI(OrderController orderControllerCopy) {
+	public OrderConfirmationUI(String[] shipmentInformation, int cvr, String email, 
+			String[] lines, double[] totalprices) {
 		setBounds(100, 100, 600, 600);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
