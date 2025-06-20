@@ -13,6 +13,7 @@
 package Controllers;
 
 import Containers.Customer;
+import Containers.Line;
 import Containers.Order;
 import Containers.OrderContainer;
 import Containers.Product;
@@ -106,5 +107,15 @@ public class OrderController {
     
     public String[] getShipmentInformation() {
     	return order.getShipmentInformation();
+    }
+    
+    public int getLineByProductID(int productID) {
+    	for (Line l : order.getLines()) {
+    		if (l.getProduct().getID() == productID) {
+    			return l.getQuantity();
+    		}
+    	}
+    	
+    	return 0;
     }
 }

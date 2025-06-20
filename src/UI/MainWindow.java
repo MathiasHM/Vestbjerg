@@ -252,17 +252,25 @@ public class MainWindow {
 					
 					if (viewRow != -1) {
 						int modelRow = table.convertRowIndexToModel(viewRow);
-						String[] info = new String[4];
+						String[] info = new String[5];
 						
 						for (int i = 0; i < 4; i++) {
 							info[i] = model.getValueAt(modelRow, i).toString();
 						}
 						
 						if (info[0] != null && info[1] != null && info[2] != null && info[3] != null) {
+							
+							info[4] = "" + oC.getLineByProductID(Integer.parseInt(info[0]));
+							
+							
 							ProductUI pUI = new ProductUI(info);
 							
 							if (pUI.getIsAccepted()) { //TODO review: Integer.parseInt(info[0]) er muligvis en questionable måde at finde productID
-								System.out.println("" + pUI.getAmount());
+								oC.addProductByID(Integer.parseInt(info[0]), pUI.getAmount());
+								System.out.println("\n\n\n\n\nNy liste:\n\n");
+								for (String s : oC.displayLines()) {
+									System.out.println(s);
+								}
 							}
 							
 						}

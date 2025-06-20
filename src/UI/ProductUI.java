@@ -52,6 +52,7 @@ public class ProductUI extends JDialog {
 		lblNewLabel_8.setForeground(new Color(255, 0, 0));
 		int max = Integer.parseInt(info[3]);
 		int min = 1;
+		int orderQuantity = Integer.parseInt(info[4]);
 		setBounds(100, 100, 450, 300);
 		setModal(true);
 		getContentPane().setLayout(new BorderLayout());
@@ -142,6 +143,9 @@ public class ProductUI extends JDialog {
 						panel_2.add(panel_3);
 						{
 							JLabel lblNewLabel_6 = new JLabel(info[3]);
+							if (orderQuantity != 0) {
+								lblNewLabel_6.setText((max - orderQuantity) + "(" + lblNewLabel_6.getText() + " i alt)");
+							}
 							panel_3.add(lblNewLabel_6);
 						}
 					}
@@ -180,9 +184,18 @@ public class ProductUI extends JDialog {
 				{
 					JPanel panel_2 = new JPanel();
 					panel_1.add(panel_2);
+					panel_2.setLayout(new BoxLayout(panel_2, BoxLayout.Y_AXIS));
 					{
 						
 						panel_2.add(lblNewLabel_8);
+					}
+					{
+
+						JLabel lblNewLabel_9 = new JLabel("");
+						if (orderQuantity != 0) {
+							lblNewLabel_9.setText("OBS! Denne vare findes allerede på ordren. \n" + "Der er " + orderQuantity + ".");
+						}
+						panel_2.add(lblNewLabel_9);
 					}
 				}
 			}
@@ -201,9 +214,13 @@ public class ProductUI extends JDialog {
 							if (t < min) {
 								lblNewLabel_8.setText("Fejl, tilføj mindst én eller annullér.");
 								textField.setText("" + min);
-							} else if (t > max) {
-								lblNewLabel_8.setText("Fejl, der kan højst bestilles " + max + " ad gangen.");
-								textField.setText("" + max);
+							} else if (t > max - orderQuantity) {
+								if (orderQuantity != 0) {
+									lblNewLabel_8.setText("Fejl, der kan højst bestilles " + (max - orderQuantity) + " mere.");
+								} else {
+									lblNewLabel_8.setText("Fejl, der kan højst bestilles " + max + " ad gangen.");
+								}
+								textField.setText("" + (max - orderQuantity));
 							} else {
 								amount = t;
 								setIsAccepted(true);

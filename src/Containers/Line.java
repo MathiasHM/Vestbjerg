@@ -33,6 +33,10 @@ public class Line {
     public Product getProduct() {
         return product;
     }
+    
+    public int getQuantity() {
+    	return quantity;
+    }
 
     public double getSubTotal() {
         return this.subTotal;

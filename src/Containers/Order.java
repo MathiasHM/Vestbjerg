@@ -146,5 +146,9 @@ public class Order {
     public String[] getShipmentInformation() {
     	return shipment.getShipmentInformation();
     }
+    
+    public ArrayList<Line> getLines() {
+    	return lines;
+    }
 }
     
