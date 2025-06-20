@@ -170,24 +170,6 @@ public class ProductUI extends JDialog {
 						panel_2.add(textField);
 						textField.setColumns(10);
 						textField.setText("" + 1);
-						oldText = textField.getText();
-						
-						textField.addPropertyChangeListener(new PropertyChangeListener() {
-
-							@Override
-							public void propertyChange(PropertyChangeEvent evt) {
-								//TODO KÆMPE TODO HER FÆRDIGGØR LOGIKKEN FOR AT SIKRE AT KUN TAL KAN INDSÆTTES
-								int t = Integer.parseInt(textField.getText());
-								if (t < min || t > max) {
-									textField.setText(oldText);
-								} else {
-									
-								}
-							}
-							
-						});
-						
-						
 				}
 								
 			}
