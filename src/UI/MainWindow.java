@@ -118,7 +118,7 @@ public class MainWindow {
 				}
 				frame.dispose();
 				OrderController orderControllerCopy = oC;
-				//new OrderConfirmationUI(orderControllerCopy);
+				new OrderConfirmationUI(orderControllerCopy);
 				// brug Regex for segregering af information inde i selve OrderConfirmation
 			}
 		});
