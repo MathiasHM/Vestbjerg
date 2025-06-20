@@ -59,9 +59,10 @@ public class MainWindow {
 	private TableRowSorter<TableModel> rowSorter;
 	private DefaultTableModel model;
 	private ArrayList<Product> products;
-	private JLabel lblNewLabel_16 = new JLabel("New label");
-	private JLabel lblNewLabel_17 = new JLabel("New label");
-	private JLabel lblNewLabel_18 = new JLabel("New label");
+	private JCheckBox chckbxNewCheckBox;
+	private JLabel lblNewLabel_16 = new JLabel("Ingen Levering Valgt");
+	private JLabel lblNewLabel_17 = new JLabel("Ingen Levering Valgt");
+	private JLabel lblNewLabel_18 = new JLabel("Ingen Levering Valgt");
 
 
 	/**
@@ -108,12 +109,20 @@ public class MainWindow {
 		JButton btnNewButton_4 = new JButton("Bekræft");
 				btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (chckbxNewCheckBox.isSelected() || !chckbxNewCheckBox.isSelected()
+				&& lblNewLabel_16.getText().equals("Ingen Levering Valgt")
+				&& lblNewLabel_17.getText().equals("Ingen Levering Valgt")
+				&& lblNewLabel_18.getText().equals("Ingen Levering Valgt")) {
+					// For specifikke uintuitive anvendelser af UI lageret
+					oC.setShippingInformation("", "", "");
+				}
 				frame.dispose();
-				Order orderCopy = oC.getOrder();
-				new OrderConfirmationUI(orderCopy, oC.displayLines());
+				OrderController orderControllerCopy = oC;
+				//new OrderConfirmationUI(orderControllerCopy);
 				// brug Regex for segregering af information inde i selve OrderConfirmation
 			}
 		});
+
 		btnNewButton_4.setForeground(Color.BLACK);
 		panel.add(btnNewButton_4);
 		
@@ -455,6 +464,7 @@ public class MainWindow {
 				System.out.println(shipInfo[0] + shipInfo[1] + shipInfo[2]); // for debugging
 				oC.setShippingInformation(shipInfo[0], shipInfo[1], shipInfo[2]);
 				setShipmentVisible();
+				chckbxNewCheckBox.setSelected(false);
 				}
 			}
 		});
@@ -467,16 +477,16 @@ public class MainWindow {
 		flowLayout_3.setAlignment(FlowLayout.RIGHT);
 		panel_12.add(panel_18);
 		
-		JCheckBox chckbxNewCheckBox = new JCheckBox("Ingen levering");
+		chckbxNewCheckBox = new JCheckBox("Ingen levering");
 		chckbxNewCheckBox.setBackground(new Color(163, 163, 163));
 		chckbxNewCheckBox.setSelected(true);
 		chckbxNewCheckBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (chckbxNewCheckBox.isSelected()) {
-					System.out.println("Implementér en NO SHIPMENT "
-							+ "OPTION IDIOT");
-				} //TODO implement no-shipment option. Ideally greyed out
-				//Shipment info.
+					lblNewLabel_16.setText("Ingen Levering Valgt");
+					lblNewLabel_17.setText("Ingen Levering Valgt");
+					lblNewLabel_18.setText("Ingen Levering Valgt");
+				}
 			}
 		});
 		panel_18.add(chckbxNewCheckBox);

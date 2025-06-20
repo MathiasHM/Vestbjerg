@@ -9,7 +9,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
-import Containers.Order;
 import Controllers.OrderController;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
@@ -29,7 +28,6 @@ public class OrderConfirmationUI extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTable table;
 	private boolean isAccepted = false;
-	private OrderController controller;
 	List<String[]> list = new ArrayList<>();
 	
 
@@ -38,7 +36,7 @@ public class OrderConfirmationUI extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			OrderConfirmationUI dialog = new OrderConfirmationUI(null, args);
+			OrderConfirmationUI dialog = new OrderConfirmationUI(null);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -48,9 +46,8 @@ public class OrderConfirmationUI extends JDialog {
 
 	/**
 	 * Create the dialog.
-	 */
-	
-	public OrderConfirmationUI(Order orderCopy, String[] lineInformation) {
+	 */	
+	public OrderConfirmationUI(OrderController orderControllerCopy) {
 		setBounds(100, 100, 600, 600);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -61,7 +58,6 @@ public class OrderConfirmationUI extends JDialog {
 		
 			JPanel panel = new JPanel();
 			contentPanel.add(panel, BorderLayout.CENTER);
-			
 			
 			String[] columnNames = {"Beskrivelse","Antal", "Enhed", "stk. pris", "pris"};
 		
@@ -82,7 +78,7 @@ public class OrderConfirmationUI extends JDialog {
 				gbc_lblNewLabel.gridy = 0;
 				panel1.add(lblNewLabel, gbc_lblNewLabel);
 				
-				String[] shipmentInfo = controller.getShipmentInformation();
+				String[] shipmentInfo = orderControllerCopy.getShipmentInformation();
 				String modtagernavn = shipmentInfo[0];
 				String adresse = shipmentInfo[1]; 
 			
@@ -95,7 +91,6 @@ public class OrderConfirmationUI extends JDialog {
 				gbc_lblNewLabel_1.gridy = 1;
 				panel1.add(lblNewLabel_1, gbc_lblNewLabel_1);
 				
-				
 				JLabel lblNewLabel_2 = new JLabel("Adresse: " + adresse);
 				
 				GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
@@ -106,7 +101,7 @@ public class OrderConfirmationUI extends JDialog {
 				gbc_lblNewLabel_2.gridy = 2;
 				panel1.add(lblNewLabel_2, gbc_lblNewLabel_2);
 			
-				JLabel lblNewLabel_3 = new JLabel("CVR: " + controller.getCustomerCVR());
+				JLabel lblNewLabel_3 = new JLabel("CVR: " + orderControllerCopy.getCustomerCVR());
 				GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
 				gbc_lblNewLabel_3.gridwidth = 2;
 				gbc_lblNewLabel_3.anchor = GridBagConstraints.WEST;
@@ -115,8 +110,7 @@ public class OrderConfirmationUI extends JDialog {
 				gbc_lblNewLabel_3.gridy = 3;
 				panel1.add(lblNewLabel_3, gbc_lblNewLabel_3);
 				
-				
-				JLabel lblNewLabel_5 = new JLabel("Email: " + controller.getCustomerEmail());
+				JLabel lblNewLabel_5 = new JLabel("Email: " + orderControllerCopy.getCustomerEmail());
 				GridBagConstraints gbc_lblNewLabel_5 = new GridBagConstraints();
 				gbc_lblNewLabel_5.gridwidth = 2;
 				gbc_lblNewLabel_5.anchor = GridBagConstraints.WEST;
@@ -188,21 +182,20 @@ public class OrderConfirmationUI extends JDialog {
 				cancelButton.setActionCommand("Annullér");
 				buttonPane.add(cancelButton);
 				
+//	------------oprettelse af jtable og funktion i tablen -------------------
+				String[] lines = orderControllerCopy.displayLines();
 				
-				ArrayList<String> lines = orderCopy.displayLines();
-				String[] linesArray = lines.toArray(new String[0]);
-				
-				int antalLinjer = linesArray.length;
+				int antalLinjer = lines.length;
 				String[][] data = new String[antalLinjer + 4][5];
 			
 				for (int i = 0; i < antalLinjer; i++) {
-					 String[] split = linesArray[i].split("/");
+					 String[] split = lines[i].split("/");
 					 data[i] = split;
 				}
 				
 				data[antalLinjer] = new String[] {"", "", "", "", ""};
 				
-				double[] total1 = orderCopy.getTotalPrice();
+				double[] total1 = orderControllerCopy.getTotalPrice();
 				String subtotal = Double.toString(total1[0]);
 				String discount = Double.toString(total1[1]);
 				String totalprice = Double.toString(total1[2]);
@@ -215,14 +208,20 @@ public class OrderConfirmationUI extends JDialog {
 				table = new JTable(data, columnNames);
 				JScrollPane scrollPane1 = new JScrollPane(table);
 				panel.add(scrollPane1);
+//	------------tablen op ----------------------------------------------------
 				
+// ------------ ændre vinduest størelse dynamisk i højden --------------------
 				pack();
-				int packedWidth = getWidth();
-				setSize(packedWidth, 600); 
+				int packedHeight = getWidth();
+				setSize(600, packedHeight); 
+				
+//        --------------------------------------------------------------------
+				
 				okButton.addActionListener(e -> {
 					isAccepted = true;	
 				    dispose();    
 				});
+				
 				cancelButton.addActionListener(e -> {
 					// slet alt i mainwindow
 					isAccepted = false;
