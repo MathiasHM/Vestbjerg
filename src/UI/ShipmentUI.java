@@ -18,6 +18,7 @@ public class ShipmentUI extends JDialog {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private String[] inputArray;
+	private boolean isDisposed = false;
 	/**
 	 * Launch the application.
 	 */
@@ -131,11 +132,13 @@ public class ShipmentUI extends JDialog {
 	                textField_2.getText(),
 	                textField_3.getText()
 	            };
-			
 		    dispose();    
+			isDisposed = true;
+
 		});
 		cancelButton.addActionListener(e -> {
 			dispose();	
+			isDisposed = true;
 		});
 		
 	

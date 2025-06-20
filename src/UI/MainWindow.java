@@ -59,6 +59,10 @@ public class MainWindow {
 	private TableRowSorter<TableModel> rowSorter;
 	private DefaultTableModel model;
 	private ArrayList<Product> products;
+	private JLabel lblNewLabel_16 = new JLabel("New label");
+	private JLabel lblNewLabel_17 = new JLabel("New label");
+	private JLabel lblNewLabel_18 = new JLabel("New label");
+
 
 	/**
 	 * Launch the application.
@@ -88,7 +92,7 @@ public class MainWindow {
 	 */
 	private void initialize() {
 		TestData.generate();
-		OrderController oC = new OrderController();
+		oC = new OrderController();
 		ProductController pC = new ProductController();
 		oC.createOrder();
 		frame = new JFrame();
@@ -450,6 +454,7 @@ public class MainWindow {
 				if (fUI.getShipInfo() != null) {
 				System.out.println(shipInfo[0] + shipInfo[1] + shipInfo[2]); // for debugging
 				oC.setShippingInformation(shipInfo[0], shipInfo[1], shipInfo[2]);
+				setShipmentVisible();
 				}
 			}
 		});
@@ -554,7 +559,7 @@ public class MainWindow {
 		flowLayout_20.setAlignment(FlowLayout.LEFT);
 		panel_33.add(panel_37);
 		
-		JLabel lblNewLabel_16 = new JLabel("New label");
+
 		panel_37.add(lblNewLabel_16);
 		
 		JPanel panel_38 = new JPanel();
@@ -562,7 +567,6 @@ public class MainWindow {
 		flowLayout_21.setAlignment(FlowLayout.LEFT);
 		panel_33.add(panel_38);
 		
-		JLabel lblNewLabel_17 = new JLabel("New label");
 		panel_38.add(lblNewLabel_17);
 		
 		JPanel panel_39 = new JPanel();
@@ -570,10 +574,14 @@ public class MainWindow {
 		flowLayout_19.setAlignment(FlowLayout.LEFT);
 		panel_33.add(panel_39);
 		
-		JLabel lblNewLabel_18 = new JLabel("New label");
 		panel_39.add(lblNewLabel_18);
 		panel_3.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{panel_4, panel_5, panel_9, panel_10, panel_11, panel_12, panel_13, panel_14, lblNewLabel_1, btnNewButton, lblNewLabel_2, panel_17, panel_18, btnNewButton_1, chckbxNewCheckBox, verticalBox, verticalBox_1, panel_8, lblNewLabel_3, panel_19, lblNewLabel_4, panel_20, panel_21, lblNewLabel_5, lblNewLabel_6, panel_22, panel_23, lblNewLabel_7, lblNewLabel_8, panel_32, panel_33, panel_34, panel_35, panel_36, panel_37, panel_38, panel_39, lblNewLabel_13, lblNewLabel_14, lblNewLabel_15, lblNewLabel_16, lblNewLabel_17, lblNewLabel_18}));
 		frame.setVisible(true);
 		}
-
+	public void setShipmentVisible() {
+		String[] shipInfo = oC.getShipmentInformation();
+		lblNewLabel_16.setText(shipInfo[0]);
+		lblNewLabel_17.setText(shipInfo[1]);
+		lblNewLabel_18.setText(shipInfo[2]);
+	}
 }
