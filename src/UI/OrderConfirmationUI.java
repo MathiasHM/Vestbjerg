@@ -302,7 +302,6 @@ public class OrderConfirmationUI extends JDialog {
 				
 				okButton.addActionListener(e -> {
 					isAccepted = true;	
-					MainWindow.setVisible(true);
 				    dispose();    
 				});
 				cancelButton.addActionListener(e -> {
@@ -315,7 +314,7 @@ public class OrderConfirmationUI extends JDialog {
 				setVisible(true);
 				
 	}
-	public boolean isAccepted() {
+	public boolean getIsAccepted() {
 		return isAccepted;
 	}
 }
