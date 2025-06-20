@@ -169,7 +169,7 @@ public class ProductUI extends JDialog {
 						textField = new JFormattedTextField();
 						panel_2.add(textField);
 						textField.setColumns(10);
-						textField.setText("" + 1);
+						textField.setText("" + min);
 				}
 								
 			}
