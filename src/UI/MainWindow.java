@@ -109,11 +109,12 @@ public class MainWindow {
 				btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				Order orderCopy = oC.getOrder();
-				new OrderConfirmationUI(orderCopy, oC.displayLines());
+				OrderController orderControllerCopy = oC;
+				new OrderConfirmationUI(orderControllerCopy);
 				// brug Regex for segregering af information inde i selve OrderConfirmation
 			}
 		});
+		
 		btnNewButton_4.setForeground(Color.BLACK);
 		panel.add(btnNewButton_4);
 		
