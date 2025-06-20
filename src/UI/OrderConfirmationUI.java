@@ -9,7 +9,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
-import Containers.Customer;
 import Containers.Order;
 import Controllers.OrderController;
 import java.awt.GridBagLayout;
@@ -29,7 +28,7 @@ public class OrderConfirmationUI extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JTable table;
-	private boolean setStatus = false;
+	private boolean isAccepted = false;
 	private OrderController controller;
 	List<String[]> list = new ArrayList<>();
 	
@@ -155,8 +154,12 @@ public class OrderConfirmationUI extends JDialog {
 				gbc_lblNewLabel.gridx = 3;
 				gbc_lblNewLabel.gridy = 0;
 				panel1.add(lblNewLabel, gbc_lblNewLabel);
+				
+				String[] shipmentInfo = controller.getShipmentInformation();
+				String modtagernavn = shipmentInfo[0];
+				String adresse = shipmentInfo[1]; 
 			
-				JLabel lblNewLabel_1 = new JLabel("Vestbjerg Renskab");
+				JLabel lblNewLabel_1 = new JLabel("Navn:" + modtagernavn);
 				GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
 				gbc_lblNewLabel_1.gridwidth = 2;
 				gbc_lblNewLabel_1.anchor = GridBagConstraints.WEST;
@@ -171,10 +174,8 @@ public class OrderConfirmationUI extends JDialog {
 //						order.setShippingInformation(deliveryName, deliveryAddress,
 //						deliveryEmail);
 //						}
-//				controller.setShippingInformation(deliveryName, deliveryAddress, "");
-				JLabel lblNewLabel_2 = new JLabel("Navn og Adresse: " // controller.
-						//setShippingInformation(deliveryName, deliveryAddress, ""
-								);
+				
+				JLabel lblNewLabel_2 = new JLabel("Adresse: " + adresse);
 				
 				GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
 				gbc_lblNewLabel_2.gridwidth = 2;
@@ -237,10 +238,9 @@ public class OrderConfirmationUI extends JDialog {
 			
 				JLabel lblNewLabel_4 = new JLabel("OrdreBekræftelse");
 				GridBagConstraints gbc_lblNewLabel_4 = new GridBagConstraints();
-				gbc_lblNewLabel_4.gridwidth = 2;
 				gbc_lblNewLabel_4.anchor = GridBagConstraints.WEST;
 				gbc_lblNewLabel_4.insets = new Insets(0, 0, 0, 5);
-				gbc_lblNewLabel_4.gridx = 0;
+				gbc_lblNewLabel_4.gridx = 1;
 				gbc_lblNewLabel_4.gridy = 10;
 				panel1.add(lblNewLabel_4, gbc_lblNewLabel_4);
 		
@@ -248,8 +248,8 @@ public class OrderConfirmationUI extends JDialog {
 				buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 				getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			
-				JButton okButton = new JButton("Bekræft");
-				okButton.setActionCommand("Bekræft");
+				JButton okButton = new JButton("færdiggøre ");
+				okButton.setActionCommand("færdiggøre ");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			
@@ -298,27 +298,24 @@ public class OrderConfirmationUI extends JDialog {
 
 				table = new JTable(data, columnNames);
 				JScrollPane scrollPane1 = new JScrollPane(table);
-				
 				panel.add(scrollPane1);
+				
 				okButton.addActionListener(e -> {
-				//	order.setStatus(Status.CONFIRMED);
-//					public void setOrderPending() {
-//				        order.setStatus(Status.PENDING);
-//				        order.setDate(LocalDateTime.now());
-//				        OrderContainer.getInstance().addOrder(order);
-//				    } 
-					controller.setOrderPending();
-					
-					
+					isAccepted = true;	
+					MainWindow.setVisible(true);
 				    dispose();    
 				});
 				cancelButton.addActionListener(e -> {
 					// slet alt i mainwindow
-					new UseCaseMenu();
-					// åben usecase menu
+					isAccepted = false;
+					// åben mainwindow
+					new MainWindow();
 				    dispose();    
 				});
 				setVisible(true);
+				
 	}
-//
+	public boolean isAccepted() {
+		return isAccepted;
+	}
 }

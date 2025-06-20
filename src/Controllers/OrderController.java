@@ -19,6 +19,7 @@ import Containers.Product;
 import Enums.Result;
 import Enums.Status;
 
+
 import java.time.LocalDateTime;
 
 public class OrderController {
@@ -101,5 +102,9 @@ public class OrderController {
 
     public Order getOrder() {
         return order;
+    }
+    
+    public String[] getShipmentInformation() {
+    	return order.getShipmentInformation();
     }
 }
