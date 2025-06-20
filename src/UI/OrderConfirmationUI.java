@@ -300,6 +300,9 @@ public class OrderConfirmationUI extends JDialog {
 				JScrollPane scrollPane1 = new JScrollPane(table);
 				panel.add(scrollPane1);
 				
+				pack();
+				int packedWidth = getWidth();
+				setSize(packedWidth, 600); 
 				okButton.addActionListener(e -> {
 					isAccepted = true;	
 				    dispose();    
@@ -308,7 +311,7 @@ public class OrderConfirmationUI extends JDialog {
 					// slet alt i mainwindow
 					isAccepted = false;
 					// åben mainwindow
-					new MainWindow();
+//					new MainWindow();
 				    dispose();    
 				});
 				setVisible(true);
