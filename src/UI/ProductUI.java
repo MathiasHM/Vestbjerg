@@ -28,13 +28,14 @@ public class ProductUI extends JDialog {
 	private int amount = 1;
 	private boolean isAccepted = false;
 	private JFormattedTextField textField;
+	private String oldText;
 	
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		try {
-			ProductUI dialog = new ProductUI();
+			ProductUI dialog = new ProductUI(new String[4]);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -47,6 +48,9 @@ public class ProductUI extends JDialog {
 	 */
 	public ProductUI(String[] info) {
 		
+		
+		int max = Integer.parseInt(info[3]);
+		int min = 1;
 		setBounds(100, 100, 450, 300);
 		setModal(true);
 		getContentPane().setLayout(new BorderLayout());
@@ -166,13 +170,19 @@ public class ProductUI extends JDialog {
 						panel_2.add(textField);
 						textField.setColumns(10);
 						textField.setText("" + 1);
-						String oldText = textField.getText();
+						oldText = textField.getText();
 						
 						textField.addPropertyChangeListener(new PropertyChangeListener() {
 
 							@Override
 							public void propertyChange(PropertyChangeEvent evt) {
 								//TODO KÆMPE TODO HER FÆRDIGGØR LOGIKKEN FOR AT SIKRE AT KUN TAL KAN INDSÆTTES
+								int t = Integer.parseInt(textField.getText());
+								if (t < min || t > max) {
+									textField.setText(oldText);
+								} else {
+									
+								}
 							}
 							
 						});
@@ -219,6 +229,10 @@ public class ProductUI extends JDialog {
 	
 	public int getAmount() {
 		return amount;
+	}
+	
+	public void updateOldText() {
+		oldText = textField.getText();
 	}
 
 }

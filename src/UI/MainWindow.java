@@ -463,6 +463,7 @@ public class MainWindow {
 		panel_12.add(panel_18);
 		
 		JCheckBox chckbxNewCheckBox = new JCheckBox("Ingen levering");
+		chckbxNewCheckBox.setBackground(new Color(163, 163, 163));
 		chckbxNewCheckBox.setSelected(true);
 		chckbxNewCheckBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -511,12 +512,67 @@ public class MainWindow {
 		JPanel panel_14 = new JPanel();
 		panel_14.setBackground(new Color(163, 163, 163));
 		panel_5.add(panel_14, BorderLayout.CENTER);
-		panel_3.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{panel_4, 
-			panel_5, panel_9, panel_10, panel_11, panel_12, panel_13, panel_14, lblNewLabel_1, 
-			btnNewButton, lblNewLabel_2, panel_17, panel_18, btnNewButton_1, chckbxNewCheckBox, 
-			verticalBox, verticalBox_1, panel_8, lblNewLabel_3, panel_19, lblNewLabel_4, panel_20, 
-			panel_21, lblNewLabel_5, lblNewLabel_6, panel_22, panel_23, 
-			lblNewLabel_7, lblNewLabel_8}));
+		panel_14.setLayout(new BoxLayout(panel_14, BoxLayout.X_AXIS));
+		
+		JPanel panel_32 = new JPanel();
+		panel_14.add(panel_32);
+		panel_32.setLayout(new BoxLayout(panel_32, BoxLayout.Y_AXIS));
+		
+		JPanel panel_34 = new JPanel();
+		FlowLayout flowLayout_16 = (FlowLayout) panel_34.getLayout();
+		flowLayout_16.setAlignment(FlowLayout.RIGHT);
+		panel_34.setBackground(new Color(163, 163, 163));
+		panel_32.add(panel_34);
+		
+		JLabel lblNewLabel_13 = new JLabel("Modtagernavn:");
+		panel_34.add(lblNewLabel_13);
+		
+		JPanel panel_35 = new JPanel();
+		FlowLayout flowLayout_17 = (FlowLayout) panel_35.getLayout();
+		flowLayout_17.setAlignment(FlowLayout.RIGHT);
+		panel_35.setBackground(new Color(163, 163, 163));
+		panel_32.add(panel_35);
+		
+		JLabel lblNewLabel_14 = new JLabel("Addresse:");
+		panel_35.add(lblNewLabel_14);
+		
+		JPanel panel_36 = new JPanel();
+		FlowLayout flowLayout_18 = (FlowLayout) panel_36.getLayout();
+		flowLayout_18.setAlignment(FlowLayout.RIGHT);
+		panel_36.setBackground(new Color(163, 163, 163));
+		panel_32.add(panel_36);
+		
+		JLabel lblNewLabel_15 = new JLabel("Leverings-email:");
+		panel_36.add(lblNewLabel_15);
+		
+		JPanel panel_33 = new JPanel();
+		panel_14.add(panel_33);
+		panel_33.setLayout(new BoxLayout(panel_33, BoxLayout.Y_AXIS));
+		
+		JPanel panel_37 = new JPanel();
+		FlowLayout flowLayout_20 = (FlowLayout) panel_37.getLayout();
+		flowLayout_20.setAlignment(FlowLayout.LEFT);
+		panel_33.add(panel_37);
+		
+		JLabel lblNewLabel_16 = new JLabel("New label");
+		panel_37.add(lblNewLabel_16);
+		
+		JPanel panel_38 = new JPanel();
+		FlowLayout flowLayout_21 = (FlowLayout) panel_38.getLayout();
+		flowLayout_21.setAlignment(FlowLayout.LEFT);
+		panel_33.add(panel_38);
+		
+		JLabel lblNewLabel_17 = new JLabel("New label");
+		panel_38.add(lblNewLabel_17);
+		
+		JPanel panel_39 = new JPanel();
+		FlowLayout flowLayout_19 = (FlowLayout) panel_39.getLayout();
+		flowLayout_19.setAlignment(FlowLayout.LEFT);
+		panel_33.add(panel_39);
+		
+		JLabel lblNewLabel_18 = new JLabel("New label");
+		panel_39.add(lblNewLabel_18);
+		panel_3.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{panel_4, panel_5, panel_9, panel_10, panel_11, panel_12, panel_13, panel_14, lblNewLabel_1, btnNewButton, lblNewLabel_2, panel_17, panel_18, btnNewButton_1, chckbxNewCheckBox, verticalBox, verticalBox_1, panel_8, lblNewLabel_3, panel_19, lblNewLabel_4, panel_20, panel_21, lblNewLabel_5, lblNewLabel_6, panel_22, panel_23, lblNewLabel_7, lblNewLabel_8, panel_32, panel_33, panel_34, panel_35, panel_36, panel_37, panel_38, panel_39, lblNewLabel_13, lblNewLabel_14, lblNewLabel_15, lblNewLabel_16, lblNewLabel_17, lblNewLabel_18}));
 		frame.setVisible(true);
 		}
 
