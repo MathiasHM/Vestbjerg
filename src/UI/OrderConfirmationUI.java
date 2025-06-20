@@ -36,7 +36,7 @@ public class OrderConfirmationUI extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			OrderConfirmationUI dialog = new OrderConfirmationUI(null);
+			OrderConfirmationUI dialog = new OrderConfirmationUI(null, defaultCloseOperation, title, args, null);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -79,9 +79,8 @@ public class OrderConfirmationUI extends JDialog {
 				gbc_lblNewLabel.gridy = 0;
 				panel1.add(lblNewLabel, gbc_lblNewLabel);
 				
-				String[] shipmentInfo = orderControllerCopy.getShipmentInformation();
-				String modtagernavn = shipmentInfo[0];
-				String adresse = shipmentInfo[1]; 
+				String modtagernavn = shipmentInformation[0];
+				String adresse = shipmentInformation[1]; 
 			
 				JLabel lblNewLabel_1 = new JLabel("Navn:" + modtagernavn);
 				GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
@@ -102,7 +101,7 @@ public class OrderConfirmationUI extends JDialog {
 				gbc_lblNewLabel_2.gridy = 2;
 				panel1.add(lblNewLabel_2, gbc_lblNewLabel_2);
 			
-				JLabel lblNewLabel_3 = new JLabel("CVR: " + orderControllerCopy.getCustomerCVR());
+				JLabel lblNewLabel_3 = new JLabel("CVR: " + cvr);
 				GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
 				gbc_lblNewLabel_3.gridwidth = 2;
 				gbc_lblNewLabel_3.anchor = GridBagConstraints.WEST;
@@ -111,7 +110,7 @@ public class OrderConfirmationUI extends JDialog {
 				gbc_lblNewLabel_3.gridy = 3;
 				panel1.add(lblNewLabel_3, gbc_lblNewLabel_3);
 				
-				JLabel lblNewLabel_5 = new JLabel("Email: " + orderControllerCopy.getCustomerEmail());
+				JLabel lblNewLabel_5 = new JLabel("Email: " + email);
 				GridBagConstraints gbc_lblNewLabel_5 = new GridBagConstraints();
 				gbc_lblNewLabel_5.gridwidth = 2;
 				gbc_lblNewLabel_5.anchor = GridBagConstraints.WEST;
@@ -184,7 +183,6 @@ public class OrderConfirmationUI extends JDialog {
 				buttonPane.add(cancelButton);
 				
 //	------------oprettelse af jtable og funktion i tablen -------------------
-				String[] lines = orderControllerCopy.displayLines();
 				
 				int antalLinjer = lines.length;
 				String[][] data = new String[antalLinjer + 4][5];
@@ -196,16 +194,14 @@ public class OrderConfirmationUI extends JDialog {
 				
 				data[antalLinjer] = new String[] {"", "", "", "", ""};
 				
-				double[] total1 = orderControllerCopy.getTotalPrice();
-				String subtotal = Double.toString(total1[0]);
-				String discount = Double.toString(total1[1]);
-				String totalprice = Double.toString(total1[2]);
+				String subtotal = Double.toString(totalprices[0]);
+				String discount = Double.toString(totalprices[1]);
+				String totalprice = Double.toString(totalprices[2]);
 				
 				data[antalLinjer + 1] = new String[] {"", "", "Subtotal", "", subtotal};
 				data[antalLinjer + 2] = new String[] {"", "", "Discount", "", discount};
 				data[antalLinjer + 3] = new String[] {"", "", "Total DKK", "", totalprice};
 						
-
 				table = new JTable(data, columnNames);
 				JScrollPane scrollPane1 = new JScrollPane(table);
 				panel.add(scrollPane1);
