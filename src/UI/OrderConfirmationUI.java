@@ -8,17 +8,17 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 
-import Controllers.OrderController;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JTable;
 
@@ -28,21 +28,8 @@ public class OrderConfirmationUI extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTable table;
 	private boolean isAccepted = false;
-	List<String[]> list = new ArrayList<>();
-	
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			OrderConfirmationUI dialog = new OrderConfirmationUI(null, defaultCloseOperation, title, args, null);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+
 
 	/**
 	 * Create the dialog.
@@ -65,11 +52,39 @@ public class OrderConfirmationUI extends JDialog {
 			JPanel panel1 = new JPanel();
 			contentPanel.add(panel1, BorderLayout.NORTH);
 			GridBagLayout gbl_panel = new GridBagLayout();
-			gbl_panel.columnWidths = new int[]{35, 209, 195, 0, 0};
-			gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+			gbl_panel.columnWidths = new int[]{63, 209, 195, 0, 0};
+			gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0 };
 			gbl_panel.columnWeights = new double[]{1.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
-			gbl_panel.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+			gbl_panel.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0};
 			panel1.setLayout(gbl_panel);
+			
+			
+			if (shipmentInformation[0] == null || shipmentInformation[1] == null ||
+					shipmentInformation[2] == null) {
+				JOptionPane.showMessageDialog(this, "fejl på shipment",
+			               "Swing Tester", JOptionPane.ERROR_MESSAGE);
+			    return;
+			}
+			if (cvr < 0) {
+				JOptionPane.showMessageDialog(this, "fejl på cvr",
+			               "Swing Tester", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			if (email == null) {
+				JOptionPane.showMessageDialog(this, "fejl på email",
+			               "Swing Tester", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			if (lines == null) {
+				JOptionPane.showMessageDialog(this, "fejl på lines",
+			               "Swing Tester", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			if (totalprices == null) {
+				JOptionPane.showMessageDialog(this, "fejl på pris",
+			               "Swing Tester", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
 			
 				JLabel lblNewLabel = new JLabel("VestBjerg Byggecenter ");
 				GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
@@ -81,7 +96,7 @@ public class OrderConfirmationUI extends JDialog {
 				
 				String modtagernavn = shipmentInformation[0];
 				String adresse = shipmentInformation[1]; 
-			
+				String LeveringEmail = shipmentInformation[2]; 
 				JLabel lblNewLabel_1 = new JLabel("Navn:" + modtagernavn);
 				GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
 				gbc_lblNewLabel_1.gridwidth = 2;
@@ -125,17 +140,19 @@ public class OrderConfirmationUI extends JDialog {
 				gbc_lblNewLabel_10.gridx = 1;
 				gbc_lblNewLabel_10.gridy = 5;
 				panel1.add(lblNewLabel_10, gbc_lblNewLabel_10);
-			
-				JLabel lblNewLabel_8 = new JLabel("");
-				GridBagConstraints gbc_lblNewLabel_8 = new GridBagConstraints();
-				gbc_lblNewLabel_8.insets = new Insets(0, 0, 5, 5);
-				gbc_lblNewLabel_8.gridx = 0;
-				gbc_lblNewLabel_8.gridy = 6;
-				panel1.add(lblNewLabel_8, gbc_lblNewLabel_8);
 				
 				LocalDate dato = LocalDateTime.now().toLocalDate();
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 				String datoTekst = dato.format(formatter);
+				
+					JLabel lblNewLabel_8 = new JLabel("Levering Email: " + LeveringEmail);
+					GridBagConstraints gbc_lblNewLabel_8 = new GridBagConstraints();
+					gbc_lblNewLabel_8.anchor = GridBagConstraints.WEST;
+					gbc_lblNewLabel_8.gridwidth = 2;
+					gbc_lblNewLabel_8.insets = new Insets(0, 0, 5, 5);
+					gbc_lblNewLabel_8.gridx = 0;
+					gbc_lblNewLabel_8.gridy = 6;
+					panel1.add(lblNewLabel_8, gbc_lblNewLabel_8);
 				
 				JLabel lblNewLabel_6 = new JLabel("Dato: " + datoTekst);
 				GridBagConstraints gbc_lblNewLabel_6 = new GridBagConstraints();
@@ -143,30 +160,23 @@ public class OrderConfirmationUI extends JDialog {
 				gbc_lblNewLabel_6.anchor = GridBagConstraints.WEST;
 				gbc_lblNewLabel_6.insets = new Insets(0, 0, 5, 5);
 				gbc_lblNewLabel_6.gridx = 0;
-				gbc_lblNewLabel_6.gridy = 8;
+				gbc_lblNewLabel_6.gridy = 10;
 				panel1.add(lblNewLabel_6, gbc_lblNewLabel_6);
 				
 				JLabel lblNewLabel_9 = new JLabel("");
 				GridBagConstraints gbc_lblNewLabel_9 = new GridBagConstraints();
 				gbc_lblNewLabel_9.insets = new Insets(0, 0, 5, 5);
 				gbc_lblNewLabel_9.gridx = 1;
-				gbc_lblNewLabel_9.gridy = 9;
+				gbc_lblNewLabel_9.gridy = 11;
 				panel1.add(lblNewLabel_9, gbc_lblNewLabel_9);
-			
-				JLabel lblNewLabel_7 = new JLabel("");
-				GridBagConstraints gbc_lblNewLabel_7 = new GridBagConstraints();
-				gbc_lblNewLabel_7.insets = new Insets(0, 0, 5, 5);
-				gbc_lblNewLabel_7.gridx = 0;
-				gbc_lblNewLabel_7.gridy = 10;
-				panel1.add(lblNewLabel_7, gbc_lblNewLabel_7);
-			
-				JLabel lblNewLabel_4 = new JLabel("OrdreBekræftelse");
-				GridBagConstraints gbc_lblNewLabel_4 = new GridBagConstraints();
-				gbc_lblNewLabel_4.anchor = GridBagConstraints.WEST;
-				gbc_lblNewLabel_4.insets = new Insets(0, 0, 0, 5);
-				gbc_lblNewLabel_4.gridx = 1;
-				gbc_lblNewLabel_4.gridy = 12;
-				panel1.add(lblNewLabel_4, gbc_lblNewLabel_4);
+							
+								JLabel lblNewLabel_4 = new JLabel("OrdreBekræftelse");
+								GridBagConstraints gbc_lblNewLabel_4 = new GridBagConstraints();
+								gbc_lblNewLabel_4.anchor = GridBagConstraints.WEST;
+								gbc_lblNewLabel_4.insets = new Insets(0, 0, 0, 5);
+								gbc_lblNewLabel_4.gridx = 1;
+								gbc_lblNewLabel_4.gridy = 13;
+								panel1.add(lblNewLabel_4, gbc_lblNewLabel_4);
 		
 				JPanel buttonPane = new JPanel();
 				buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -182,6 +192,7 @@ public class OrderConfirmationUI extends JDialog {
 				cancelButton.setActionCommand("Annullér");
 				buttonPane.add(cancelButton);
 				
+				
 //	------------oprettelse af jtable og funktion i tablen -------------------
 				
 				int antalLinjer = lines.length;
@@ -194,9 +205,9 @@ public class OrderConfirmationUI extends JDialog {
 				
 				data[antalLinjer] = new String[] {"", "", "", "", ""};
 				
-				String subtotal = Double.toString(totalprices[0]);
-				String discount = Double.toString(totalprices[1]);
-				String totalprice = Double.toString(totalprices[2]);
+				String subtotal = Double.toString(totalprices[0]) + " kr.";
+				String discount = Double.toString(totalprices[1])+ " kr.";
+				String totalprice = Double.toString(totalprices[2])+ " kr.";
 				
 				data[antalLinjer + 1] = new String[] {"", "", "Subtotal", "", subtotal};
 				data[antalLinjer + 2] = new String[] {"", "", "Discount", "", discount};
@@ -205,11 +216,25 @@ public class OrderConfirmationUI extends JDialog {
 				table = new JTable(data, columnNames);
 				JScrollPane scrollPane1 = new JScrollPane(table);
 				panel.add(scrollPane1);
+				
 //	------------tablen op ----------------------------------------------------
+				
+// 				alignment
+				DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+				rightRenderer.setHorizontalAlignment(JLabel.RIGHT);
+				
+				DefaultTableCellRenderer leftRenderer = new DefaultTableCellRenderer();
+				leftRenderer.setHorizontalAlignment(JLabel.LEFT);
+				
+				table.getColumnModel().getColumn(0).setCellRenderer(leftRenderer);
+				table.getColumnModel().getColumn(1).setCellRenderer(rightRenderer);
+				table.getColumnModel().getColumn(2).setCellRenderer(leftRenderer);
+				table.getColumnModel().getColumn(3).setCellRenderer(rightRenderer);
+				table.getColumnModel().getColumn(4).setCellRenderer(rightRenderer);
 				
 // ------------ ændre vinduest størelse dynamisk i højden --------------------
 				pack();
-				int packedHeight = getWidth();
+				int packedHeight = getHeight();
 				setSize(600, packedHeight); 
 				
 //        --------------------------------------------------------------------
