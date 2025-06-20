@@ -262,22 +262,7 @@ public class MainWindow {
 							ProductUI pUI = new ProductUI(info);
 							
 							if (pUI.getIsAccepted()) { //TODO review: Integer.parseInt(info[0]) er muligvis en questionable måde at finde productID
-								Result x = oC.addProductByID(Integer.parseInt(info[0]), pUI.getAmount());
-								if (x.equals(Result.QUANTITYLESSTHANONE)) {
-									pUI = new ProductUI(info);
-								}
-								
-								if (x.equals(Result.PRODUCTNOTFOUND)) {
-									System.out.println("ERROR: Product not found.");
-									return;
-								}
-								
-								if (x.equals(Result.MAXTHRESHOLDEXCEEDED)) {
-									pUI = new ProductUI(info);
-									
-								}
-								
-								
+								System.out.println("" + pUI.getAmount());
 							}
 							
 						}

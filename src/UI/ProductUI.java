@@ -29,7 +29,6 @@ public class ProductUI extends JDialog {
 	private int amount = 1;
 	private boolean isAccepted = false;
 	private JFormattedTextField textField;
-	private String oldText;
 	
 	/**
 	 * Launch the application.
@@ -202,11 +201,15 @@ public class ProductUI extends JDialog {
 							if (t < min) {
 								lblNewLabel_8.setText("Fejl, tilføj mindst én eller annullér.");
 								textField.setText("" + min);
-							}
-							if (t > max) {
+							} else if (t > max) {
 								lblNewLabel_8.setText("Fejl, der kan højst bestilles " + max + " ad gangen.");
 								textField.setText("" + max);
+							} else {
+								amount = t;
+								setIsAccepted(true);
+								dispose();
 							}
+							
 						} else {
 							lblNewLabel_8.setText("Fejl, antal skal være et tal.");
 							textField.setText("" + min);
