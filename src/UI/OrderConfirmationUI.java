@@ -34,6 +34,8 @@ public class OrderConfirmationUI extends JDialog {
 	/**
 	 * Create the dialog.
 	 */	
+
+
 	public OrderConfirmationUI(String[] shipmentInformation, int cvr, String email, 
 			String[] lines, double[] totalprices) {
 		setBounds(100, 100, 600, 600);
@@ -207,6 +209,7 @@ public class OrderConfirmationUI extends JDialog {
 				
 				String subtotal = Double.toString(totalprices[0]) + " kr.";
 				String discount = Double.toString(totalprices[1])+ " kr.";
+				// Hav til at være moms baseret for med eller uden en kunde
 				String totalprice = Double.toString(totalprices[2])+ " kr.";
 				
 				data[antalLinjer + 1] = new String[] {"", "", "Subtotal", "", subtotal};
