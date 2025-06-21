@@ -61,26 +61,39 @@ public class OrderConfirmationUI extends JDialog {
 			panel1.setLayout(gbl_panel);
 			
 			
-			if (shipmentInformation[0] == null || shipmentInformation[1] == null ||
-					shipmentInformation[2] == null) {
+			if (shipmentInformation[0] == null) { 
 				JOptionPane.showMessageDialog(this, "fejl på shipment",
 			               "Swing Tester", JOptionPane.ERROR_MESSAGE);
-			    return;
+				shipmentInformation[0] = "-";   
 			}
+			
+				if (shipmentInformation[1] == null) {
+					JOptionPane.showMessageDialog(this, "fejl på shipment",
+				               "Swing Tester", JOptionPane.ERROR_MESSAGE);
+					shipmentInformation[1] = "-";
+				}
+				
+				if (shipmentInformation[2] == null) {
+					JOptionPane.showMessageDialog(this, "fejl på shipment",
+				               "Swing Tester", JOptionPane.ERROR_MESSAGE);
+					shipmentInformation[2] = "-";
+				}
+			
 			if (cvr < 0) {
 				JOptionPane.showMessageDialog(this, "fejl på cvr",
 			               "Swing Tester", JOptionPane.ERROR_MESSAGE);
-				return;
+				cvr = 0;
 			}
+			
 			if (email == null) {
 				JOptionPane.showMessageDialog(this, "fejl på email",
 			               "Swing Tester", JOptionPane.ERROR_MESSAGE);
-				return;
+				email = "-";
 			}
 			if (lines == null) {
 				JOptionPane.showMessageDialog(this, "fejl på lines",
 			               "Swing Tester", JOptionPane.ERROR_MESSAGE);
-				return;
+				lines = new String[] { "-" };
 			}
 			if (totalprices == null) {
 				JOptionPane.showMessageDialog(this, "fejl på pris",
@@ -208,9 +221,9 @@ public class OrderConfirmationUI extends JDialog {
 				data[antalLinjer] = new String[] {"", "", "", "", ""};
 				
 				String subtotal = Double.toString(totalprices[0]) + " kr.";
-				String discount = Double.toString(totalprices[1])+ " kr.";
+				String discount = Double.toString(totalprices[1]) + " %";
 				// Hav til at være moms baseret for med eller uden en kunde
-				String totalprice = Double.toString(totalprices[2])+ " kr.";
+				String totalprice = String.format("%.2f",totalprices[2])+ " kr.";
 				
 				data[antalLinjer + 1] = new String[] {"", "", "Subtotal", "", subtotal};
 				data[antalLinjer + 2] = new String[] {"", "", "Discount", "", discount};
