@@ -185,20 +185,20 @@ public class OrderConfirmationUI extends JDialog {
 				gbc_lblNewLabel_9.gridy = 11;
 				panel1.add(lblNewLabel_9, gbc_lblNewLabel_9);
 							
-								JLabel lblNewLabel_4 = new JLabel("OrdreBekræftelse");
-								GridBagConstraints gbc_lblNewLabel_4 = new GridBagConstraints();
-								gbc_lblNewLabel_4.anchor = GridBagConstraints.WEST;
-								gbc_lblNewLabel_4.insets = new Insets(0, 0, 0, 5);
-								gbc_lblNewLabel_4.gridx = 1;
-								gbc_lblNewLabel_4.gridy = 13;
-								panel1.add(lblNewLabel_4, gbc_lblNewLabel_4);
+				JLabel lblNewLabel_4 = new JLabel("OrdreBekræftelse");
+				GridBagConstraints gbc_lblNewLabel_4 = new GridBagConstraints();
+				gbc_lblNewLabel_4.anchor = GridBagConstraints.WEST;
+				gbc_lblNewLabel_4.insets = new Insets(0, 0, 0, 5);
+				gbc_lblNewLabel_4.gridx = 1;
+				gbc_lblNewLabel_4.gridy = 13;
+				panel1.add(lblNewLabel_4, gbc_lblNewLabel_4);
 		
 				JPanel buttonPane = new JPanel();
 				buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 				getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			
-				JButton okButton = new JButton("færdiggøre ");
-				okButton.setActionCommand("færdiggøre ");
+				JButton okButton = new JButton("Færdiggøre ");
+				okButton.setActionCommand("Færdiggøre ");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			
@@ -242,9 +242,12 @@ public class OrderConfirmationUI extends JDialog {
 				DefaultTableCellRenderer leftRenderer = new DefaultTableCellRenderer();
 				leftRenderer.setHorizontalAlignment(JLabel.LEFT);
 				
+				DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+				centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+				
 				table.getColumnModel().getColumn(0).setCellRenderer(leftRenderer);
 				table.getColumnModel().getColumn(1).setCellRenderer(rightRenderer);
-				table.getColumnModel().getColumn(2).setCellRenderer(leftRenderer);
+				table.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
 				table.getColumnModel().getColumn(3).setCellRenderer(rightRenderer);
 				table.getColumnModel().getColumn(4).setCellRenderer(rightRenderer);
 				
